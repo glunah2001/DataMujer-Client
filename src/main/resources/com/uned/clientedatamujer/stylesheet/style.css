@@ -1,0 +1,215 @@
+.grid-background {
+    -fx-background-image: url("../images/BG.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+/* TextFields y PasswordFields */
+.text-field, .password-field {
+    -fx-background-color: #F2F2F2; /* gris claro */
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: transparent;
+    -fx-padding: 10 15 10 15;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #888888;
+    -fx-alignment: center;
+}
+
+/* Botón principal Ingresar */
+.button-primario {
+    -fx-background-color: #F2C94C; /* amarillo */
+    -fx-text-fill: #000000;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+    -fx-pref-width: 210px;
+    -fx-pref-height: 40px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2); /* sombra sutil por defecto */
+    -fx-transition: all 0.2s ease; /* suaviza la transición */
+}
+
+/* Efecto hover */
+.button-primario:hover {
+    -fx-background-color: #E6B83A; /* un tono más oscuro de amarillo */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 3); /* sombra más marcada */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05; /* leve aumento de tamaño */
+}
+
+/* Feedback al presionar el botón */
+.button-primario:pressed {
+    -fx-background-color: #D4A520; /* amarillo más oscuro */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 2, 0, 0, 1); /* sombra más sutil hacia adentro */
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95; /* leve reducción de tamaño para simular presión */
+}
+
+/* Botones secundarios (Olvidé mi contraseña y Registrarme) */
+.button-secundario {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+/* Este es el estilo base para todas tus etiquetas */
+.label {
+    -fx-text-fill: #333333; /* Color de texto oscuro, por ejemplo */
+    -fx-font-family: "Arial"; /* Una fuente a elegir */
+}
+
+/* Etiqueta para títulos o preguntas (mayor) */
+.etiqueta-mayor {
+    -fx-font-size: 26pt; /* Tamaño grande */
+    -fx-font-weight: bold; /* En negrita */
+}
+
+/* Etiqueta para textos secundarios (menor) */
+.etiqueta-menor {
+    -fx-font-size: 10pt; /* Tamaño más pequeño */
+    -fx-font-weight: normal; /* Sin negrita */
+}
+
+/* Estilo base para ComboBox */
+.combo-box {
+    -fx-background-color: #F2F2F2; /* gris claro, como el text-field */
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: transparent;
+    -fx-padding: 0; /* Ajustamos el padding para controlar el texto y el botón por separado */
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-alignment: center; /* Centra el texto en el ComboBox (opcional, si es necesario) */
+}
+
+/* Modifica el TextField dentro del ComboBox */
+.combo-box .list-cell {
+    -fx-padding: 10 15 10 15; /* Padding para el texto, similar al text-field */
+    -fx-background-color: transparent; /* Asegura que el color de fondo venga del .combo-box */
+    -fx-text-fill: #333333;
+}
+
+/* Estilo del botón de la flecha (arrow-button) */
+.combo-box .arrow-button {
+    -fx-background-color: transparent; /* Fondo transparente para que se vea el fondo del ComboBox */
+    -fx-padding: 0 15 0 15; /* Aumenta el padding para hacer el área del botón más ancha/grande */
+}
+
+/* Estilo de la flecha (arrow) */
+.combo-box .arrow-button .arrow {
+    -fx-background-color: #E081BD; /* Color rosado similar al de la imagen */
+    -fx-shape: "M5.2,14.7 C4.8,15.1 4.2,15.1 3.8,14.7 L0.3,11.2 C-0.1,10.8 -0.1,10.2 0.3,9.8 L1,9.1 C1.4,8.7 2,8.7 2.4,9.1 L4.5,11.2 L6.6,9.1 C7,8.7 7.6,8.7 8,9.1 L8.7,9.8 C9.1,10.2 9.1,10.8 8.7,11.2 L5.2,14.7 Z";
+    -fx-padding: 8px; /* Aumenta el padding para hacer la flecha más grande */
+    -fx-background-radius: 50px;
+}
+
+/*
+ * Animación Sencilla para el Despliegue del ComboBox
+ */
+
+/* 1. Estilo del menú desplegable (ComboBox Popup) */
+.combo-box-popup .list-view {
+    /* Define un color de fondo diferente (por ejemplo, blanco) para destacarlo */
+    -fx-background-color: white;
+    /* Borde redondeado suave para el menú */
+    -fx-background-radius: 8px;
+    /* Sombra sutil para darle profundidad y un efecto de "elevación" al desplegarse */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);
+}
+
+/* 2. Estilo de las celdas (los ítems "PERSONA FÍSICA" y "PERSONA JURÍDICA") */
+.combo-box-popup .list-view .list-cell {
+    -fx-padding: 10 15 10 15;
+    -fx-background-color: transparent; /* Fondo transparente por defecto */
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+/* 3. Efecto visual al pasar el ratón (hover) sobre los ítems del menú */
+.combo-box-popup .list-view .list-cell:filled:hover {
+    /* Un color de fondo muy suave al pasar el ratón */
+    -fx-background-color: #FEE7F2; /* Un rosa muy claro, a juego con tu diseño */
+    -fx-text-fill: #333333;
+    /* Leve transición (simulada) al cambiar el color de fondo para suavizar el efecto */
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+}
+
+/* 4. Efecto en la celda seleccionada */
+.combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color: #E081BD; /* Color rosado principal para indicar la selección */
+    -fx-text-fill: white;
+}
+
+.jfx-toggle-button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+
+    /* Configuración por defecto (apagado): Pista morada #A98BE4, Bola BLANCA */
+    -jfx-toggle-line-color: #A98BE4; /* Pista/Fondo (TRACK) - Rosado/Morado apagado */
+    -jfx-toggle-color: white;       /* Bola (THUMB) - Blanca apagada */
+}
+
+/* Estado APAGADO (Aseguramos la bola blanca y la pista morada) */
+.jfx-toggle-button:untoggle {
+    -jfx-toggle-line-color: #A98BE4; /* Pista/Fondo (TRACK) - Color que se ve cuando está APAGADO */
+    -jfx-toggle-color: white;       /* Bola (THUMB) - Blanca */
+}
+
+/* Estado ENCENDIDO (La bola es morada y la pista es rosada) */
+.jfx-toggle-button:toggle {
+    -jfx-toggle-line-color: #E081BD; /* Pista/Fondo (TRACK) - Color ROSADO que se ve cuando está ENCENDIDO */
+    -jfx-toggle-color: #A98BE4;      /* Bola (THUMB) - Color MORADO cuando está ENCENDIDO */
+}
+
+/*
+ * ESTILO PARA EL DatePicker (FECHA DE NACIMIENTO)
+ */
+.date-picker {
+    -fx-background-color: #F2F2F2; /* gris claro, como el text-field */
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: transparent;
+    /* Ajustamos el padding para el contenedor total, la imagen tiene menos padding horizontal */
+    -fx-padding: 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #888888;
+}
+
+/* Estilo para el TextField dentro del DatePicker */
+.date-picker .text-field {
+    /* Le quitamos el fondo para que herede el del .date-picker */
+    -fx-background-color: transparent;
+    -fx-background-radius: 8px 0 0 8px; /* Redondeado solo a la izquierda */
+    -fx-border-radius: 8px 0 0 8px;
+    -fx-border-color: transparent;
+    -fx-padding: 10 15 10 15; /* Padding interno */
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #4c4c4c; /* Oscurecemos para que se vea la diferencia */
+}
+
+/* Estilo para el botón de despliegue (calendario) */
+.date-picker .arrow-button {
+    -fx-background-color: #E081BD; /* Fondo rosa (El color principal de tu imagen) */
+    -fx-background-radius: 0 8px 8px 0; /* Redondeado solo a la derecha */
+    -fx-padding: 10; /* Padding del botón */
+}
+
+/* Estilo del ícono del calendario dentro del botón */
+.date-picker .arrow-button .arrow {
+    -fx-background-color: white; /* Icono blanco */
+    -fx-shape: "M7 11h2v2H7zM11 11h2v2h-2zM15 11h2v2h-2zM17 2H7c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 18H9V6h6v14z";
+    /* Puedes probar con un icono de calendario que te guste más si este no se ve bien en tu versión de JavaFX. */
+}
+
+/* Efecto hover en el botón rosa */
+.date-picker .arrow-button:hover {
+    -fx-background-color: #C263A2; /* Rosa un poco más oscuro al pasar el ratón */
+}

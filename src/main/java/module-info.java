@@ -1,6 +1,8 @@
 module com.uned.clientedatamujer {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jakarta.validation;
+    requires com.fasterxml.jackson.annotation;
 
 
     opens com.uned.clientedatamujer to javafx.fxml;

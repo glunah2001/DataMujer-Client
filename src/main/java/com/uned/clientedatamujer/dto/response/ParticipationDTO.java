@@ -1,6 +1,6 @@
 package com.uned.clientedatamujer.dto.response;
 
-import com.UNED.APIDataMujer.enums.ParticipationState;
+import com.uned.clientedatamujer.enums.ParticipationState;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

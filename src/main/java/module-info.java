@@ -1,12 +1,16 @@
 module com.uned.clientedatamujer {
-    requires javafx.controls;
     requires javafx.fxml;
     requires jakarta.validation;
-    requires com.fasterxml.jackson.annotation;
+    requires java.net.http;
+    requires com.jfoenix;
+    requires javafx.controls;
+    requires com.fasterxml.jackson.datatype.jsr310;
+    requires com.fasterxml.jackson.databind;
 
 
     opens com.uned.clientedatamujer to javafx.fxml;
     exports com.uned.clientedatamujer;
     exports com.uned.clientedatamujer.controller;
+    exports com.uned.clientedatamujer.dto to com.fasterxml.jackson.databind;
     opens com.uned.clientedatamujer.controller to javafx.fxml;
 }

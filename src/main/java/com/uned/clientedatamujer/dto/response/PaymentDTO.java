@@ -1,7 +1,7 @@
 package com.uned.clientedatamujer.dto.response;
 
-import com.UNED.APIDataMujer.enums.Classification;
-import com.UNED.APIDataMujer.enums.Method;
+import com.uned.clientedatamujer.enums.Classification;
+import com.uned.clientedatamujer.enums.Method;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

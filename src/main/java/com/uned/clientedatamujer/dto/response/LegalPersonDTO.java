@@ -1,6 +1,6 @@
 package com.uned.clientedatamujer.dto.response;
 
-import com.UNED.APIDataMujer.enums.Country;
+import com.uned.clientedatamujer.enums.Country;
 
 import java.time.LocalDate;
 

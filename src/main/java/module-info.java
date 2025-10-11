@@ -12,5 +12,7 @@ module com.uned.clientedatamujer {
     exports com.uned.clientedatamujer;
     exports com.uned.clientedatamujer.controller;
     exports com.uned.clientedatamujer.dto to com.fasterxml.jackson.databind;
+
     opens com.uned.clientedatamujer.controller to javafx.fxml;
+    opens com.uned.clientedatamujer.dto.authentication to com.fasterxml.jackson.databind;
 }

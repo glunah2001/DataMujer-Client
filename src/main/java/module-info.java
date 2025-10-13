@@ -15,4 +15,7 @@ module com.uned.clientedatamujer {
 
     opens com.uned.clientedatamujer.controller to javafx.fxml;
     opens com.uned.clientedatamujer.dto.authentication to com.fasterxml.jackson.databind;
+    opens com.uned.clientedatamujer.dto.request to com.fasterxml.jackson.databind;
+    opens com.uned.clientedatamujer.dto.response to com.fasterxml.jackson.databind;
+    opens com.uned.clientedatamujer.dto.token to com.fasterxml.jackson.databind;
 }

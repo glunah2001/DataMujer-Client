@@ -2,6 +2,7 @@ package com.uned.clientedatamujer.controller;
 
 import com.jfoenix.controls.JFXSnackbar;
 import com.uned.clientedatamujer.dto.ApiError;
+import com.uned.clientedatamujer.dto.authentication.ResetPasswordDTO;
 import com.uned.clientedatamujer.service.AuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,10 +44,11 @@ public class ResetPasswordController extends BaseController{
         txtNewPassword.clear();
 
         showLoading(rootPane);
+        ResetPasswordDTO dto = new ResetPasswordDTO(token, newPassword);
 
         runAsync(() ->{
             try{
-                Object result = service.resetPassword(token, newPassword);
+                Object result = service.resetPassword(dto);
                 if(result instanceof String success){
                     runLater(() ->{
                         showSuccessSnackBar(success, snackbarInfo);

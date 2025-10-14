@@ -213,3 +213,90 @@
 .date-picker .arrow-button:hover {
     -fx-background-color: #C263A2; /* Rosa un poco más oscuro al pasar el ratón */
 }
+
+.sidebar-vbox {
+    -fx-background-color: white; /* El fondo es blanco */
+    -fx-padding: 0; /* Sin padding */
+    -fx-spacing: 0;
+    -fx-border-color: #DDDDDD; /* Opcional: un borde sutil a la derecha */
+    -fx-border-width: 0 1 0 0;
+}
+
+.topbar-hbox {
+    -fx-background-color: #54CACF; /* Fondo blanco para la barra superior */
+    -fx-padding: 10 20 10 20; /* Padding para separar el contenido de los bordes */
+    -fx-spacing: 10;
+    -fx-alignment: CENTER_RIGHT; /* Alineación del contenido (como el perfil a la derecha) */
+    -fx-border-color: #DDDDDD; /* Una línea sutil para separar de la zona de contenido */
+    -fx-border-width: 0 0 1 0; /* Solo borde inferior */
+}
+
+.my-profile {
+    /* 1. Colores y Fondo */
+    -fx-background-color: #54CACF; /* Color turquesa/cian de la imagen (aproximado) */
+    -fx-text-fill: white;          /* Color del texto (Mi perfil) */
+
+    /* 2. Fuente y Texto */
+    -fx-font-size: 15px;            /* Tamaño grande para "Mi perfil" */
+    -fx-font-weight: bold;          /* Negrita */
+
+    /* 3. Dimensiones y Esquinas */
+    -fx-background-radius: 0;       /* Sin esquinas redondeadas (botón de bloque) */
+    -fx-pref-height: 27px;         /* Altura preferida para imitar el banner */
+
+    /* 4. Alineación */
+    -fx-alignment: CENTER_LEFT;     /* Alinea el texto a la izquierda */
+
+    /* 5. Cursor */
+    -fx-cursor: hand;               /* Indica que es interactivo */
+}
+
+.sidebar-vbox .button {
+    /* 1. Fondo y Dimensiones */
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-pref-width: 200px;             /* Ancho completo del VBox */
+    -fx-pref-height: 50px;             /* Altura fija para cada botón */
+
+    /* 2. Texto y Fuente */
+    -fx-text-fill: #333333;           /* Color de texto (consistente con el resto) */
+    -fx-font-family: "Arial";         /* Fuente consistente */
+    -fx-font-size: 14px;              /* Tamaño de fuente (ajusta si es necesario) */
+    -fx-font-weight: bold;            /* Texto en negrita, como se solicitó */
+    -fx-alignment: CENTER;            /* Texto centrado horizontal y verticalmente */
+
+    /* 3. Borde (el único visible) */
+    -fx-border-color: transparent transparent #A98BE4 transparent;
+    -fx-border-width: 0 0 4 0;        /* Solo borde inferior de 1px */
+
+    /* 4. Cursor */
+    -fx-cursor: hand;
+}
+
+.sidebar-vbox .button:hover {
+    -fx-border-width: 0 0 4px 0; /* Muestra la barra */
+    -fx-border-color: transparent transparent #A98BE4 transparent; /* Color del borde inferior */
+    -fx-background-color: #F9F7FF; /* Fondo muy suave opcional */
+}
+
+/* Opcional: efecto de presión */
+.sidebar-vbox .button:pressed {
+    -fx-background-color: #F0E9FF; /* Color más oscuro al hacer clic */
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.decoracion-sidebar-top {
+    /* Fondo morado del mismo color que el resto de tu paleta */
+    -fx-background-color: #A98BE4; /* Color morado que ya usas para el borde */
+    -fx-background-radius: 0;
+    -fx-pref-height: 32px; /* Altura similar a la de un botón para que encaje */
+    -fx-pref-width: 200px; /* Ancho completo del sidebar */
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 15; /* Padding para mover los puntos a la izquierda */
+    -fx-spacing: 8px;
+}
+
+.dot-icon {
+    -fx-fill: white; /* Color blanco para los puntos */
+    /* El radio de 2.0 ya está en el FXML, pero podrías definirlo aquí si prefieres */
+}

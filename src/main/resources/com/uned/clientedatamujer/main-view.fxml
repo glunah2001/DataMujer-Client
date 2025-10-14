@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<StackPane prefHeight="720.0" prefWidth="1080.0" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="52.0" prefWidth="0.0" styleClass="topbar-hbox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="70.0" prefWidth="130.0" styleClass="my-profile" text="Mi Perfil">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/myprofile.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" layoutY="52.0" prefHeight="668.0" prefWidth="200.0" styleClass="sidebar-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="52.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="decoracion-sidebar-top">
+                     <children>
+                        <Circle fill="#535353" radius="3.5" />
+                        <Circle fill="#535353" radius="3.5" />
+                        <Circle fill="#535353" radius="3.5" />
+                        <Circle fill="#535353" radius="3.5" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" text="Actividades" />
+                  <Button fx:id="btnNewActivity" mnemonicParsing="false" text="Nueva Actividad" />
+                  <Button mnemonicParsing="false" text="Mis Participaciones" />
+                  <Button fx:id="btnMyVolunteering" mnemonicParsing="false" text="Mis Voluntariados" />
+                  <Button mnemonicParsing="false" text="Mis Pagos" />
+                  <Button fx:id="btnGenReport" mnemonicParsing="false" text="Generar Reporte" />
+                  <Button fx:id="btnAdminOps" mnemonicParsing="false" text="Operac. Administrador" />
+                  <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <ImageView fitHeight="138.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                     <image>
+                        <Image url="@images/DataMujer.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="3.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+            <StackPane fx:id="SubScenePane" prefHeight="150.0" prefWidth="200.0" styleClass="grid-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

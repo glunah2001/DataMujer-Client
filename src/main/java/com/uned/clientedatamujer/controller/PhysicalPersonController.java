@@ -84,7 +84,7 @@ public class PhysicalPersonController extends BaseController{
                 if(result instanceof String success){
                     runLater(() -> {
                         showSuccessSnackBar(success,snackBarInfo);
-                        withDelay(3,() ->{
+                        withDelay(4,() ->{
                             hideLoading(rootPane);
                             try{
                                 clearForm();
@@ -107,9 +107,7 @@ public class PhysicalPersonController extends BaseController{
                     }
                 }
             }catch(Exception e){
-                runLater(()->{
-                    hideLoading(rootPane);
-                });
+                runLater(()-> hideLoading(rootPane));
                 e.printStackTrace();
             }
         });
@@ -120,7 +118,7 @@ public class PhysicalPersonController extends BaseController{
 
     private void initializeCountry(){
         comboCountry.getItems().addAll(Arrays.asList(Country.values()));
-        comboCountry.setConverter(new StringConverter<Country>() {
+        comboCountry.setConverter(new StringConverter<>() {
             @Override
             public String toString(Country country) {
                 if (country == null) return "";
@@ -249,7 +247,7 @@ public class PhysicalPersonController extends BaseController{
 
 
         int age = Period.between(physical.birthDate(), LocalDate.now()).getYears();
-        if(age < 12 || age > 90){
+        if(age < 16 || age > 90){
             showErrorSnackBar("Seleccione un año de nacimiento válido.", snackBarInfo);
             return false;
         }

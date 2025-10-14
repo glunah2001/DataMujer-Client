@@ -46,7 +46,7 @@ public class ForgotPasswordController extends  BaseController{
                 if(result instanceof String success){
                     runLater(() ->{
                         showSuccessSnackBar(success,snackbarInfo);
-                        withDelay(3, () ->{
+                        withDelay(4, () ->{
                             hideLoading(rootPane);
                             try{
                                 SceneManager.changeScene(

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXSnackbar?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -14,102 +15,105 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<GridPane prefHeight="720.0" prefWidth="1080.0" styleClass="grid-background" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.LegalPersonController">
-   <columnConstraints>
-      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="194.0" minWidth="10.0" prefWidth="194.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="312.0" minWidth="10.0" prefWidth="202.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="675.0" minWidth="10.0" prefWidth="225.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="371.0" minWidth="10.0" prefWidth="219.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="254.0" minWidth="10.0" prefWidth="240.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints maxHeight="442.0" minHeight="10.0" prefHeight="152.0" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="595.0" minHeight="10.0" prefHeight="146.0" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="321.0" minHeight="10.0" prefHeight="139.0" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="135.0" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="135.0" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="135.0" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="148.0" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="148.0" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="148.0" valignment="CENTER" vgrow="ALWAYS" />
-   </rowConstraints>
-   <children>
-      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/DataMujer.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </StackPane>
-      <Button mnemonicParsing="false" styleClass="button-primario" text="Registrarse" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="TOP" />
-      <Button mnemonicParsing="false" onAction="#ToLoginView" styleClass="button-secundario" text="¿Ya tienes cuenta? Inicia Sesión" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-      <TextField prefHeight="0.0" prefWidth="250.0" promptText="CÉDULA JURÍDICA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <DatePicker promptText="FECHA DE FUNDACIÓN" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-      </DatePicker>
-      <TextField promptText="TELEFONO" GridPane.columnIndex="1" GridPane.rowIndex="5">
-         <GridPane.margin>
-            <Insets left="10.0" right="10.0" />
-         </GridPane.margin>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <ComboBox prefHeight="42.0" prefWidth="233.0" promptText="PAÍS" GridPane.columnIndex="2" GridPane.rowIndex="5">
-         <GridPane.margin>
-            <Insets left="10.0" />
-         </GridPane.margin>
-      </ComboBox>
-      <TextField promptText="UBICACIÓN" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="6">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-      </TextField>
-      <TextField promptText="CORREO ELECTRONICO" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.valignment="TOP">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin>
-      </TextField>
-      <TextField promptText="USERNAME" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="TOP">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-         <GridPane.margin>
-            <Insets left="10.0" right="10.0" />
-         </GridPane.margin>
-      </TextField>
-      <PasswordField promptText="CONSTRASEÑA" GridPane.columnIndex="3" GridPane.rowIndex="7" GridPane.valignment="TOP">
-         <padding>
-            <Insets left="10.0" />
-         </padding>
-         <GridPane.margin>
-            <Insets left="10.0" />
-         </GridPane.margin>
-      </PasswordField>
-      <TextField promptText="NOMBRE DE LA EMPRESA" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin>
-      </TextField>
-   </children>
-</GridPane>
+<StackPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.LegalPersonController">
+   <JFXSnackbar fx:id="snackBarInfo" />
+    <GridPane prefHeight="720.0" prefWidth="1080.0" styleClass="grid-background" stylesheets="@stylesheet/style.css">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="194.0" minWidth="10.0" prefWidth="194.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="312.0" minWidth="10.0" prefWidth="202.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="675.0" minWidth="10.0" prefWidth="225.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="371.0" minWidth="10.0" prefWidth="219.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="254.0" minWidth="10.0" prefWidth="240.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="442.0" minHeight="10.0" prefHeight="152.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="595.0" minHeight="10.0" prefHeight="146.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="321.0" minHeight="10.0" prefHeight="139.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="135.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="135.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="135.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="148.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="148.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="148.0" valignment="CENTER" vgrow="ALWAYS" />
+        </rowConstraints>
+        <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                <children>
+                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@images/DataMujer.jpg" />
+                        </image>
+                    </ImageView>
+                </children>
+            </StackPane>
+            <Button mnemonicParsing="false" onAction="#registerPerson" styleClass="button-primario" text="Registrarse" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="TOP" />
+            <Button mnemonicParsing="false" onAction="#ToLoginView" styleClass="button-secundario" text="¿Ya tienes cuenta? Inicia Sesión" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+            <TextField fx:id="txtCedula" prefHeight="0.0" prefWidth="250.0" promptText="CÉDULA JURÍDICA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+            </TextField>
+            <DatePicker fx:id="datePickerFoundation" promptText="FECHA DE FUNDACIÓN" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                <GridPane.margin>
+                    <Insets />
+                </GridPane.margin>
+            </DatePicker>
+            <TextField fx:id="txtPhone" promptText="TELEFONO" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <GridPane.margin>
+                    <Insets left="10.0" right="10.0" />
+                </GridPane.margin>
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+            </TextField>
+            <ComboBox fx:id="comboCountry" prefHeight="42.0" prefWidth="233.0" promptText="PAÍS" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                <GridPane.margin>
+                    <Insets left="10.0" />
+                </GridPane.margin>
+            </ComboBox>
+            <TextField fx:id="txtLocation" promptText="UBICACIÓN" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="6">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+                <GridPane.margin>
+                    <Insets />
+                </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMail" promptText="CORREO ELECTRONICO" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.valignment="TOP">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+                <GridPane.margin>
+                    <Insets right="10.0" />
+                </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtUser" promptText="USERNAME" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="TOP">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+                <padding>
+                    <Insets left="10.0" right="10.0" />
+                </padding>
+                <GridPane.margin>
+                    <Insets left="10.0" right="10.0" />
+                </GridPane.margin>
+            </TextField>
+            <PasswordField fx:id="txtPassword" promptText="CONSTRASEÑA" GridPane.columnIndex="3" GridPane.rowIndex="7" GridPane.valignment="TOP">
+                <padding>
+                    <Insets left="10.0" />
+                </padding>
+                <GridPane.margin>
+                    <Insets left="10.0" />
+                </GridPane.margin>
+            </PasswordField>
+            <TextField fx:id="txtName" promptText="NOMBRE DE LA EMPRESA" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+                <GridPane.margin>
+                    <Insets right="10.0" />
+                </GridPane.margin>
+            </TextField>
+        </children>
+    </GridPane>
+</StackPane>

@@ -52,7 +52,7 @@ public class ResetPasswordController extends BaseController{
                 if(result instanceof String success){
                     runLater(() ->{
                         showSuccessSnackBar(success, snackbarInfo);
-                        withDelay(2, ()->{
+                        withDelay(3, ()->{
                             hideLoading(rootPane);
                             try{
                                 SceneManager.toLogIn();
@@ -72,7 +72,7 @@ public class ResetPasswordController extends BaseController{
                         );
                         if(errorDto.error().equalsIgnoreCase("BAD REQUEST")
                         && errorDto.details() == null){
-                            withDelay(2,() ->{
+                            withDelay(3,() ->{
                                 hideLoading(rootPane);
                                 try {
                                     SceneManager.toLogIn();

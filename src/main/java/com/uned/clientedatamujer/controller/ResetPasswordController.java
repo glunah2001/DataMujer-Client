@@ -39,7 +39,11 @@ public class ResetPasswordController extends BaseController{
     private void resetPassword(){
         String token = txtToken.getText().trim();
         String newPassword = txtNewPassword.getText().trim();
-        if(token.isEmpty() || newPassword.isEmpty()) return;
+        if(token.isEmpty() || newPassword.isEmpty()){
+            showErrorSnackBar("No se puede hacer un reset de contraseña si no completa todos los datos.",
+                    snackbarInfo);
+            return;
+        }
         txtToken.clear();
         txtNewPassword.clear();
 

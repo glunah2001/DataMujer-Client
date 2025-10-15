@@ -35,7 +35,10 @@ public class ForgotPasswordController extends  BaseController{
     @FXML
     private void ToResetPasswordView(ActionEvent event){
         String email = txtEmail.getText().trim();
-        if (email.isEmpty()) return;
+        if (email.isEmpty()){
+            showErrorSnackBar("Ingrese su correo electrónico.", snackbarInfo);
+            return;
+        }
         txtEmail.clear();
 
         showLoading(rootPane);

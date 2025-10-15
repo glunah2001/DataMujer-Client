@@ -4,9 +4,11 @@ module com.uned.clientedatamujer {
     requires java.net.http;
     requires com.jfoenix;
     requires javafx.controls;
-    requires com.fasterxml.jackson.datatype.jsr310;
-    requires com.fasterxml.jackson.databind;
 
+    requires com.auth0.jwt;
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.datatype.jsr310;
+    requires com.fasterxml.jackson.annotation;
 
     opens com.uned.clientedatamujer to javafx.fxml;
     exports com.uned.clientedatamujer;

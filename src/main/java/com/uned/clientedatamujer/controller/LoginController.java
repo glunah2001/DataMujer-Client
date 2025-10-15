@@ -1,6 +1,11 @@
 package com.uned.clientedatamujer.controller;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.dto.ApiError;
+import com.uned.clientedatamujer.dto.authentication.UserLoginDTO;
+import com.uned.clientedatamujer.dto.token.TokenResponse;
+import com.uned.clientedatamujer.service.AuthService;
+import com.uned.clientedatamujer.service.AuthSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -19,6 +24,7 @@ public class LoginController extends BaseController{
     private TextField txtUser;
     @FXML
     private PasswordField txtPassword;
+    private final AuthService service = new AuthService();
 
     @FXML
     private void initialize(){
@@ -48,6 +54,50 @@ public class LoginController extends BaseController{
             showErrorSnackBar("Ingrese sus datos de acceso.", snackBarInfo);
             return;
         }
+
+        var dto = new UserLoginDTO(user, password);
+
+        showLoading(rootPane);
+        runAsync(()->{
+            try{
+                Object object = service.login(dto);
+                if(object instanceof TokenResponse response){
+                    hideLoading(rootPane);
+                    runLater(() ->{
+                        try{
+                            AuthSession.setTokens(response);
+                            System.out.printf("%s\n%s\n",
+                                    AuthSession.getAccessToken(),
+                                    AuthSession.getRefreshToken());
+                            System.out.println(AuthSession.getExpiration());
+                            System.out.println(AuthSession.getSubject());
+                            System.out.println(AuthSession.getRole());
+                            System.out.println(AuthSession.getPersonType());
+                            SceneManager.changeScene("/com/uned/clientedatamujer/main-view.fxml",
+                                    1080, 720, true);
+                        }catch(IOException e){
+                            String message = "Corrupción en la ruta de recursos";
+                            showErrorSnackBar(message, snackBarInfo);
+                        }
+                    });
+                }else if(object instanceof ApiError error){
+                    runLater(()->{
+                        handleApiError(
+                                rootPane,
+                                snackBarInfo,
+                                error,
+                                "Error con los datos de inicio de sesión."
+                        );
+                        hideLoading(rootPane);
+                    });
+                }
+            }catch(Exception e){
+                runLater(()->{
+                    hideLoading(rootPane);
+                });
+                e.printStackTrace();
+            }
+        });
     }
 
     private void clearForm(){

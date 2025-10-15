@@ -59,12 +59,12 @@ public abstract class BaseController {
             return;
         }
 
-        switch (error.error().toUpperCase()){
-            case "NOT FOUND", "CONFLICT", "BAD REQUEST", "UNEXPECTED", "SERVICE UNAVAILABLE" -> {
+        /*switch (error.error().toUpperCase()){
+            case "NOT FOUND", "CONFLICT", "BAD REQUEST", "UNEXPECTED", "SERVICE UNAVAILABLE" -> {*/
                 String message = error.error() + ": " + error.message();
                 showErrorSnackBar(message, snackbar);
-            }
+            /*}
             case "UNAUTHORIZED", "FORBIDDEN" -> {}
-        }
+        }*/
     }
 }

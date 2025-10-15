@@ -18,6 +18,40 @@
     -fx-alignment: center;
 }
 
+.text-area {
+    -fx-background-color: #F2F2F2; /* gris claro */
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: transparent;
+    -fx-padding: 10 15 10 15;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #888888;
+    /* QUITAMOS el -fx-alignment: center; para que el texto fluya normalmente */
+}
+
+/* Modificación para el contenido (Viewport) del TextArea */
+.text-area .content {
+    -fx-background-color: transparent; /* Fondo transparente para que se vea el fondo del .text-area */
+    -fx-padding: 0;
+}
+
+/* Opcional: Estilo de las barras de desplazamiento (Scroll Bars) */
+.text-area .scroll-bar:vertical, .text-area .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-bar .increment-button,
+.text-area .scroll-bar .decrement-button {
+    -fx-padding: 0;
+}
+
+.text-area .scroll-bar .thumb {
+    -fx-background-color: #A98BE4; /* Color morado para el "pulgar" de la barra */
+    -fx-background-insets: 0.5;
+    -fx-background-radius: 5;
+}
+
 /* Botón principal Ingresar */
 .button-primario {
     -fx-background-color: #F2C94C; /* amarillo */
@@ -212,6 +246,52 @@
 /* Efecto hover en el botón rosa */
 .date-picker .arrow-button:hover {
     -fx-background-color: #C263A2; /* Rosa un poco más oscuro al pasar el ratón */
+}
+
+.time-picker {
+    /* Fondo claro como el de los text-field */
+    -fx-background-color: #F2F2F2;
+    -fx-background-radius: 8px; /* Esquinas redondeadas */
+    -fx-border-color: transparent; /* Sin borde explícito */
+    -fx-border-radius: 8px;
+
+    /* Alinear y espaciar los Spinners */
+    -fx-alignment: CENTER; /* Centra los Spinners en el HBox */
+    -fx-padding: 0 10 0 10; /* Pequeño relleno interior horizontal */
+    -fx-spacing: 5px; /* Espacio entre los Spinners (para los ":") */
+    -fx-pref-height: 42px; /* Aumentamos la altura para que coincida con los TextField */
+}
+
+/* Estilo para los Spinners dentro del Time Picker */
+.time-picker > .spinner {
+    -fx-max-width: 90px; /* Limita el ancho para que quepan bien */
+    -fx-pref-height: 38px; /* Altura un poco menor que el HBox */
+    -fx-background-color: transparent; /* Fondo transparente para usar el del HBox */
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-padding: 0;
+}
+
+/* Estilo para el campo de texto interno (donde se ven los números) */
+.time-picker > .spinner .text-field {
+    -fx-alignment: CENTER; /* Centra el texto */
+    -fx-background-color: transparent; /* Importante para usar el fondo del HBox */
+    -fx-prompt-text-fill: #333333; /* El color del texto del número */
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold; /* Los números en negrita son más claros */
+}
+
+/* Estilo para los botones de las flechas (increment/decrement) */
+.time-picker > .spinner .increment-arrow-button,
+.time-picker > .spinner .decrement-arrow-button {
+    -fx-background-color: transparent; /* Botones transparentes */
+    -fx-padding: 0 4px 0 4px;
+}
+
+/* Estilo para las flechas dentro de los botones */
+.time-picker > .spinner .increment-arrow,
+.time-picker > .spinner .decrement-arrow {
+    -fx-background-color: #A98BE4; /* Color morado de tu paleta */
 }
 
 .sidebar-vbox {

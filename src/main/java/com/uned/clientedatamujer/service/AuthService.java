@@ -1,6 +1,8 @@
 package com.uned.clientedatamujer.service;
 
 import com.uned.clientedatamujer.dto.authentication.ResetPasswordDTO;
+import com.uned.clientedatamujer.dto.authentication.UserLoginDTO;
+import com.uned.clientedatamujer.dto.token.TokenResponse;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,5 +32,17 @@ public class AuthService extends BaseHttpClient{
                 .build();
 
         return sendRequest(request, String.class);
+    }
+
+    public Object login(UserLoginDTO dto) throws IOException{
+        String url = URL + "/auth/login";
+        String json = objectMapper.writeValueAsString(dto);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .header("Content-Type", "Application/json")
+                .build();
+        return sendRequest(request, TokenResponse.class);
     }
 }

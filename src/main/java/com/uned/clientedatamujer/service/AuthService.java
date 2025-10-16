@@ -45,4 +45,19 @@ public class AuthService extends BaseHttpClient{
                 .build();
         return sendRequest(request, TokenResponse.class);
     }
+
+    public void logout(String accessJwt){
+        String url = URL + "/auth/logout";
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .header("Content-Type", "Application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        AuthSession.clear();
+
+        sendRequest(request, Void.class);
+    }
 }

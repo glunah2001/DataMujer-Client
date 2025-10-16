@@ -1,0 +1,75 @@
+package com.uned.clientedatamujer.controller;
+
+import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.service.AuthSession;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+
+public class MainController extends BaseController{
+    @FXML
+    private JFXSnackbar snackBarInfo;
+    @FXML
+    private StackPane rootPane;
+    @FXML
+    private Button btnNewActivity;
+    @FXML
+    private Button btnMyVolunteering;
+    @FXML
+    private Button btnGenReport;
+    @FXML
+    private Button btnAdminOps;
+    @FXML
+    private StackPane SubScenePane;
+
+    @FXML
+    private void initialize(){
+        snackBarInfo = new JFXSnackbar(rootPane);
+        showLoading(rootPane);
+        restrictButtons();
+        hideLoading(rootPane);
+        showSuccessSnackBar(
+                "Bienvenido "+AuthSession.getSubject(),
+                snackBarInfo
+        );
+    }
+
+    @FXML
+    private void toMyProfile(ActionEvent event) {
+
+    }
+
+    private void restrictButtons(){
+        resetButtons();
+        String role = AuthSession.getRole();
+        if(role.equals("ROLE_ADMIN")) {
+            return;
+        }else{
+            btnGenReport.setVisible(false);
+            btnGenReport.setManaged(false);
+            btnAdminOps.setVisible(false);
+            btnAdminOps.setManaged(false);
+        }
+
+        if(role.equals("ROLE_STANDARD")){
+            btnNewActivity.setVisible(false);
+            btnNewActivity.setManaged(false);
+            btnMyVolunteering.setVisible(false);
+            btnMyVolunteering.setManaged(false);
+        }
+    }
+
+    private void resetButtons(){
+        btnNewActivity.setVisible(true);
+        btnNewActivity.setManaged(true);
+        btnMyVolunteering.setVisible(true);
+        btnMyVolunteering.setManaged(true);
+        btnGenReport.setVisible(true);
+        btnGenReport.setManaged(true);
+        btnAdminOps.setVisible(true);
+        btnAdminOps.setManaged(true);
+    }
+
+
+}

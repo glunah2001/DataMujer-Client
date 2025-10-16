@@ -53,6 +53,7 @@ public abstract class BaseHttpClient {
             );
             if(response.statusCode() >= 200 && response.statusCode() < 300){
                 try{
+                    if(responseType.equals(Void.class)) return null;
                     if(responseType.equals(String.class)) return response.body();
                     return objectMapper.readValue(response.body(), responseType);
                 }catch (Exception e){

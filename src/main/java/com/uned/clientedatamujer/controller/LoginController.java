@@ -66,13 +66,6 @@ public class LoginController extends BaseController{
                     runLater(() ->{
                         try{
                             AuthSession.setTokens(response);
-                            System.out.printf("%s\n%s\n",
-                                    AuthSession.getAccessToken(),
-                                    AuthSession.getRefreshToken());
-                            System.out.println(AuthSession.getExpiration());
-                            System.out.println(AuthSession.getSubject());
-                            System.out.println(AuthSession.getRole());
-                            System.out.println(AuthSession.getPersonType());
                             SceneManager.changeScene("/com/uned/clientedatamujer/main-view.fxml",
                                     1080, 720, true);
                         }catch(IOException e){

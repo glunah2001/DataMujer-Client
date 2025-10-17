@@ -44,7 +44,7 @@
                      </children>
                   </HBox>
                   <Button mnemonicParsing="false" text="Actividades" />
-                  <Button fx:id="btnNewActivity" mnemonicParsing="false" text="Nueva Actividad" />
+                  <Button fx:id="btnNewActivity" mnemonicParsing="false" onAction="#loadNewActivity" text="Nueva Actividad" />
                   <Button mnemonicParsing="false" text="Mis Participaciones" />
                   <Button fx:id="btnMyVolunteering" mnemonicParsing="false" text="Mis Voluntariados" />
                   <Button mnemonicParsing="false" text="Mis Pagos" />

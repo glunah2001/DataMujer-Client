@@ -81,6 +81,7 @@ public class LoginController extends BaseController{
                                 "Error con los datos de inicio de sesión."
                         );
                         hideLoading(rootPane);
+                        clearForm();
                     });
                 }
             }catch(Exception e){

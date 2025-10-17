@@ -8,15 +8,15 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane stylesheets="@stylesheet/style.css" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-<GridPane style="-fx-background-color: TRANSPARENT;" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" >
+<AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.NewActivityController">
+<GridPane style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -53,45 +53,45 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="70.0" prefWidth="780.0" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="2">
          <children>
-            <TextField prefWidth="250.0" promptText="NOMBRE DE ACTIVIDAD" HBox.hgrow="ALWAYS" />
-            <TextField prefHeight="42.0" prefWidth="250.0" promptText="USERNAME DEL ORGANIZADOR" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtActivity" prefWidth="250.0" promptText="NOMBRE DE ACTIVIDAD" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtUsername" prefHeight="42.0" prefWidth="250.0" promptText="USERNAME DEL ORGANIZADOR" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox prefHeight="125.0" prefWidth="780.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="3" GridPane.rowSpan="2">
          <children>
-            <TextArea prefHeight="200.0" prefWidth="200.0" promptText="DESCRIPCIÓN" wrapText="true" HBox.hgrow="ALWAYS" />
+            <TextArea fx:id="txtDescription" prefHeight="200.0" prefWidth="200.0" promptText="DESCRIPCIÓN" wrapText="true" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="69.0" prefWidth="200.0" spacing="80.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="5">
          <children>
-            <JFXToggleButton text="Virtual" unToggleLineColor="#f5d2e8">
+            <JFXToggleButton fx:id="toggleIsOnSite" text="Virtual" unToggleLineColor="#f5d2e8">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
             </JFXToggleButton>
-            <TextField promptText="UBICACIÓN/PLATAFORMA" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtLocation" promptText="UBICACIÓN/PLATAFORMA" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="125.0" prefWidth="780.0" spacing="50.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="6">
          <children>
             <VBox alignment="CENTER" prefHeight="100.0" prefWidth="325.0" spacing="10.0">
                <children>
-                  <DatePicker promptText="FECHA INICIO" />
+                  <DatePicker fx:id="dtpStartDate" promptText="FECHA INICIO" />
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="time-picker">
                      <children>
-                        <Spinner HBox.hgrow="ALWAYS" />
-                        <Spinner HBox.hgrow="ALWAYS" />
+                        <Spinner fx:id="spinnerStartHour" HBox.hgrow="ALWAYS" />
+                        <Spinner fx:id="spinnerStartMinutes" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="325.0" spacing="10.0">
                <children>
-                  <DatePicker promptText="FECHA FIN" />
+                  <DatePicker fx:id="dtpEndDate" promptText="FECHA FIN" />
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="time-picker">
                      <children>
-                        <Spinner HBox.hgrow="ALWAYS" />
-                        <Spinner HBox.hgrow="ALWAYS" />
+                        <Spinner fx:id="spinnerEndHour" HBox.hgrow="ALWAYS" />
+                        <Spinner fx:id="spinnerEndMinutes" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                </children>
@@ -100,7 +100,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="53.0" prefWidth="880.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
          <children>
-            <Button mnemonicParsing="false" styleClass="button-primario" text="Publicar" />
+            <Button mnemonicParsing="false" onAction="#btnPublish" styleClass="button-primario" text="Publicar" />
          </children>
       </HBox>
    </children>

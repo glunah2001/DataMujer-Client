@@ -1,8 +1,11 @@
 package com.uned.clientedatamujer.controller;
 
+import com.jfoenix.controls.JFXSnackbar;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,6 +41,25 @@ public class SceneManager {
 
     public static void toMainView(int width, int height) throws IOException{
         changeScene("/com/uned/clientedatamujer/main-view.fxml", width, height, true);
+    }
+
+    public static void loadSubScene(StackPane subScenePane,
+                                    String fxml,
+                                    MainController mainController,
+                                    StackPane rootPane,
+                                    JFXSnackbar snackbar) throws IOException {
+        FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxml));
+        Parent root = loader.load();
+
+        subScenePane.getChildren().clear();
+
+        //cargar controlador
+        BaseSubSceneController controller = loader.getController();
+        controller.setMainController(mainController);
+        controller.setRootPane(rootPane);
+        controller.setSnackBarInfo(snackbar);
+
+        subScenePane.getChildren().add(root);
     }
 
 }

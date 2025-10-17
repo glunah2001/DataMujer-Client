@@ -80,4 +80,24 @@ public class MainController extends BaseController{
     }
 
 
+    public void loadNewActivity(ActionEvent event) {
+        if(AuthSession.getRole().equals("STANDARD")){
+            SubScenePane.getChildren().clear();
+            showErrorSnackBar("Usted no cuenta con la autorización para realizar esta operación.",
+                    snackBarInfo);
+            return;
+        }
+
+        try {
+            SceneManager.loadSubScene(
+                    SubScenePane,
+                    "/com/uned/clientedatamujer/new-activity-subscene.fxml",
+                    this,
+                    rootPane,
+                    snackBarInfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

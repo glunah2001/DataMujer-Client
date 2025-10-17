@@ -278,7 +278,6 @@
     -fx-border-color: transparent;
     -fx-font-size: 14px;
     -fx-padding: 0;
-    /* HACEMOS que el Spinner ocupe todo el espacio que le da el HBox */
     -fx-hgrow: ALWAYS; /* <-- Asegura que tome el espacio disponible */
 }
 

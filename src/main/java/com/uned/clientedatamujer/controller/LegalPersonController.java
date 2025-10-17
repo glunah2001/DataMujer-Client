@@ -16,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 public class LegalPersonController extends BaseController{
@@ -211,6 +212,12 @@ public class LegalPersonController extends BaseController{
             showErrorSnackBar("Por favor, rellene todos los datos.", snackBarInfo);
             return false;
         }
+
+        if(datePickerFoundation.getValue().isAfter(LocalDate.now())){
+            showErrorSnackBar("Seleccione una fecha de fundación válida", snackBarInfo);
+            return false;
+        }
+
         return true;
     }
 

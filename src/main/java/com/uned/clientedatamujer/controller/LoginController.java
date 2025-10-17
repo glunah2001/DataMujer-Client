@@ -66,8 +66,7 @@ public class LoginController extends BaseController{
                     runLater(() ->{
                         try{
                             AuthSession.setTokens(response);
-                            SceneManager.changeScene("/com/uned/clientedatamujer/main-view.fxml",
-                                    1080, 720, true);
+                            SceneManager.toMainView(1080, 720);
                         }catch(IOException e){
                             String message = "Corrupción en la ruta de recursos";
                             showErrorSnackBar(message, snackBarInfo);

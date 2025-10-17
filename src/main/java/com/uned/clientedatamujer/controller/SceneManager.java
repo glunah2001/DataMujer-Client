@@ -32,4 +32,12 @@ public class SceneManager {
         changeScene("/com/uned/clientedatamujer/login-view.fxml", 1080, 720, false);
     }
 
+    public static void toMyProfile(int width, int height) throws IOException {
+        changeScene("/com/uned/clientedatamujer/my-profile-view.fxml", width, height, true);
+    }
+
+    public static void toMainView(int width, int height) throws IOException{
+        changeScene("/com/uned/clientedatamujer/main-view.fxml", width, height, true);
+    }
+
 }

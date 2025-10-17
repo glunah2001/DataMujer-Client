@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
+
 public class MainController extends BaseController{
     @FXML
     private JFXSnackbar snackBarInfo;
@@ -37,7 +39,13 @@ public class MainController extends BaseController{
 
     @FXML
     private void toMyProfile(ActionEvent event) {
-
+        int width = (int) rootPane.getWidth();
+        int height = (int) rootPane.getHeight();
+        try {
+            SceneManager.toMyProfile(width, height);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void restrictButtons(){

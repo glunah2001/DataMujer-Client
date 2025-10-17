@@ -84,7 +84,7 @@
                <Insets />
             </GridPane.margin>
          </DatePicker>
-         <TextField fx:id="txtPhone" promptText="TELEFONO" GridPane.columnIndex="2" GridPane.rowIndex="5">
+         <TextField fx:id="txtPhone" promptText="TELÉFONO" GridPane.columnIndex="2" GridPane.rowIndex="5">
             <GridPane.margin>
                <Insets left="10.0" right="10.0" />
             </GridPane.margin>

@@ -5,6 +5,14 @@
     -fx-background-position: center center;
 }
 
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
 /* TextFields y PasswordFields */
 .text-field, .password-field {
     -fx-background-color: #F2F2F2; /* gris claro */

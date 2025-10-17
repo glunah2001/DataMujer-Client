@@ -13,6 +13,7 @@ module com.uned.clientedatamujer {
     opens com.uned.clientedatamujer to javafx.fxml;
     exports com.uned.clientedatamujer;
     exports com.uned.clientedatamujer.controller;
+    exports com.uned.clientedatamujer.enums;
     exports com.uned.clientedatamujer.dto to com.fasterxml.jackson.databind;
 
     opens com.uned.clientedatamujer.controller to javafx.fxml;

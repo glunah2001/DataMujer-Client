@@ -267,39 +267,41 @@
     -fx-alignment: CENTER; /* Centra los Spinners en el HBox */
     -fx-padding: 0 10 0 10; /* Pequeño relleno interior horizontal */
     -fx-spacing: 5px; /* Espacio entre los Spinners (para los ":") */
-    -fx-pref-height: 42px; /* Aumentamos la altura para que coincida con los TextField */
+    -fx-pref-height: 42px; /* Altura para que coincida con los TextField/DatePicker */
 }
 
 /* Estilo para los Spinners dentro del Time Picker */
 .time-picker > .spinner {
-    -fx-max-width: 90px; /* Limita el ancho para que quepan bien */
+    /* ELIMINAR: -fx-max-width: 90px; */
     -fx-pref-height: 38px; /* Altura un poco menor que el HBox */
     -fx-background-color: transparent; /* Fondo transparente para usar el del HBox */
     -fx-border-color: transparent;
     -fx-font-size: 14px;
     -fx-padding: 0;
+    /* HACEMOS que el Spinner ocupe todo el espacio que le da el HBox */
+    -fx-hgrow: ALWAYS; /* <-- Asegura que tome el espacio disponible */
 }
 
 /* Estilo para el campo de texto interno (donde se ven los números) */
 .time-picker > .spinner .text-field {
     -fx-alignment: CENTER; /* Centra el texto */
-    -fx-background-color: transparent; /* Importante para usar el fondo del HBox */
-    -fx-prompt-text-fill: #333333; /* El color del texto del número */
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: #333333;
     -fx-text-fill: #333333;
-    -fx-font-weight: bold; /* Los números en negrita son más claros */
+    -fx-font-weight: bold;
 }
 
 /* Estilo para los botones de las flechas (increment/decrement) */
 .time-picker > .spinner .increment-arrow-button,
 .time-picker > .spinner .decrement-arrow-button {
-    -fx-background-color: transparent; /* Botones transparentes */
+    -fx-background-color: transparent;
     -fx-padding: 0 4px 0 4px;
 }
 
 /* Estilo para las flechas dentro de los botones */
 .time-picker > .spinner .increment-arrow,
 .time-picker > .spinner .decrement-arrow {
-    -fx-background-color: #A98BE4; /* Color morado de tu paleta */
+    -fx-background-color: #A98BE4;
 }
 
 .sidebar-vbox {

@@ -60,36 +60,18 @@ public class LoginController extends BaseController{
 
         var dto = new UserLoginDTO(user, password);
 
-        showLoading();
-        runAsync(()->{
-            try{
-                Object object = service.login(dto);
-                if(object instanceof TokenResponse response){
-                    hideLoading();
-                    runLater(() ->{
-                        try{
-                            AuthSession.setTokens(response);
-                            SceneManager.toMainView(1080, 720);
-                        }catch(IOException e){
-                            String message = "Corrupción en la ruta de recursos";
-                            showErrorSnackBar(message);
-                        }
-                    });
-                }else if(object instanceof ApiError error){
-                    runLater(()->{
-                        handleApiError(
-                                error,
-                                "Error con los datos de inicio de sesión."
-                        );
-                        hideLoading();
-                        clearForm();
-                    });
-                }
-            }catch(Exception e){
-                runLater(this::hideLoading);
-                e.printStackTrace();
-            }
-        });
+        executeCall(
+                () -> service.login(dto),
+                (TokenResponse response) -> {
+                    try{
+                        AuthSession.setTokens(response);
+                        SceneManager.toMainView(1080, 720);
+                    }catch(IOException e){
+                        showErrorSnackBar("Corrupción en la ruta de recursos");
+                    }
+                },
+                "Error con los datos de inicio de sesión."
+        );
     }
 
     private void clearForm(){

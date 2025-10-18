@@ -135,12 +135,13 @@ public class MyProfileController extends BaseController{
     }
 
     private void getData(){
-        Object result = userService.getMyProfile();
-        if(result instanceof ApiError error){
-            showErrorSnackBar(error.message());
-        }else if(result instanceof ProfileDTO person){
-            myData = person;
-        }
+        executeCall(
+                userService::getMyProfile,
+                (ProfileDTO newData) -> {
+                    myData = newData;
+                },
+                null
+        );
     }
 
     private void loadData(){
@@ -179,36 +180,21 @@ public class MyProfileController extends BaseController{
     }
 
     private void sendUpdateRequest(Object dto){
-        showLoading();
-        runAsync(() -> {
-            try {
-                Object response = userService.updateProfile(dto);
-                if (response instanceof PhysicalPersonDTO newData) {
-                    myData = newData;
-                    loadData();
-                    runLater(() -> {
-                        hideLoading();
-                        showSuccessSnackBar("Actualización realizada satisfactoriamente");
-                    });
-                } else if (response instanceof LegalPersonDTO newData) {
-                    myData = newData;
-                    loadData();
-                    runLater(() -> {
-                        hideLoading();
-                        showSuccessSnackBar("Actualización realizada satisfactoriamente");
-                    });
-                } else if (response instanceof ApiError error) {
-                    runLater(() -> {
-                        hideLoading();
+        executeCall(
+                () -> userService.updateProfile(dto),
+                (Object response) -> {
+                    if(response instanceof PhysicalPersonDTO newData){
+                        myData = newData;
                         loadData();
-                        handleApiError(error, "Error al Actualizar sus datos.");
-                    });
-                }
-            } catch (Exception e) {
-                runLater(this::hideLoading);
-                e.printStackTrace();
-            }
-        });
+                    }else if(response instanceof LegalPersonDTO newData){
+                        myData = newData;
+                        loadData();
+                    }
+                    hideLoading();
+                    showSuccessSnackBar("Actualización realizada satisfactoriamente");
+                },
+                "Error al Actualizar sus datos."
+        );
     }
 
     private PhysicalPersonUpdateDTO getPhysicalData(){

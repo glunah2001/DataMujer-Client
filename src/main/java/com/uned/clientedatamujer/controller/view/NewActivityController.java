@@ -56,32 +56,19 @@ public class NewActivityController extends BaseSubSceneController{
 
         var data = getData();
 
-        mainController.showLoading();
-        mainController.runAsync(() ->{
-            try{
-                Object response = service.postActivity(data, AuthSession.getAccessToken());
-                if(response instanceof ActivityDTO dto){
-                    mainController.runLater(()->{
-                        mainController.hideLoading();
-                        String message = String.format(
-                                "Se ha creado la actividad %S con id %d.",
-                                dto.activity(),
-                                dto.id()
-                        );
-                        mainController.showSuccessSnackBar(message);
-                        clearForm();
-                    });
-                }else if(response instanceof ApiError error){
-                    mainController.runLater(() ->{
-                        mainController.hideLoading();
-                        mainController.handleApiError(error, "Error en la creación " +
-                                "de la actividad.");
-                    });
-                }
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        });
+        mainController.executeCall(
+                () -> service.postActivity(data, AuthSession.getAccessToken()),
+                (ActivityDTO dto) -> {
+                    String message = String.format(
+                            "Se ha creado la actividad %S con id %d.",
+                            dto.activity(),
+                            dto.id()
+                    );
+                    mainController.showSuccessSnackBar(message);
+                    clearForm();
+                },
+                "Error en la creación de la actividad."
+        );
     }
 
     private void initializeToggle(){

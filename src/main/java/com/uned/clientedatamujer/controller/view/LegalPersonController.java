@@ -70,39 +70,23 @@ public class LegalPersonController extends BaseController{
 
         showLoading();
 
-        runAsync(()->{
-            try {
-                Object result = service.register(legal);
-                if(result instanceof String success){
-                    runLater(()->{
-                        showSuccessSnackBar(success);
-                        withDelay(4, () ->{
-                            hideLoading();
-                            try{
-                                clearForm();
-                                SceneManager.toLogIn();
-                            }catch(IOException e){
-                                String message = "Corrupción en la ruta de recursos";
-                                showErrorSnackBar(message);
-                            }
-                        });
-                    });
-                }else if(result instanceof ApiError error){
-                    try {
-                        runLater(()->{
-                            hideLoading();
-                            handleApiError(error, "Error en los datos de registro");
-                        });
-                    }catch(Exception e){
+        executeCall(
+                () -> service.register(legal),
+                (String success) -> {
+                    showSuccessSnackBar(success);
+                    withDelay(4, () ->{
                         hideLoading();
-                        e.printStackTrace();
-                    }
-                }
-            }catch(Exception e){
-                runLater(this::hideLoading);
-                e.printStackTrace();
-            }
-        });
+                        try{
+                            clearForm();
+                            SceneManager.toLogIn();
+                        }catch(IOException e){
+                            String message = "Corrupción en la ruta de recursos";
+                            showErrorSnackBar(message);
+                        }
+                    });
+                },
+                "Error en los datos de registro"
+        );
     }
 
     private void initializeCountry(){

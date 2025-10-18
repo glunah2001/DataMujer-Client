@@ -20,6 +20,7 @@ public abstract class BaseController {
     protected <T> void executeCall(
             ThrowingSupplier<Object> serviceCall,
             Consumer<T> onSuccess,
+            Consumer<ApiError> onError,
             String errorTitle
     ){
         showLoading();
@@ -28,8 +29,9 @@ public abstract class BaseController {
                 Object response = serviceCall.get();
                 if(response instanceof ApiError error){
                     runLater(()->{
-                        hideLoading();
                         handleApiError(error, errorTitle);
+                        if(onError != null)onError.accept(error);
+                        else hideLoading();
                     });
                 }else{
                     T data = (T) response;
@@ -43,6 +45,14 @@ public abstract class BaseController {
                 runLater(this::hideLoading);
             }
         });
+    }
+
+    protected <T> void executeCall(
+            ThrowingSupplier<Object> serviceCall,
+            Consumer<T> onSuccess,
+            String errorTitle
+    ){
+        executeCall(serviceCall, onSuccess, null, errorTitle);
     }
 
     public void setRootPane(StackPane rootPane) {this.rootPane = rootPane;}
@@ -84,8 +94,8 @@ public abstract class BaseController {
     }
 
     protected void handleApiError(ApiError error,
-                                  String title){
-        if(error.details() != null){
+                                  String title) {
+        if (error.details() != null) {
             String message = error.details().stream()
                     .map(detail -> "* " + detail)
                     .collect(Collectors.joining("\n"));
@@ -93,12 +103,7 @@ public abstract class BaseController {
             return;
         }
 
-        /*switch (error.error().toUpperCase()){
-            case "NOT FOUND", "CONFLICT", "BAD REQUEST", "UNEXPECTED", "SERVICE UNAVAILABLE" -> {*/
-                String message = error.error() + ": " + error.message();
-                showErrorSnackBar(message);
-            /*}
-            case "UNAUTHORIZED", "FORBIDDEN" -> {}
-        }*/
+        String message = error.error() + ": " + error.message();
+        showErrorSnackBar(message);
     }
 }

@@ -12,17 +12,15 @@ module com.uned.clientedatamujer {
 
     opens com.uned.clientedatamujer to javafx.fxml;
     exports com.uned.clientedatamujer;
-    exports com.uned.clientedatamujer.controller;
+    exports com.uned.clientedatamujer.controller.util;
+    exports com.uned.clientedatamujer.controller.view;
     exports com.uned.clientedatamujer.enums;
     exports com.uned.clientedatamujer.dto to com.fasterxml.jackson.databind;
 
-    opens com.uned.clientedatamujer.controller to javafx.fxml;
+    opens com.uned.clientedatamujer.controller.view to javafx.fxml;
+    opens com.uned.clientedatamujer.controller.util to javafx.fxml;
     opens com.uned.clientedatamujer.dto.authentication to com.fasterxml.jackson.databind;
     opens com.uned.clientedatamujer.dto.request to com.fasterxml.jackson.databind;
     opens com.uned.clientedatamujer.dto.response to com.fasterxml.jackson.databind;
     opens com.uned.clientedatamujer.dto.token to com.fasterxml.jackson.databind;
-    exports com.uned.clientedatamujer.controller.util;
-    opens com.uned.clientedatamujer.controller.util to javafx.fxml;
-    exports com.uned.clientedatamujer.controller.view;
-    opens com.uned.clientedatamujer.controller.view to javafx.fxml;
 }

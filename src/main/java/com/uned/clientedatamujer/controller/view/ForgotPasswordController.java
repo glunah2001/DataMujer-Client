@@ -44,40 +44,24 @@ public class ForgotPasswordController extends  BaseController{
         }
         txtEmail.clear();
 
-        showLoading();
-        runAsync(() ->{
-            try{
-                Object result = service.forgotPassword(email);
-
-                if(result instanceof String success){
-                    runLater(() ->{
-                        showSuccessSnackBar(success);
-                        withDelay(4, () ->{
-                            hideLoading();
-                            try{
-                                SceneManager.changeScene(
-                                        "/com/uned/clientedatamujer/reset-password-view.fxml",
-                                        1080, 720, false
-                                );
-                            }catch(IOException e){
-                                String message = "Corrupción en la ruta de recursos";
-                                showErrorSnackBar(message);
-                            }
-                        });
-                    });
-                }else if(result instanceof ApiError errorDto){
-                    runLater(() -> {
-                        handleApiError(
-                                errorDto,
-                                null
-                        );
+        executeCall(
+                () -> service.forgotPassword(email),
+                (String success) -> {
+                    showSuccessSnackBar(success);
+                    withDelay(4, () ->{
                         hideLoading();
+                        try{
+                            SceneManager.changeScene(
+                                    "/com/uned/clientedatamujer/reset-password-view.fxml",
+                                    1080, 720, false
+                            );
+                        }catch(IOException e){
+                            String message = "Corrupción en la ruta de recursos";
+                            showErrorSnackBar(message);
+                        }
                     });
-                }
-            }catch(Exception e){
-                runLater(this::hideLoading);
-                e.printStackTrace();
-            }
-        });
+                },
+                null
+        );
     }
 }

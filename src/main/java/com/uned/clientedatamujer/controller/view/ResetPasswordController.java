@@ -49,50 +49,38 @@ public class ResetPasswordController extends BaseController{
         txtToken.clear();
         txtNewPassword.clear();
 
-        showLoading();
         ResetPasswordDTO dto = new ResetPasswordDTO(token, newPassword);
 
-        runAsync(() ->{
-            try{
-                Object result = service.resetPassword(dto);
-                if(result instanceof String success){
-                    runLater(() ->{
-                        showSuccessSnackBar(success);
-                        withDelay(3, ()->{
-                            hideLoading();
-                            try{
-                                SceneManager.toLogIn();
-                            }catch(IOException e){
-                                String message = "Corrupción en la ruta de recursos";
-                                showErrorSnackBar(message);
-                            }
-                        });
-                    });
-                }else if(result instanceof ApiError errorDto){
-                    runLater(() ->{
-                        handleApiError(
-                                errorDto,
-                                "No fue posible restablecer su contraseña."
-                        );
-                        if(errorDto.error().equalsIgnoreCase("BAD REQUEST")
-                        && errorDto.details() == null){
-                            withDelay(3,() ->{
-                                hideLoading();
-                                try {
-                                    SceneManager.toLogIn();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            });
-                        }else{
-                            hideLoading();
+        executeCall(
+                () -> service.resetPassword(dto),
+                (String success) -> {
+                    showSuccessSnackBar(success);
+                    withDelay(3, ()->{
+                        hideLoading();
+                        try{
+                            SceneManager.toLogIn();
+                        }catch(IOException e){
+                            String message = "Corrupción en la ruta de recursos";
+                            showErrorSnackBar(message);
                         }
                     });
+                },
+                (ApiError error) -> {
+                    if(error.error().equalsIgnoreCase("BAD REQUEST")
+                            && error.details() == null){
+                        withDelay(3,() ->{
+                            hideLoading();
+                            try {
+                                SceneManager.toLogIn();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        return;
+                    }
+                    hideLoading();
                 }
-            }catch(Exception e){
-                hideLoading();
-                e.printStackTrace();
-            }
-        });
+                ,"No fue posible restablecer su contraseña."
+        );
     }
 }

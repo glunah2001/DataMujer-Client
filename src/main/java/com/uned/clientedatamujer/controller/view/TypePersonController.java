@@ -21,12 +21,13 @@ public class TypePersonController {
     private void ToRegisterView(ActionEvent event) throws IOException{
         String scene;
         int index = comboBoxPersonType.getSelectionModel().getSelectedIndex();
-
-        if(index == 0){
-            scene = "/com/uned/clientedatamujer/physical-person-view.fxml";
-        }else if( index == 1){
-            scene = "/com/uned/clientedatamujer/legal-person-view.fxml";
-        }else{ return; }
+        switch (index) {
+            case 0 -> scene = "/com/uned/clientedatamujer/physical-person-view.fxml";
+            case 1 -> scene = "/com/uned/clientedatamujer/legal-person-view.fxml";
+            default -> {
+                return;
+            }
+        }
 
         SceneManager.changeScene(
                 scene, 1080, 720, false

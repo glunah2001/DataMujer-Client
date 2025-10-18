@@ -1,6 +1,7 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.service.AuthSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,13 +29,12 @@ public class MainController extends BaseController{
     @FXML
     private void initialize(){
         snackBarInfo = new JFXSnackbar(rootPane);
-        showLoading(rootPane);
+        setRootPane(rootPane);
+        setSnackBarInfo(snackBarInfo);
+        showLoading();
         restrictButtons();
-        hideLoading(rootPane);
-        showSuccessSnackBar(
-                "Bienvenido "+AuthSession.getSubject(),
-                snackBarInfo
-        );
+        hideLoading();
+        showSuccessSnackBar("Bienvenido "+AuthSession.getSubject());
     }
 
     @FXML
@@ -83,8 +83,7 @@ public class MainController extends BaseController{
     public void loadNewActivity(ActionEvent event) {
         if(AuthSession.getRole().equals("STANDARD")){
             SubScenePane.getChildren().clear();
-            showErrorSnackBar("Usted no cuenta con la autorización para realizar esta operación.",
-                    snackBarInfo);
+            showErrorSnackBar("Usted no cuenta con la autorización para realizar esta operación.");
             return;
         }
 

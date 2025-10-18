@@ -1,6 +1,7 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.service.AuthService;
 import javafx.event.ActionEvent;
@@ -24,6 +25,8 @@ public class ForgotPasswordController extends  BaseController{
     @FXML
     private void initialize(){
         snackbarInfo = new JFXSnackbar(rootPane);
+        setRootPane(rootPane);
+        setSnackBarInfo(snackbarInfo);
     }
 
 
@@ -36,21 +39,21 @@ public class ForgotPasswordController extends  BaseController{
     private void ToResetPasswordView(ActionEvent event){
         String email = txtEmail.getText().trim();
         if (email.isEmpty()){
-            showErrorSnackBar("Ingrese su correo electrónico.", snackbarInfo);
+            showErrorSnackBar("Ingrese su correo electrónico.");
             return;
         }
         txtEmail.clear();
 
-        showLoading(rootPane);
+        showLoading();
         runAsync(() ->{
             try{
                 Object result = service.forgotPassword(email);
 
                 if(result instanceof String success){
                     runLater(() ->{
-                        showSuccessSnackBar(success,snackbarInfo);
+                        showSuccessSnackBar(success);
                         withDelay(4, () ->{
-                            hideLoading(rootPane);
+                            hideLoading();
                             try{
                                 SceneManager.changeScene(
                                         "/com/uned/clientedatamujer/reset-password-view.fxml",
@@ -58,25 +61,21 @@ public class ForgotPasswordController extends  BaseController{
                                 );
                             }catch(IOException e){
                                 String message = "Corrupción en la ruta de recursos";
-                                showErrorSnackBar(message, snackbarInfo);
+                                showErrorSnackBar(message);
                             }
                         });
                     });
                 }else if(result instanceof ApiError errorDto){
                     runLater(() -> {
                         handleApiError(
-                                rootPane,
-                                snackbarInfo,
                                 errorDto,
                                 null
                         );
-                        hideLoading(rootPane);
+                        hideLoading();
                     });
                 }
             }catch(Exception e){
-                runLater(() ->{
-                    hideLoading(rootPane);
-                });
+                runLater(this::hideLoading);
                 e.printStackTrace();
             }
         });

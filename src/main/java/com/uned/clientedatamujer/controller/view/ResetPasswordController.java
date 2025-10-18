@@ -1,6 +1,7 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.authentication.ResetPasswordDTO;
 import com.uned.clientedatamujer.service.AuthService;
@@ -28,6 +29,8 @@ public class ResetPasswordController extends BaseController{
     @FXML
     private void initialize(){
         snackbarInfo = new JFXSnackbar(rootPane);
+        setRootPane(rootPane);
+        setSnackBarInfo(snackbarInfo);
     }
 
     @FXML
@@ -40,14 +43,13 @@ public class ResetPasswordController extends BaseController{
         String token = txtToken.getText().trim();
         String newPassword = txtNewPassword.getText().trim();
         if(token.isEmpty() || newPassword.isEmpty()){
-            showErrorSnackBar("No se puede hacer un reset de contraseña si no completa todos los datos.",
-                    snackbarInfo);
+            showErrorSnackBar("No se puede hacer un reset de contraseña si no completa todos los datos.");
             return;
         }
         txtToken.clear();
         txtNewPassword.clear();
 
-        showLoading(rootPane);
+        showLoading();
         ResetPasswordDTO dto = new ResetPasswordDTO(token, newPassword);
 
         runAsync(() ->{
@@ -55,29 +57,27 @@ public class ResetPasswordController extends BaseController{
                 Object result = service.resetPassword(dto);
                 if(result instanceof String success){
                     runLater(() ->{
-                        showSuccessSnackBar(success, snackbarInfo);
+                        showSuccessSnackBar(success);
                         withDelay(3, ()->{
-                            hideLoading(rootPane);
+                            hideLoading();
                             try{
                                 SceneManager.toLogIn();
                             }catch(IOException e){
                                 String message = "Corrupción en la ruta de recursos";
-                                showErrorSnackBar(message, snackbarInfo);
+                                showErrorSnackBar(message);
                             }
                         });
                     });
                 }else if(result instanceof ApiError errorDto){
                     runLater(() ->{
                         handleApiError(
-                                rootPane,
-                                snackbarInfo,
                                 errorDto,
                                 "No fue posible restablecer su contraseña."
                         );
                         if(errorDto.error().equalsIgnoreCase("BAD REQUEST")
                         && errorDto.details() == null){
                             withDelay(3,() ->{
-                                hideLoading(rootPane);
+                                hideLoading();
                                 try {
                                     SceneManager.toLogIn();
                                 } catch (IOException e) {
@@ -85,12 +85,12 @@ public class ResetPasswordController extends BaseController{
                                 }
                             });
                         }else{
-                            hideLoading(rootPane);
+                            hideLoading();
                         }
                     });
                 }
             }catch(Exception e){
-                hideLoading(rootPane);
+                hideLoading();
                 e.printStackTrace();
             }
         });

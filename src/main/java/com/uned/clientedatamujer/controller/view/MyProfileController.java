@@ -1,6 +1,7 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.request.CommonUpdateDTO;
 import com.uned.clientedatamujer.dto.request.LegalPersonUpdateDTO;
@@ -61,14 +62,16 @@ public class MyProfileController extends BaseController{
 
     @FXML
     private void initialize(){
-        showLoading(rootPane);
+        showLoading();
         snackBarInfo = new JFXSnackbar(rootPane);
+        setRootPane(rootPane);
+        setSnackBarInfo(snackBarInfo);
         initializeCountry();
         initializePhone();
         prepareSceneElements();
         getData();
         loadData();
-        hideLoading(rootPane);
+        hideLoading();
     }
 
     @FXML
@@ -134,7 +137,7 @@ public class MyProfileController extends BaseController{
     private void getData(){
         Object result = userService.getMyProfile();
         if(result instanceof ApiError error){
-            showErrorSnackBar(error.message(), snackBarInfo);
+            showErrorSnackBar(error.message());
         }else if(result instanceof ProfileDTO person){
             myData = person;
         }
@@ -176,7 +179,7 @@ public class MyProfileController extends BaseController{
     }
 
     private void sendUpdateRequest(Object dto){
-        showLoading(rootPane);
+        showLoading();
         runAsync(() -> {
             try {
                 Object response = userService.updateProfile(dto);
@@ -184,27 +187,25 @@ public class MyProfileController extends BaseController{
                     myData = newData;
                     loadData();
                     runLater(() -> {
-                        hideLoading(rootPane);
-                        showSuccessSnackBar("Actualización realizada satisfactoriamente", snackBarInfo);
+                        hideLoading();
+                        showSuccessSnackBar("Actualización realizada satisfactoriamente");
                     });
                 } else if (response instanceof LegalPersonDTO newData) {
                     myData = newData;
                     loadData();
                     runLater(() -> {
-                        hideLoading(rootPane);
-                        showSuccessSnackBar("Actualización realizada satisfactoriamente", snackBarInfo);
+                        hideLoading();
+                        showSuccessSnackBar("Actualización realizada satisfactoriamente");
                     });
                 } else if (response instanceof ApiError error) {
                     runLater(() -> {
-                        hideLoading(rootPane);
+                        hideLoading();
                         loadData();
-                        handleApiError(rootPane, snackBarInfo, error, "Error al Actualizar sus datos.");
+                        handleApiError(error, "Error al Actualizar sus datos.");
                     });
                 }
             } catch (Exception e) {
-                runLater(() -> {
-                    hideLoading(rootPane);
-                });
+                runLater(this::hideLoading);
                 e.printStackTrace();
             }
         });
@@ -240,7 +241,7 @@ public class MyProfileController extends BaseController{
     private boolean validateData(){
         if(txtName.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPhone.getText().isEmpty() ||
                 txtLocation.getText().isEmpty()) {
-            showErrorSnackBar("Por favor, rellene todos los datos.", snackBarInfo);
+            showErrorSnackBar("Por favor, rellene todos los datos.");
             return false;
         }
 
@@ -248,23 +249,23 @@ public class MyProfileController extends BaseController{
         if(AuthSession.getPersonType().equals("FISICA") && (
                 txtFSurname.getText().isEmpty() ||
                 txtSSurname.getText().isEmpty() || txtProfession.getText().isEmpty())) {
-            showErrorSnackBar("Por favor, rellene todos los datos.", snackBarInfo);
+            showErrorSnackBar("Por favor, rellene todos los datos.");
             return false;
         }
 
         if(AuthSession.getPersonType().equals("FISICA")){
             int age = Period.between(dtpDate.getValue(), LocalDate.now()).getYears();
             if(age < 16 || age > 90){
-                showErrorSnackBar("Seleccione un año de nacimiento válido.", snackBarInfo);
+                showErrorSnackBar("Seleccione un año de nacimiento válido.");
                 return false;
             }
         }else if(dtpDate.getValue().isAfter(LocalDate.now())){
-            showErrorSnackBar("Seleccione un año de fundación válido.", snackBarInfo);
+            showErrorSnackBar("Seleccione un año de fundación válido.");
             return false;
         }
 
         if(!isCountrySelected()){
-            showErrorSnackBar("Seleccione un páis.", snackBarInfo);
+            showErrorSnackBar("Seleccione un páis.");
             return false;
         }
         return true;

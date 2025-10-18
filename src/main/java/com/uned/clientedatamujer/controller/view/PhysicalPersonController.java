@@ -1,9 +1,11 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXToggleButton;
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.request.CommonRegisterDTO;
-import com.uned.clientedatamujer.dto.request.LegalPersonRegisterDTO;
+import com.uned.clientedatamujer.dto.request.PhysicalPersonRegisterDTO;
 import com.uned.clientedatamujer.enums.Country;
 import com.uned.clientedatamujer.service.RegisterService;
 import javafx.event.ActionEvent;
@@ -17,9 +19,10 @@ import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 
-public class LegalPersonController extends BaseController{
+public class PhysicalPersonController extends BaseController{
 
     @FXML
     private StackPane rootPane;
@@ -28,13 +31,21 @@ public class LegalPersonController extends BaseController{
     @FXML
     private TextField txtCedula;
     @FXML
+    private JFXToggleButton toggleDocumentType;
+    @FXML
     private TextField txtName;
     @FXML
-    private DatePicker datePickerFoundation;
+    private TextField txtFSurname;
+    @FXML
+    private TextField txtSSurname;
+    @FXML
+    private DatePicker dtpBirthDate;
     @FXML
     private TextField txtPhone;
     @FXML
     private ComboBox<Country> comboCountry;
+    @FXML
+    private TextField txtProfession;
     @FXML
     private TextField txtLocation;
     @FXML
@@ -49,9 +60,12 @@ public class LegalPersonController extends BaseController{
     @FXML
     private void initialize(){
         initializeCountry();
+        initializeToggle();
         initializePhone();
         initializeCedula();
         snackBarInfo = new JFXSnackbar(rootPane);
+        setRootPane(rootPane);
+        setSnackBarInfo(snackBarInfo);
     }
 
     @FXML
@@ -62,45 +76,48 @@ public class LegalPersonController extends BaseController{
     @FXML
     public void registerPerson(ActionEvent event) {
         var common = getCommonData();
-        var legal = getLegalData(common);
-        if(!validateFormData(legal)) return;
+        var physical = getPhysicalData(common);
+        if(!validateFormData(physical)) return;
 
-        showLoading(rootPane);
+        showLoading();
 
         runAsync(()->{
-            try {
-                Object result = service.register(legal);
+            try{
+                Object result = service.register(physical);
                 if(result instanceof String success){
-                    runLater(()->{
-                        showSuccessSnackBar(success, snackBarInfo);
-                        withDelay(4, () ->{
-                            hideLoading(rootPane);
+                    runLater(() -> {
+                        showSuccessSnackBar(success);
+                        withDelay(4,() ->{
+                            hideLoading();
                             try{
                                 clearForm();
                                 SceneManager.toLogIn();
-                            }catch(IOException e){
+                            }catch (IOException e){
                                 String message = "Corrupción en la ruta de recursos";
-                                showErrorSnackBar(message, snackBarInfo);
+                                showErrorSnackBar(message);
                             }
                         });
                     });
                 }else if(result instanceof ApiError error){
                     try {
                         runLater(()->{
-                            hideLoading(rootPane);
-                            handleApiError(rootPane, snackBarInfo, error, "Error en los datos de registro");
+                            hideLoading();
+                            handleApiError(error, "Error en los datos de registro");
                         });
                     }catch(Exception e){
-                        hideLoading(rootPane);
+                        hideLoading();
                         e.printStackTrace();
                     }
                 }
             }catch(Exception e){
-                runLater(()-> hideLoading(rootPane));
+                runLater(this::hideLoading);
                 e.printStackTrace();
             }
         });
     }
+
+    @FXML
+    public void clearCedula(ActionEvent event) {txtCedula.clear();}
 
     private void initializeCountry(){
         comboCountry.getItems().addAll(Arrays.asList(Country.values()));
@@ -123,6 +140,17 @@ public class LegalPersonController extends BaseController{
         });
 
         comboCountry.setValue(Country.COSTA_RICA);
+    }
+
+    private void initializeToggle(){
+        toggleDocumentType.setText("Cédula Nacional");
+        toggleDocumentType.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                toggleDocumentType.setText("DIMEX");
+            } else {
+                toggleDocumentType.setText("Cédula Nacional");
+            }
+        });
     }
 
     private void initializePhone(){
@@ -158,13 +186,16 @@ public class LegalPersonController extends BaseController{
     }
 
     private void initializeCedula(){
-        txtCedula.textProperty().addListener((obs, oldText, newText) -> {
+        txtCedula.textProperty().addListener((obs,
+                                              oldText,
+                                              newText) -> {
             if (!newText.matches("\\d*")) {
                 txtCedula.setText(newText.replaceAll("[^\\d]", ""));
                 return;
             }
 
-            int maxLength = 10;
+            int maxLength = toggleDocumentType.isSelected() ? 12 : 9;
+
             if (newText.length() > maxLength) {
                 txtCedula.setText(oldText);
             }
@@ -186,35 +217,41 @@ public class LegalPersonController extends BaseController{
                 txtLocation.getText().trim()
         );
     }
-    private LegalPersonRegisterDTO getLegalData(CommonRegisterDTO common){
-        return new LegalPersonRegisterDTO(
-                common,
+
+    private PhysicalPersonRegisterDTO getPhysicalData(CommonRegisterDTO common){
+        return new PhysicalPersonRegisterDTO(common,
                 txtCedula.getText().trim(),
+                txtFSurname.getText().trim(),
+                txtSSurname.getText().trim(),
                 txtName.getText().trim(),
-                datePickerFoundation.getValue()
-        );
+                txtProfession.getText().trim(),
+                dtpBirthDate.getValue()
+                );
     }
 
-    private boolean validateFormData(LegalPersonRegisterDTO legal){
+    private boolean validateFormData(PhysicalPersonRegisterDTO physical){
         if(!isCountrySelected()) {
-            showErrorSnackBar("Seleccione por favor un país de residencia.", snackBarInfo);
+            showErrorSnackBar("Seleccione por favor un país de residencia.");
             return false;
         }
-        if(legal.foundationDate() == null){
-            showErrorSnackBar("Por favor, indique su fecha de nacimiento.", snackBarInfo);
-            return false;
-        }
-
-        if(legal.businessName().isEmpty() || legal.commonRegisterDTO().phoneNumber().isEmpty() ||
-                legal.commonRegisterDTO().location().isEmpty() || legal.commonRegisterDTO().email().isEmpty() ||
-                legal.commonRegisterDTO().username().isEmpty() || legal.commonRegisterDTO().password().isEmpty() ||
-                legal.legalId().isEmpty()){
-            showErrorSnackBar("Por favor, rellene todos los datos.", snackBarInfo);
+        if(physical.birthDate() == null){
+            showErrorSnackBar("Por favor, indique su fecha de nacimiento.");
             return false;
         }
 
-        if(datePickerFoundation.getValue().isAfter(LocalDate.now())){
-            showErrorSnackBar("Seleccione una fecha de fundación válida", snackBarInfo);
+        if(physical.name().isEmpty() || physical.firstSurname().isEmpty() ||
+        physical.secondSurname().isEmpty() || physical.commonRegisterDTO().phoneNumber().isEmpty() ||
+        physical.commonRegisterDTO().location().isEmpty() || physical.profession().isEmpty() ||
+        physical.commonRegisterDTO().email().isEmpty() || physical.commonRegisterDTO().username().isEmpty() ||
+        physical.commonRegisterDTO().password().isEmpty() || physical.nationalId().isEmpty()){
+            showErrorSnackBar("Por favor, rellene todos los datos.");
+            return false;
+        }
+
+
+        int age = Period.between(physical.birthDate(), LocalDate.now()).getYears();
+        if(age < 16 || age > 90){
+            showErrorSnackBar("Seleccione un año de nacimiento válido.");
             return false;
         }
 
@@ -228,7 +265,9 @@ public class LegalPersonController extends BaseController{
         txtPhone.clear();
         txtLocation.clear();
         txtCedula.clear();
+        txtFSurname.clear();
+        txtSSurname.clear();
         txtName.clear();
+        txtProfession.clear();
     }
-
 }

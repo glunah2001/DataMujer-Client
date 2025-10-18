@@ -1,4 +1,4 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.util;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;

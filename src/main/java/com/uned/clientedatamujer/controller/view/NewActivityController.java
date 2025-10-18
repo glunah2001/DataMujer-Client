@@ -1,4 +1,4 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXToggleButton;
 import com.uned.clientedatamujer.dto.ApiError;
@@ -46,6 +46,8 @@ public class NewActivityController extends BaseSubSceneController{
         initializeSpinner(spinnerStartMinutes, 59);
         initializeSpinner(spinnerEndMinutes, 59);
         initializeToggle();
+        setRootPane(rootPane);
+        setSnackBarInfo(snackBarInfo);
     }
 
     @FXML
@@ -54,25 +56,25 @@ public class NewActivityController extends BaseSubSceneController{
 
         var data = getData();
 
-        mainController.showLoading(rootPane);
+        mainController.showLoading();
         mainController.runAsync(() ->{
             try{
                 Object response = service.postActivity(data, AuthSession.getAccessToken());
                 if(response instanceof ActivityDTO dto){
                     mainController.runLater(()->{
-                        mainController.hideLoading(rootPane);
+                        mainController.hideLoading();
                         String message = String.format(
                                 "Se ha creado la actividad %S con id %d.",
                                 dto.activity(),
                                 dto.id()
                         );
-                        mainController.showSuccessSnackBar(message, snackBarInfo);
+                        mainController.showSuccessSnackBar(message);
                         clearForm();
                     });
                 }else if(response instanceof ApiError error){
                     mainController.runLater(() ->{
-                        mainController.hideLoading(rootPane);
-                        mainController.handleApiError(rootPane, snackBarInfo, error, "Error en la creación " +
+                        mainController.hideLoading();
+                        mainController.handleApiError(error, "Error en la creación " +
                                 "de la actividad.");
                     });
                 }
@@ -106,14 +108,12 @@ public class NewActivityController extends BaseSubSceneController{
     public boolean validateData(){
         if(txtActivity.getText().isEmpty() || txtUsername.getText().isEmpty() ||
                 txtDescription.getText().isEmpty() || txtLocation.getText().isEmpty()){
-            mainController.showErrorSnackBar("Por favor, complete toda la información de la actividad",
-                    snackBarInfo);
+            mainController.showErrorSnackBar("Por favor, complete toda la información de la actividad");
             return false;
         }
 
         if(dtpStartDate.getValue() == null || dtpEndDate.getValue() == null){
-            mainController.showErrorSnackBar("Por favor, coloque fechas válidas",
-                    snackBarInfo);
+            mainController.showErrorSnackBar("Por favor, coloque fechas válidas");
             return false;
         }
 

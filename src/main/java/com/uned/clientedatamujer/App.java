@@ -1,6 +1,6 @@
 package com.uned.clientedatamujer;
 
-import com.uned.clientedatamujer.controller.SceneManager;
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

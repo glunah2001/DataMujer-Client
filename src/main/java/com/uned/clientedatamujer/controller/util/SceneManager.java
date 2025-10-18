@@ -1,6 +1,8 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.util;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.controller.view.BaseSubSceneController;
+import com.uned.clientedatamujer.controller.view.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

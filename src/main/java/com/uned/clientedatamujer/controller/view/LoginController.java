@@ -1,6 +1,7 @@
-package com.uned.clientedatamujer.controller;
+package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.authentication.UserLoginDTO;
 import com.uned.clientedatamujer.dto.token.TokenResponse;
@@ -29,6 +30,8 @@ public class LoginController extends BaseController{
     @FXML
     private void initialize(){
         snackBarInfo = new JFXSnackbar(rootPane);
+        setRootPane(rootPane);
+        setSnackBarInfo(snackBarInfo);
     }
 
     @FXML
@@ -51,43 +54,39 @@ public class LoginController extends BaseController{
         String user = txtUser.getText().trim();
         String password = txtPassword.getText().trim();
         if(user.isEmpty() || password.isEmpty()){
-            showErrorSnackBar("Ingrese sus datos de acceso.", snackBarInfo);
+            showErrorSnackBar("Ingrese sus datos de acceso.");
             return;
         }
 
         var dto = new UserLoginDTO(user, password);
 
-        showLoading(rootPane);
+        showLoading();
         runAsync(()->{
             try{
                 Object object = service.login(dto);
                 if(object instanceof TokenResponse response){
-                    hideLoading(rootPane);
+                    hideLoading();
                     runLater(() ->{
                         try{
                             AuthSession.setTokens(response);
                             SceneManager.toMainView(1080, 720);
                         }catch(IOException e){
                             String message = "Corrupción en la ruta de recursos";
-                            showErrorSnackBar(message, snackBarInfo);
+                            showErrorSnackBar(message);
                         }
                     });
                 }else if(object instanceof ApiError error){
                     runLater(()->{
                         handleApiError(
-                                rootPane,
-                                snackBarInfo,
                                 error,
                                 "Error con los datos de inicio de sesión."
                         );
-                        hideLoading(rootPane);
+                        hideLoading();
                         clearForm();
                     });
                 }
             }catch(Exception e){
-                runLater(()->{
-                    hideLoading(rootPane);
-                });
+                runLater(this::hideLoading);
                 e.printStackTrace();
             }
         });

@@ -1,6 +1,7 @@
 package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXToggleButton;
+import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.request.ActivityRegisterDTO;
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
@@ -41,11 +42,15 @@ public class NewActivityController extends BaseSubSceneController{
 
     @FXML
     public void initialize(){
-        initializeSpinner(spinnerStartHour, 23);
-        initializeSpinner(spinnerEndHour, 23);
-        initializeSpinner(spinnerStartMinutes, 59);
-        initializeSpinner(spinnerEndMinutes, 59);
-        initializeToggle();
+        ComponentInitializer.initializeSpinnerHours(spinnerStartHour);
+        ComponentInitializer.initializeSpinnerHours(spinnerEndHour);
+        ComponentInitializer.initializeSpinnerMinutes(spinnerStartMinutes);
+        ComponentInitializer.initializeSpinnerMinutes(spinnerEndMinutes);
+        ComponentInitializer.initializeToggle(
+                toggleIsOnSite,
+                "Virtual",
+                "Presencial"
+                );
         setRootPane(rootPane);
         setSnackBarInfo(snackBarInfo);
     }
@@ -69,27 +74,6 @@ public class NewActivityController extends BaseSubSceneController{
                 },
                 "Error en la creación de la actividad."
         );
-    }
-
-    private void initializeToggle(){
-        toggleIsOnSite.setText("Virtual");
-        toggleIsOnSite.selectedProperty()
-                .addListener((observable,
-                              oldValue,
-                              newValue) -> {
-            if (newValue) {
-                toggleIsOnSite.setText("Presencial");
-            } else {
-                toggleIsOnSite.setText("Virtual");
-            }
-        });
-    }
-
-    private void initializeSpinner(Spinner<Integer> spinner, int max){
-        SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, max, 0);
-        valueFactory.setWrapAround(true);
-        spinner.setValueFactory(valueFactory);
     }
 
     public boolean validateData(){

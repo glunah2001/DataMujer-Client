@@ -2,6 +2,7 @@ package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToggleButton;
+import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.request.CommonRegisterDTO;
@@ -59,10 +60,14 @@ public class PhysicalPersonController extends BaseController{
 
     @FXML
     private void initialize(){
-        initializeCountry();
-        initializeToggle();
-        initializePhone();
-        initializeCedula();
+        ComponentInitializer.initializeCountry(comboCountry);
+        ComponentInitializer.initializeToggle(
+                toggleDocumentType,
+                "Cédula Nacional",
+                "DIMEX"
+                );
+        ComponentInitializer.initializePhone(txtPhone);
+        ComponentInitializer.initializePhysicalCedula(txtCedula, toggleDocumentType);
         snackBarInfo = new JFXSnackbar(rootPane);
         setRootPane(rootPane);
         setSnackBarInfo(snackBarInfo);
@@ -100,89 +105,6 @@ public class PhysicalPersonController extends BaseController{
 
     @FXML
     public void clearCedula(ActionEvent event) {txtCedula.clear();}
-
-    private void initializeCountry(){
-        comboCountry.getItems().addAll(Arrays.asList(Country.values()));
-        comboCountry.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Country country) {
-                if (country == null) return "";
-                String formatted = country.name().toUpperCase().replace("_", " ");
-                return Character.toUpperCase(formatted.charAt(0)) + formatted.substring(1);
-            }
-
-            @Override
-            public Country fromString(String string) {
-                if (string == null || string.isEmpty()) return null;
-                return Arrays.stream(Country.values())
-                        .filter(c -> c.name().replace("_", " ").equalsIgnoreCase(string))
-                        .findFirst()
-                        .orElse(null);
-            }
-        });
-
-        comboCountry.setValue(Country.COSTA_RICA);
-    }
-
-    private void initializeToggle(){
-        toggleDocumentType.setText("Cédula Nacional");
-        toggleDocumentType.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                toggleDocumentType.setText("DIMEX");
-            } else {
-                toggleDocumentType.setText("Cédula Nacional");
-            }
-        });
-    }
-
-    private void initializePhone(){
-        txtPhone.textProperty().addListener((obs,
-                                             oldText,
-                                             newText) -> {
-            if (!newText.matches("[+\\d\\s]*")) {
-                txtPhone.setText(newText.replaceAll("[^+\\d\\s]", ""));
-                return;
-            }
-
-            if (newText.chars().filter(ch -> ch == '+').count() > 1) {
-                txtPhone.setText(oldText);
-                return;
-            }
-
-            if (newText.length() > 1 && newText.charAt(0) != '+') {
-                txtPhone.setText("+" + newText.replaceAll("\\+", ""));
-                return;
-            }
-
-            if (newText.length() > 17) {
-                txtPhone.setText(oldText);
-                return;
-            }
-
-            if (!newText.isEmpty() && !newText.matches("^\\+[1-9]\\d{0,2}\\s\\d{0,14}$")) {
-                if (!newText.matches("^\\+[1-9]?\\d{0,2}\\s?\\d{0,14}$")) {
-                    txtPhone.setText(oldText);
-                }
-            }
-        });
-    }
-
-    private void initializeCedula(){
-        txtCedula.textProperty().addListener((obs,
-                                              oldText,
-                                              newText) -> {
-            if (!newText.matches("\\d*")) {
-                txtCedula.setText(newText.replaceAll("[^\\d]", ""));
-                return;
-            }
-
-            int maxLength = toggleDocumentType.isSelected() ? 12 : 9;
-
-            if (newText.length() > maxLength) {
-                txtCedula.setText(oldText);
-            }
-        });
-    }
 
     private boolean isCountrySelected() {
         Country selected = comboCountry.getValue();

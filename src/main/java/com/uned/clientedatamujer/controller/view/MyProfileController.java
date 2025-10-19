@@ -1,6 +1,7 @@
 package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.request.CommonUpdateDTO;
@@ -66,8 +67,8 @@ public class MyProfileController extends BaseController{
         snackBarInfo = new JFXSnackbar(rootPane);
         setRootPane(rootPane);
         setSnackBarInfo(snackBarInfo);
-        initializeCountry();
-        initializePhone();
+        ComponentInitializer.initializeCountry(comboBoxCountry);
+        ComponentInitializer.initializePhone(txtPhone);
         prepareSceneElements();
         getData();
         loadData();
@@ -260,59 +261,5 @@ public class MyProfileController extends BaseController{
     private boolean isCountrySelected() {
         Country selected = comboBoxCountry.getValue();
         return selected != null;
-    }
-
-    private void initializeCountry(){
-        comboBoxCountry.getItems().addAll(Arrays.asList(Country.values()));
-        comboBoxCountry.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Country country) {
-                if (country == null) return "";
-                String formatted = country.name().toUpperCase().replace("_", " ");
-                return Character.toUpperCase(formatted.charAt(0)) + formatted.substring(1);
-            }
-
-            @Override
-            public Country fromString(String string) {
-                if (string == null || string.isEmpty()) return null;
-                return Arrays.stream(Country.values())
-                        .filter(c -> c.name().replace("_", " ").equalsIgnoreCase(string))
-                        .findFirst()
-                        .orElse(null);
-            }
-        });
-        comboBoxCountry.setValue(Country.COSTA_RICA);
-    }
-
-    private void initializePhone(){
-        txtPhone.textProperty().addListener((obs,
-                                             oldText,
-                                             newText) -> {
-            if (!newText.matches("[+\\d\\s]*")) {
-                txtPhone.setText(newText.replaceAll("[^+\\d\\s]", ""));
-                return;
-            }
-
-            if (newText.chars().filter(ch -> ch == '+').count() > 1) {
-                txtPhone.setText(oldText);
-                return;
-            }
-
-            if (newText.length() > 1 && newText.charAt(0) != '+') {
-                txtPhone.setText("+" + newText.replaceAll("\\+", ""));
-                return;
-            }
-
-            if (newText.length() > 17) {
-                txtPhone.setText(oldText);
-                return;
-            }
-
-            if (!newText.isEmpty() && !newText.matches("^\\+[1-9]\\d{0,2}\\s\\d{0,14}$")) {
-                if (!newText.matches("^\\+[1-9]?\\d{0,2}\\s?\\d{0,14}$")) {
-                    txtPhone.setText(oldText);
-                }
-            }
-        });
     }
 }

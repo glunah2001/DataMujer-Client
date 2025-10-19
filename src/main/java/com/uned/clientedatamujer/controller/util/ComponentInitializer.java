@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class ComponentInitializer {
 
-    public void initializeCountry(ComboBox<Country> comboCountry){
+    public static void initializeCountry(ComboBox<Country> comboCountry){
         comboCountry.getItems().addAll(Arrays.asList(Country.values()));
         comboCountry.setConverter(new StringConverter<>() {
             @Override
@@ -34,7 +34,7 @@ public class ComponentInitializer {
         comboCountry.setValue(Country.COSTA_RICA);
     }
 
-    public void initializeToggle(JFXToggleButton toggle, String off, String on){
+    public static void initializeToggle(JFXToggleButton toggle, String off, String on){
         toggle.setText(off);
         toggle.selectedProperty().addListener((
                 observable,
@@ -48,7 +48,7 @@ public class ComponentInitializer {
         });
     }
 
-    public void initializePhone(TextField txtPhone){
+    public static void initializePhone(TextField txtPhone){
         txtPhone.textProperty().addListener((obs,
                                              oldText,
                                              newText) -> {
@@ -80,7 +80,16 @@ public class ComponentInitializer {
         });
     }
 
-    public void initializeCedula(TextField txtCedula, boolean isPhysicalIssue, boolean isDimex){
+    public static void initializePhysicalCedula(TextField txtCedula,
+                                                JFXToggleButton toggle){
+        initializeCedula(txtCedula, true, toggle);
+    }
+
+    public static void initializeLegalCedula(TextField txtCedula){
+        initializeCedula(txtCedula, false, null);
+    }
+
+    private static void initializeCedula(TextField txtCedula, boolean isPhysicalIssue, JFXToggleButton toggle){
         txtCedula.textProperty().addListener((obs,
                                               oldText,
                                               newText) -> {
@@ -89,7 +98,7 @@ public class ComponentInitializer {
                 return;
             }
 
-            int maxLength = isPhysicalIssue ? (isDimex ? 12 : 9) : 10;
+            int maxLength = isPhysicalIssue ? (toggle.isSelected() ? 12 : 9) : 10;
 
             if (newText.length() > maxLength) {
                 txtCedula.setText(oldText);
@@ -97,10 +106,10 @@ public class ComponentInitializer {
         });
     }
 
-    public void initializeSpinnerHours(Spinner<Integer> spinner){initializeSpinner(spinner, 23);}
-    public void initializeSpinnerMinutes(Spinner<Integer> spinner){initializeSpinner(spinner, 59);}
+    public static void initializeSpinnerHours(Spinner<Integer> spinner){initializeSpinner(spinner, 23);}
+    public static void initializeSpinnerMinutes(Spinner<Integer> spinner){initializeSpinner(spinner, 59);}
 
-    private void initializeSpinner(Spinner<Integer> spinner, int max){
+    private static void initializeSpinner(Spinner<Integer> spinner, int max){
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(0, max, 0);
         valueFactory.setWrapAround(true);

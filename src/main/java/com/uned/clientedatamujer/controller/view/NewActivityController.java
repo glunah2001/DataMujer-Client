@@ -41,7 +41,7 @@ public class NewActivityController extends BaseSubSceneController{
     private final ActivityService service = new ActivityService();
 
     @FXML
-    public void initialize(){
+    private void initialize(){
         ComponentInitializer.initializeSpinnerHours(spinnerStartHour);
         ComponentInitializer.initializeSpinnerHours(spinnerEndHour);
         ComponentInitializer.initializeSpinnerMinutes(spinnerStartMinutes);
@@ -51,8 +51,6 @@ public class NewActivityController extends BaseSubSceneController{
                 "Virtual",
                 "Presencial"
                 );
-        setRootPane(rootPane);
-        setSnackBarInfo(snackBarInfo);
     }
 
     @FXML

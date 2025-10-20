@@ -63,15 +63,14 @@ public class MyProfileController extends BaseController{
 
     @FXML
     private void initialize(){
-        showLoading();
         snackBarInfo = new JFXSnackbar(rootPane);
         setRootPane(rootPane);
         setSnackBarInfo(snackBarInfo);
+        showLoading();
         ComponentInitializer.initializeCountry(comboBoxCountry);
         ComponentInitializer.initializePhone(txtPhone);
         prepareSceneElements();
         getData();
-        loadData();
         hideLoading();
     }
 
@@ -140,6 +139,7 @@ public class MyProfileController extends BaseController{
                 userService::getMyProfile,
                 (ProfileDTO newData) -> {
                     myData = newData;
+                    loadData();
                 },
                 null
         );

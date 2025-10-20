@@ -1,5 +1,6 @@
 package com.uned.clientedatamujer.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -66,6 +67,31 @@ public abstract class BaseHttpClient {
                     return failedErrorJsonLecture(request.uri().toString());
                 }
             }
+        }catch (IOException | InterruptedException e) {
+            return noServerConnection(request.uri().toString());
+        }
+    }
+
+    protected <T> Object sendRequest(HttpRequest request, TypeReference<T> responseType) {
+        try{
+            HttpResponse<String> response = client.send(
+                    request,
+                    HttpResponse.BodyHandlers.ofString()
+            );
+            if(response.statusCode() >= 200 && response.statusCode() < 300) {
+                try {
+                    return objectMapper.readValue(response.body(), responseType);
+                } catch (Exception e) {
+                    return failedErrorJsonLecture(request.uri().toString());
+                }
+            }else{
+                try{
+                    return objectMapper.readValue(response.body(), ApiError.class);
+                }catch (Exception e) {
+                    return failedErrorJsonLecture(request.uri().toString());
+                }
+            }
+
         }catch (IOException | InterruptedException e) {
             return noServerConnection(request.uri().toString());
         }

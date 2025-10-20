@@ -43,7 +43,7 @@
                         <Circle fill="#535353" radius="3.5" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" text="Actividades" />
+                  <Button mnemonicParsing="false" text="Actividades" onAction="#loadActivities"/>
                   <Button fx:id="btnNewActivity" mnemonicParsing="false" onAction="#loadNewActivity" text="Nueva Actividad" />
                   <Button mnemonicParsing="false" text="Mis Participaciones" />
                   <Button fx:id="btnMyVolunteering" mnemonicParsing="false" text="Mis Voluntariados" />

@@ -79,8 +79,8 @@ public class MainController extends BaseController{
         btnAdminOps.setManaged(true);
     }
 
-
-    public void loadNewActivity(ActionEvent event) {
+    @FXML
+    private void loadNewActivity(ActionEvent event) {
         if(AuthSession.getRole().equals("STANDARD")){
             SubScenePane.getChildren().clear();
             showErrorSnackBar("Usted no cuenta con la autorización para realizar esta operación.");
@@ -93,10 +93,25 @@ public class MainController extends BaseController{
                     "/com/uned/clientedatamujer/new-activity-subscene.fxml",
                     this,
                     rootPane,
-                    snackBarInfo);
+                    snackBarInfo
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    @FXML
+    private void loadActivities(ActionEvent event) {
+        try{
+            SceneManager.loadSubScene(
+                    SubScenePane,
+                    "/com/uned/clientedatamujer/activities-subscene.fxml",
+                    this,
+                    rootPane,
+                    snackBarInfo
+            );
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 }

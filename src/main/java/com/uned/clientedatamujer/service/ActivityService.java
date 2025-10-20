@@ -1,5 +1,7 @@
 package com.uned.clientedatamujer.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.ActivityRegisterDTO;
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
 
@@ -17,11 +19,37 @@ public class ActivityService extends BaseHttpClient{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "Application/json")
+                .header("Content-Type", "application/json")
                 .header("AUTHORIZATION", "Bearer "+accessJwt)
                 .build();
 
         return sendRequest(request, ActivityDTO.class);
+    }
+
+    public Object getActivityById(String accessJwt, Long id) {
+        String url = URL + "/activity?id="+id;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer " + accessJwt)
+                .build();
+
+        return sendRequest(request, ActivityDTO.class);
+    }
+
+    public Object getNonFinishedActivities(String accessJwt, int page) {
+        String url = URL + "/activity/all?page="+page;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, new TypeReference<SimplePage<ActivityDTO>>() {});
     }
 
 }

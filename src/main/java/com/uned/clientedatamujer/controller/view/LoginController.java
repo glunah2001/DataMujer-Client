@@ -70,6 +70,10 @@ public class LoginController extends BaseController{
                         showErrorSnackBar("Corrupción en la ruta de recursos");
                     }
                 },
+                (ApiError error) -> {
+                    hideLoading();
+                    clearForm();
+                },
                 "Error con los datos de inicio de sesión."
         );
     }

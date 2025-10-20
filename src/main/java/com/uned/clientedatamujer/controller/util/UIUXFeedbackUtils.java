@@ -7,11 +7,14 @@ import com.jfoenix.controls.JFXSnackbar;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Optional;
 
 public class UIUXFeedbackUtils {
 
@@ -43,26 +46,33 @@ public class UIUXFeedbackUtils {
     }
 
     public static void showLoadingOverlay(StackPane rootPane){
-        if(overlayPane != null && rootPane.getChildren().contains(overlayPane))
-            return;
+        Optional<Node> existingOverlay = rootPane.getChildren().stream()
+                .filter(node -> "overlay-pane".equals(node.getId()))
+                .findFirst();
 
-        overlayPane = new StackPane();
-        overlayPane.setStyle("fx-background-color: rgba(0, 0, 0, 0.6);");
+        if (existingOverlay.isPresent()) {
+            return;
+        }
+
+        StackPane overlay = new StackPane();
+        overlay.setId("overlay-pane");
+        overlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.6);");
 
         ProgressIndicator spinner = new ProgressIndicator();
-        spinner.setMaxSize(80,80);
+        spinner.setMaxSize(80, 80);
 
-        overlayPane.getChildren().add(spinner);
+        overlay.getChildren().add(spinner);
         StackPane.setAlignment(spinner, Pos.CENTER);
 
-        overlayPane.setPickOnBounds(true);
+        overlay.setPickOnBounds(true);
 
-        Platform.runLater(() -> rootPane.getChildren().add(overlayPane));
+        Platform.runLater(() -> rootPane.getChildren().add(overlay));
     }
 
     public static void hideLoadingOverlay(StackPane rootPane){
-        if(overlayPane == null) return;
-        Platform.runLater(() -> rootPane.getChildren().remove(overlayPane));
+        Platform.runLater(() ->
+                rootPane.getChildren().removeIf(node -> "overlay-pane".equals(node.getId()))
+        );
     }
 
     public static void showErrorDialog(StackPane rootPane, String title, String message) {

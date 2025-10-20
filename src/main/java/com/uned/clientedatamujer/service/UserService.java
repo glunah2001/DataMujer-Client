@@ -40,7 +40,7 @@ public class UserService extends BaseHttpClient{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .PUT(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "Application/json")
+                .header("Content-Type", "application/json")
                 .header("AUTHORIZATION", "Bearer "+accessJwt)
                 .build();
         if(AuthSession.getPersonType().equals("FISICA")){

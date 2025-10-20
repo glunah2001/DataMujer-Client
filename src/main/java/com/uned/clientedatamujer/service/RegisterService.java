@@ -22,7 +22,7 @@ public class RegisterService extends BaseHttpClient{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "Application/json")
+                .header("Content-Type", "application/json")
                 .build();
         return sendRequest(request, String.class);
     }

@@ -1,7 +1,12 @@
 package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 public abstract class BaseSubSceneController {
 
@@ -17,5 +22,22 @@ public abstract class BaseSubSceneController {
 
     public void setSnackBarInfo(JFXSnackbar snackBarInfo) {
         this.snackBarInfo = snackBarInfo;
+    }
+
+    public <T> void setCard(String fxml, VBox vBox, T content){
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(fxml)
+            );
+            HBox item = loader.load();
+            BaseCardController<T> controller = loader.getController();
+            controller.setData(content);
+
+            item.maxWidthProperty().bind(vBox.widthProperty());
+
+            vBox.getChildren().add(item);
+        } catch (IOException e) {
+            mainController.showSuccessSnackBar("Corrupción en la ruta de recursos.");
+        }
     }
 }

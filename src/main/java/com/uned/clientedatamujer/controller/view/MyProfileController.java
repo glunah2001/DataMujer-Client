@@ -140,8 +140,7 @@ public class MyProfileController extends BaseController{
                 (ProfileDTO newData) -> {
                     myData = newData;
                     loadData();
-                },
-                null
+                }
         );
     }
 

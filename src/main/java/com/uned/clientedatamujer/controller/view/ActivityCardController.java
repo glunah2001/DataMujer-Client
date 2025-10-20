@@ -8,7 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
-public class ActivityCardController {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class ActivityCardController implements BaseCardController<ActivityDTO>{
 
     @FXML
     private Label labelID;
@@ -34,6 +37,7 @@ public class ActivityCardController {
         System.out.println("PARTICIPAR");
     }
 
+    @Override
     public void setData(ActivityDTO dto){
         labelID.setText(
                 String.format("ID #%d - %S", dto.id(), dto.activity())
@@ -49,8 +53,8 @@ public class ActivityCardController {
                 """,
                 dto.isOnSite() ? "PRESENCIAL" : "VIRTUAL",
                 dto.location(),
-                dto.startDate().toString(),
-                dto.endDate().toString(),
+                textFormatter(dto.startDate()),
+                textFormatter(dto.endDate()),
                 dto.description())
         );
 
@@ -60,5 +64,10 @@ public class ActivityCardController {
             btnDelete.setVisible(false);
             btnDelete.setManaged(false);
         }
+    }
+
+    private String textFormatter(LocalDateTime date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy  HH:mm");
+        return formatter.format(date);
     }
 }

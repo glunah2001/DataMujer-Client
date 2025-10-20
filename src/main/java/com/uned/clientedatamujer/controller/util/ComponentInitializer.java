@@ -2,13 +2,11 @@ package com.uned.clientedatamujer.controller.util;
 
 import com.jfoenix.controls.JFXToggleButton;
 import com.uned.clientedatamujer.enums.Country;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.StringConverter;
 
 import java.util.Arrays;
+import java.util.function.UnaryOperator;
 
 public class ComponentInitializer {
 
@@ -114,5 +112,29 @@ public class ComponentInitializer {
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(0, max, 0);
         valueFactory.setWrapAround(true);
         spinner.setValueFactory(valueFactory);
+    }
+
+    public static void configureLongOnlyTextField(TextField txtID) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.isEmpty()) {
+                return change;
+            }
+
+            if (!newText.matches("\\d+")) {
+                return null;
+            }
+
+            try {
+                long value = Long.parseLong(newText);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+
+            return change;
+        };
+
+        TextFormatter<Long> textFormatter = new TextFormatter<>(filter);
+        txtID.setTextFormatter(textFormatter);
     }
 }

@@ -60,8 +60,7 @@ public class ForgotPasswordController extends  BaseController{
                             showErrorSnackBar(message);
                         }
                     });
-                },
-                null
+                }
         );
     }
 }

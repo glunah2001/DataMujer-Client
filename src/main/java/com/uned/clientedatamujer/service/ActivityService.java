@@ -26,7 +26,7 @@ public class ActivityService extends BaseHttpClient{
         return sendRequest(request, ActivityDTO.class);
     }
 
-    public Object getActivityById(String accessJwt, Long id) {
+    public Object getActivityById(String accessJwt, String id) {
         String url = URL + "/activity?id="+id;
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -51,5 +51,4 @@ public class ActivityService extends BaseHttpClient{
 
         return sendRequest(request, new TypeReference<SimplePage<ActivityDTO>>() {});
     }
-
 }

@@ -54,7 +54,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
                 <children>
                     <TextField fx:id="txtID" prefHeight="42.0" prefWidth="150.0" promptText="ID" HBox.hgrow="NEVER" />
-                    <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#searchActivity" styleClass="button-primario" text="Buscar" />
+                    <Button mnemonicParsing="false" onAction="#searchActivity" styleClass="button-primario" text="Buscar" />
                 </children>
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2">
@@ -66,9 +66,10 @@
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="3" GridPane.rowSpan="5">
                 <content>
                     <VBox fx:id="VBoxActivities" spacing="20.0" style="-fx-background-color: TRANSPARENT;">
-                  <padding>
-                     <Insets left="10.0" right="10.0" />
-                  </padding></VBox>
+                        <padding>
+                            <Insets left="10.0" right="10.0" />
+                        </padding>
+                    </VBox>
                 </content>
             </ScrollPane>
         </children>

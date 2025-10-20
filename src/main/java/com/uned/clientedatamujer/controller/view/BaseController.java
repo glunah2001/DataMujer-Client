@@ -55,6 +55,13 @@ public abstract class BaseController {
         executeCall(serviceCall, onSuccess, null, errorTitle);
     }
 
+    protected <T> void executeCall(
+            ThrowingSupplier<Object> serviceCall,
+            Consumer<T> onSuccess
+    ){
+        executeCall(serviceCall, onSuccess, null, null);
+    }
+
     public void setRootPane(StackPane rootPane) {this.rootPane = rootPane;}
 
     public void setSnackBarInfo(JFXSnackbar snackBarInfo) {this.snackBarInfo = snackBarInfo;}
@@ -89,7 +96,7 @@ public abstract class BaseController {
         UIUXFeedbackUtils.successSnackbar(message, snackBarInfo);
     }
 
-    protected void showErrorDialog(StackPane rootPane, String title, String message){
+    protected void showErrorDialog(String title, String message){
         UIUXFeedbackUtils.showErrorDialog(rootPane, title, message);
     }
 
@@ -99,7 +106,7 @@ public abstract class BaseController {
             String message = error.details().stream()
                     .map(detail -> "* " + detail)
                     .collect(Collectors.joining("\n"));
-            showErrorDialog(rootPane, title, message);
+            showErrorDialog(title, message);
             return;
         }
 

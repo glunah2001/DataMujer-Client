@@ -1,7 +1,10 @@
 package com.uned.clientedatamujer.controller.view;
 
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
+import com.uned.clientedatamujer.dto.response.ParticipationDTO;
+import com.uned.clientedatamujer.service.ActivityService;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.ParticipationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,10 +24,22 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
     private Button btnDelete;
     @FXML
     private Button btnVolunteering;
+    private BaseSubSceneController parentController;
+    private ActivityDTO data;
+
+
 
     @FXML
     private void deleteActivity(ActionEvent event) {
-        System.out.println("ELIMINAR");
+        var service = new ActivityService();
+        parentController.mainController.executeCall(
+                () -> service.deleteActivity(AuthSession.getAccessToken(), String.valueOf(data.id())),
+                (_) -> {
+                    parentController.mainController.showSuccessSnackBar("Actividad eliminada exitosamente");
+                    if(parentController instanceof ActivityController activityController)
+                        activityController.refreshCurrentPage();
+                }
+        );
     }
 
     @FXML
@@ -34,11 +49,23 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
 
     @FXML
     private void applyToParticipate(ActionEvent event) {
+        var service = new ParticipationService();
+        parentController.mainController.executeCall(
+                () -> service.createParticipation(AuthSession.getAccessToken(), data.id()),
+                (ParticipationDTO dto) -> {
+                    parentController.mainController.showSuccessSnackBar(
+                            "Se ha registrado exitosamente en la actividad "+dto.activityId()
+                                    + " compruébelo en la sección \"Mis Participaciones\""
+                    );
+                }
+        );
+
         System.out.println("PARTICIPAR");
     }
 
     @Override
     public void setData(ActivityDTO dto){
+        data = dto;
         labelID.setText(
                 String.format("ID #%d - %S", dto.id(), dto.activity())
         );
@@ -69,5 +96,10 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
     private String textFormatter(LocalDateTime date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy  HH:mm");
         return formatter.format(date);
+    }
+
+    @Override
+    public void setParentController(BaseSubSceneController parent) {
+        this.parentController = parent;
     }
 }

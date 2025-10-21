@@ -24,13 +24,15 @@ public abstract class BaseSubSceneController {
         this.snackBarInfo = snackBarInfo;
     }
 
-    public <T> void setCard(String fxml, VBox vBox, T content){
+    public <T> void setCard(String fxml, VBox vBox, T content, BaseSubSceneController parent){
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(fxml)
             );
             HBox item = loader.load();
             BaseCardController<T> controller = loader.getController();
+
+            controller.setParentController(parent);
             controller.setData(content);
 
             item.maxWidthProperty().bind(vBox.widthProperty());

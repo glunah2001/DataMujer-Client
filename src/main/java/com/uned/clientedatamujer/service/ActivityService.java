@@ -51,4 +51,18 @@ public class ActivityService extends BaseHttpClient{
 
         return sendRequest(request, new TypeReference<SimplePage<ActivityDTO>>() {});
     }
+
+    public Object deleteActivity(String accessJwt, String id){
+        String url = URL + "/activity?id="+id;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .DELETE()
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, Void.class);
+    }
+
 }

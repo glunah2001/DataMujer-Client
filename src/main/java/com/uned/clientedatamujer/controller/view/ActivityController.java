@@ -72,7 +72,8 @@ public class ActivityController extends BaseSubSceneController{
                         setCard(
                                 "/com/uned/clientedatamujer/activity-container.fxml",
                                 VBoxActivities,
-                                activity
+                                activity,
+                                this
                         );
                     });
                 }
@@ -88,7 +89,8 @@ public class ActivityController extends BaseSubSceneController{
                     setCard(
                             "/com/uned/clientedatamujer/activity-container.fxml",
                             VBoxActivities,
-                            dto
+                            dto,
+                            this
                     );
                 }
         );
@@ -111,5 +113,9 @@ public class ActivityController extends BaseSubSceneController{
         btnNext.setManaged(allowNext);
         btnPrev.setVisible(allowPrev);
         btnPrev.setManaged(allowPrev);
+    }
+
+    public void refreshCurrentPage() {
+        getPageData(currentPage);
     }
 }

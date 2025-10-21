@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="880.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane layoutX="395.0" layoutY="204.0" style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label styleClass="etiqueta-mayor" text="MIS VOLUNTARIADOS" GridPane.columnIndex="2" GridPane.columnSpan="5" GridPane.halignment="CENTER" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #e0d7cf;" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="1">
+               <children>
+                  <Label styleClass="etiqueta-menor" text="Datos de Voluntariado" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+               <children>
+                  <TextField fx:id="txtId" prefHeight="42.0" prefWidth="90.0" promptText="ID" />
+                  <ComboBox fx:id="comboBoxSearchType" prefWidth="150.0" promptText="Buscar..." value="ID" HBox.hgrow="ALWAYS">
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <String fx:value="ID" />
+                               <String fx:value="EN ACTIVIDAD" />
+                           </FXCollections>
+                       </items>
+                  </ComboBox>
+                  <Button fx:id="btnSearch" mnemonicParsing="false" styleClass="button-primario" text="Buscar" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="btnPrev" mnemonicParsing="false" styleClass="button-secundario" text="Anterior" />
+                  <Button fx:id="btnNext" mnemonicParsing="false" styleClass="button-secundario" text="Siguiente" />
+               </children>
+            </HBox>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="3" GridPane.rowSpan="6">
+               <content>
+                  <VBox fx:id="VBoxVolunteering" spacing="20.0" style="-fx-background-color: TRANSPARENT;">
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

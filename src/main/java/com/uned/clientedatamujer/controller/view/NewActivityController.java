@@ -62,6 +62,7 @@ public class NewActivityController extends BaseSubSceneController{
         mainController.executeCall(
                 () -> service.postActivity(data, AuthSession.getAccessToken()),
                 (ActivityDTO dto) -> {
+                    mainController.hideLoading();
                     String message = String.format(
                             "Se ha creado la actividad %S con id %d.",
                             dto.activity(),

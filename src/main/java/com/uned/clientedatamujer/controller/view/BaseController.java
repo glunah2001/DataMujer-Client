@@ -35,10 +35,7 @@ public abstract class BaseController {
                     });
                 }else{
                     T data = (T) response;
-                    runLater(() -> {
-                        hideLoading();
-                        onSuccess.accept(data);
-                    });
+                    runLater(() -> {onSuccess.accept(data);});
                 }
             }catch(Exception e){
                 e.printStackTrace();

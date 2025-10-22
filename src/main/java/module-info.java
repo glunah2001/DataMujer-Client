@@ -15,6 +15,7 @@ module com.uned.clientedatamujer {
     exports com.uned.clientedatamujer.controller.util;
     exports com.uned.clientedatamujer.controller.view;
     exports com.uned.clientedatamujer.enums;
+    exports com.uned.clientedatamujer.dto.request;
     exports com.uned.clientedatamujer.dto.response;
     exports com.uned.clientedatamujer.dto to com.fasterxml.jackson.databind;
 

@@ -1,9 +1,11 @@
 package com.uned.clientedatamujer.controller.view;
 
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
 import com.uned.clientedatamujer.dto.response.ParticipationDTO;
 import com.uned.clientedatamujer.service.ActivityService;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.ParticipationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -44,7 +47,25 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
 
     @FXML
     private void applyToVolunteering(ActionEvent event) {
-        System.out.println("VOLUNTARIADO");
+        DataUtilities.setLastActivityDTO(data);
+        if(AuthSession.getRole().equals("STANDARD")){
+            parentController.mainController.getSubScenePane().getChildren().clear();
+            parentController.mainController.showErrorSnackBar(
+                    "Usted no cuenta con la autorización para realizar esta operación."
+            );
+            return;
+        }
+        try{
+            SceneManager.loadSubScene(
+                    parentController.mainController.getSubScenePane(),
+                    "/com/uned/clientedatamujer/new-volunteering-subscene.fxml",
+                    parentController.mainController,
+                    parentController.rootPane,
+                    parentController.snackBarInfo
+            );
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -59,8 +80,6 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
                     );
                 }
         );
-
-        System.out.println("PARTICIPAR");
     }
 
     @Override
@@ -101,5 +120,10 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
     @Override
     public void setParentController(BaseSubSceneController parent) {
         this.parentController = parent;
+    }
+
+    @Override
+    public ActivityDTO sendData() {
+        return null;
     }
 }

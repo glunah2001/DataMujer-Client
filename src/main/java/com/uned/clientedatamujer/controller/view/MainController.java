@@ -114,4 +114,6 @@ public class MainController extends BaseController{
             e.printStackTrace();
         }
     }
+
+    public StackPane getSubScenePane() {return SubScenePane;}
 }

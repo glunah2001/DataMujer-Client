@@ -76,6 +76,7 @@ public class ActivityController extends BaseSubSceneController{
                                 this
                         );
                     });
+                    mainController.hideLoading();
                 }
         );
     }
@@ -92,6 +93,7 @@ public class ActivityController extends BaseSubSceneController{
                             dto,
                             this
                     );
+                    mainController.hideLoading();
                 }
         );
     }

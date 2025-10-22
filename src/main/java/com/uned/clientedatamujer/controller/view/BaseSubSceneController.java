@@ -42,4 +42,25 @@ public abstract class BaseSubSceneController {
             mainController.showSuccessSnackBar("Corrupción en la ruta de recursos.");
         }
     }
+
+    public <T> void setForm(String fxml, VBox vBox, BaseSubSceneController parent, T type){
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(fxml)
+            );
+            HBox item = loader.load();
+            BaseFormController<T> controller = loader.getController();
+
+            controller.setParentController(parent);
+            controller.setRoot(item);
+
+            item.setUserData(controller);
+
+            item.maxWidthProperty().bind(vBox.widthProperty());
+
+            vBox.getChildren().add(item);
+        } catch (IOException e) {
+            mainController.showSuccessSnackBar("Corrupción en la ruta de recursos.");
+        }
+    }
 }

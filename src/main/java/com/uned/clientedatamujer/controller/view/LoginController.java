@@ -63,6 +63,7 @@ public class LoginController extends BaseController{
         executeCall(
                 () -> service.login(dto),
                 (TokenResponse response) -> {
+                    hideLoading();
                     try{
                         AuthSession.setTokens(response);
                         SceneManager.toMainView(1080, 720);

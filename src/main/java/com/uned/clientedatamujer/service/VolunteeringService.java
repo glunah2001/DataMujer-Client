@@ -3,6 +3,7 @@ package com.uned.clientedatamujer.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.BaseVolunteeringRegisterDTO;
+import com.uned.clientedatamujer.dto.request.VolunteeringUpdateDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringWrapperDTO;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
 
@@ -94,4 +95,18 @@ public class VolunteeringService extends BaseHttpClient{
         return sendRequest(request, Void.class);
     }
 
+    public Object updateVolunteering(String accessJwt, VolunteeringUpdateDTO dto, String id) throws IOException{
+        String url = URL + "/volunteering?id="+id;
+
+        String json = objectMapper.writeValueAsString(dto);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .PUT(HttpRequest.BodyPublishers.ofString(json))
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, VolunteeringDTO.class);
+    }
 }

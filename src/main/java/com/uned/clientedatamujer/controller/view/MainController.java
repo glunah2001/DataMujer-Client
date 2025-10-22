@@ -116,7 +116,7 @@ public class MainController extends BaseController{
     }
 
     @FXML
-    private void loadVolunteering(ActionEvent event) {
+    protected void loadVolunteering(ActionEvent event) {
         try{
             SceneManager.loadSubScene(
                     SubScenePane,

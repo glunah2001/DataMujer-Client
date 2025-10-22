@@ -1,14 +1,18 @@
 package com.uned.clientedatamujer.controller.view;
 
+import com.uned.clientedatamujer.controller.util.SceneManager;
+import com.uned.clientedatamujer.dto.response.ActivityDTO;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
 import com.uned.clientedatamujer.service.ActivityService;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.VolunteeringService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -74,6 +78,26 @@ public class VolunteeringCardController implements BaseCardController<Volunteeri
 
     @FXML
     private void updateVolunteering(ActionEvent event) {
+        var service = new ActivityService();
+        parentController.mainController.executeCall(
+                () -> service.getActivityById(AuthSession.getAccessToken(), String.valueOf(data.activityId())),
+                (ActivityDTO dto) -> {
+                    parentController.mainController.hideLoading();
+                    DataUtilities.setLastActivityDTO(dto);
+                    DataUtilities.setLastVolunteeringDTO(data);
+                    try{
+                        SceneManager.loadSubScene(
+                                parentController.mainController.getSubScenePane(),
+                                "/com/uned/clientedatamujer/update-volunteering-subscene.fxml",
+                                parentController.mainController,
+                                parentController.rootPane,
+                                parentController.snackBarInfo
+                        );
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+        );
     }
 
     private String textFormatter(LocalDateTime date){

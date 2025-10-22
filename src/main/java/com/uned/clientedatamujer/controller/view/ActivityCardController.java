@@ -30,8 +30,6 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
     private BaseSubSceneController parentController;
     private ActivityDTO data;
 
-
-
     @FXML
     private void deleteActivity(ActionEvent event) {
         var service = new ActivityService();
@@ -120,10 +118,5 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
     @Override
     public void setParentController(BaseSubSceneController parent) {
         this.parentController = parent;
-    }
-
-    @Override
-    public ActivityDTO sendData() {
-        return null;
     }
 }

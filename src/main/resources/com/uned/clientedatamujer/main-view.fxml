@@ -46,7 +46,7 @@
                   <Button mnemonicParsing="false" text="Actividades" onAction="#loadActivities"/>
                   <Button fx:id="btnNewActivity" mnemonicParsing="false" onAction="#loadNewActivity" text="Nueva Actividad" />
                   <Button mnemonicParsing="false" text="Mis Participaciones" />
-                  <Button fx:id="btnMyVolunteering" mnemonicParsing="false" text="Mis Voluntariados" />
+                  <Button fx:id="btnMyVolunteering" mnemonicParsing="false" text="Mis Voluntariados" onAction="#loadVolunteering"/>
                   <Button mnemonicParsing="false" text="Mis Pagos" />
                   <Button fx:id="btnGenReport" mnemonicParsing="false" text="Generar Reporte" />
                   <Button fx:id="btnAdminOps" mnemonicParsing="false" text="Operac. Administrador" />

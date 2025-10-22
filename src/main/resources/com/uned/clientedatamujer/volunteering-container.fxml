@@ -6,7 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" style="-fx-background-color: #e0d7cf; -fx-background-radius: 15;" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="225.0" style="-fx-background-color: #e0d7cf; -fx-background-radius: 15;"
+      stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.uned.clientedatamujer.controller.view.VolunteeringCardController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
          <children>
@@ -18,8 +21,8 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="14.0" layoutY="151.0" prefHeight="50.0" prefWidth="200.0" spacing="30.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                <children>
-                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteVolunteering" styleClass="button-primario" text="Eliminar" />
-                  <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateVolunteering" styleClass="button-primario" text="Actualizar" />
+                  <Button mnemonicParsing="false" onAction="#deleteVolunteering" styleClass="button-primario" text="Eliminar" />
+                  <Button mnemonicParsing="false" onAction="#updateVolunteering" styleClass="button-primario" text="Actualizar" />
                </children>
             </HBox>
             <HBox layoutX="26.0" layoutY="209.0" prefHeight="3.0" prefWidth="540.0" style="-fx-background-color: WHITE;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />

@@ -64,13 +64,13 @@
                            </FXCollections>
                        </items>
                   </ComboBox>
-                  <Button fx:id="btnSearch" mnemonicParsing="false" styleClass="button-primario" text="Buscar" />
+                  <Button mnemonicParsing="false" styleClass="button-primario" text="Buscar" onAction="#searchVolunteering"/>
                </children>
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="btnPrev" mnemonicParsing="false" styleClass="button-secundario" text="Anterior" />
-                  <Button fx:id="btnNext" mnemonicParsing="false" styleClass="button-secundario" text="Siguiente" />
+                  <Button fx:id="btnPrev" onAction="#showPrevious" mnemonicParsing="false" styleClass="button-secundario" text="Anterior" />
+                  <Button fx:id="btnNext" onAction="#showNext" mnemonicParsing="false" styleClass="button-secundario" text="Siguiente" />
                </children>
             </HBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="3" GridPane.rowSpan="6">

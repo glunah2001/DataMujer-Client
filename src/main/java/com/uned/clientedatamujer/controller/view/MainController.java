@@ -115,5 +115,20 @@ public class MainController extends BaseController{
         }
     }
 
+    @FXML
+    private void loadVolunteering(ActionEvent event) {
+        try{
+            SceneManager.loadSubScene(
+                    SubScenePane,
+                    "/com/uned/clientedatamujer/volunteering-subscene.fxml",
+                    this,
+                    rootPane,
+                    snackBarInfo
+            );
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public StackPane getSubScenePane() {return SubScenePane;}
 }

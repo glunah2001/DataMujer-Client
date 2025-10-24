@@ -36,6 +36,7 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
         parentController.mainController.executeCall(
                 () -> service.deleteActivity(AuthSession.getAccessToken(), String.valueOf(data.id())),
                 (_) -> {
+                    parentController.mainController.hideLoading();
                     parentController.mainController.showSuccessSnackBar("Actividad eliminada exitosamente");
                     if(parentController instanceof ActivityController activityController)
                         activityController.refreshCurrentPage();
@@ -72,6 +73,7 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
         parentController.mainController.executeCall(
                 () -> service.createParticipation(AuthSession.getAccessToken(), data.id()),
                 (ParticipationDTO dto) -> {
+                    parentController.mainController.hideLoading();
                     parentController.mainController.showSuccessSnackBar(
                             "Se ha registrado exitosamente en la actividad "+dto.activityId()
                                     + " compruébelo en la sección \"Mis Participaciones\""

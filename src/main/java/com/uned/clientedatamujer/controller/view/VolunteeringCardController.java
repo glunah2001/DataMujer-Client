@@ -38,7 +38,7 @@ public class VolunteeringCardController implements BaseCardController<Volunteeri
         txtDescription.setText(
                 String.format("""
                 INFORMACIÓN DE VOLUNTARIADO:
-                USUARIO: %S (%S)
+                USUARIO: %s (%S)
                 INICIO DE TURNO: %s
                 FIN DE TURNO: %s
                 

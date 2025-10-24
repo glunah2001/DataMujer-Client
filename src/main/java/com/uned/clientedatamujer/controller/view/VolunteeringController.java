@@ -2,7 +2,6 @@ package com.uned.clientedatamujer.controller.view;
 
 import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.dto.SimplePage;
-import com.uned.clientedatamujer.dto.response.ActivityDTO;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
 import com.uned.clientedatamujer.service.AuthSession;
 import com.uned.clientedatamujer.service.VolunteeringService;
@@ -36,6 +35,9 @@ public class VolunteeringController extends BaseSubSceneController{
         setRootPane(rootPane);
         setSnackBarInfo(snackBarInfo);
         ComponentInitializer.configureLongOnlyTextField(txtId);
+        if(AuthSession.getRole().equals("ROLE_MENTOR")){
+            comboBoxSearchType.getItems().remove("ID");
+        }
         Platform.runLater(() -> {
             currentPage = 0;
             getPageDataMyPending(currentPage);
@@ -144,10 +146,10 @@ public class VolunteeringController extends BaseSubSceneController{
         }
         int index = comboBoxSearchType.getSelectionModel().getSelectedIndex();
         if(index == 0){
-            getSingleData(id);
-        }else if(index == 1){
             currentPage = 0;
             getPageDataInActivity(currentPage, id);
+        }else if(index == 1){
+            getSingleData(id);
         }
     }
 }

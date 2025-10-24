@@ -55,11 +55,11 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
                <children>
                   <TextField fx:id="txtId" prefHeight="42.0" prefWidth="90.0" promptText="ID" />
-                  <ComboBox fx:id="comboBoxSearchType" prefWidth="150.0" promptText="Buscar..." value="ID" HBox.hgrow="ALWAYS">
+                  <ComboBox fx:id="comboBoxSearchType" prefWidth="150.0" promptText="Buscar..." value="EN ACTIVIDAD" HBox.hgrow="ALWAYS">
                        <items>
                            <FXCollections fx:factory="observableArrayList">
-                               <String fx:value="ID" />
                                <String fx:value="EN ACTIVIDAD" />
+                               <String fx:value="ID" />
                            </FXCollections>
                        </items>
                   </ComboBox>

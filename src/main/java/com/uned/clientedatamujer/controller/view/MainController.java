@@ -145,5 +145,37 @@ public class MainController extends BaseController{
         }
     }
 
+    @FXML
+    private void loadNewPayment(ActionEvent event) {
+        try{
+            SceneManager.loadSubScene(
+                    SubScenePane,
+                    "/com/uned/clientedatamujer/new-payment-subscene.fxml",
+                    this,
+                    rootPane,
+                    snackBarInfo
+            );
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loadPayments(ActionEvent event) {
+        try{
+            SceneManager.loadSubScene(
+                    SubScenePane,
+                    "/com/uned/clientedatamujer/payment-subscene.fxml",
+                    this,
+                    rootPane,
+                    snackBarInfo
+            );
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public StackPane getSubScenePane() {return SubScenePane;}
+
+
 }

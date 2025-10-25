@@ -14,8 +14,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="860.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0"
+            prefWidth="860.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uned.clientedatamujer.controller.view.PaymentUpdateController">
+    <children>
       <GridPane layoutX="321.0" layoutY="140.0" style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -45,8 +48,8 @@
                         <DatePicker fx:id="dtpStartDate" promptText="FECHA DE PAGO" />
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="time-picker">
                            <children>
-                              <Spinner fx:id="spinnerStartHour" HBox.hgrow="ALWAYS" />
-                              <Spinner fx:id="spinnerStartMinutes" HBox.hgrow="ALWAYS" />
+                              <Spinner fx:id="spinnerPayHour" HBox.hgrow="ALWAYS" />
+                              <Spinner fx:id="spinnerPayMinutes" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </children>
@@ -63,11 +66,11 @@
                </children>
             </HBox>
             <Label styleClass="etiqueta-mayor" text="Actualizar Pago" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="CENTER" />
-            <TextField editable="false" promptText="ID" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" promptText="DESCRIPCIÓN" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+            <TextField  fx:id="txtId" editable="false" promptText="ID" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextArea fx:id="txtDescription" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="DESCRIPCIÓN" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="3" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
                <children>
-                  <Button mnemonicParsing="false" styleClass="button-primario" text="Aceptar" />
+                  <Button mnemonicParsing="false" styleClass="button-primario" text="Aceptar" onAction="#update"/>
                </children>
             </HBox>
          </children>

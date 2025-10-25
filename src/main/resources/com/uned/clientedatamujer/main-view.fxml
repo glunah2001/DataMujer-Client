@@ -47,8 +47,8 @@
                   <Button fx:id="btnNewActivity" mnemonicParsing="false" onAction="#loadNewActivity" text="Nueva Actividad" />
                   <Button mnemonicParsing="false" onAction="#loadParticipation" text="Mis Participaciones" />
                   <Button fx:id="btnMyVolunteering" mnemonicParsing="false" onAction="#loadVolunteering" text="Mis Voluntariados" />
-                  <Button mnemonicParsing="false" text="Nuevo Pago" />
-                  <Button mnemonicParsing="false" text="Mis Pagos" />
+                  <Button mnemonicParsing="false" text="Nuevo Pago" onAction="#loadNewPayment"/>
+                  <Button mnemonicParsing="false" text="Mis Pagos" onAction="#loadPayments"/>
                   <Button fx:id="btnGenReport" mnemonicParsing="false" text="Generar Reporte" />
                   <Button fx:id="btnAdminOps" mnemonicParsing="false" text="Operac. Administrador" />
                   <Region VBox.vgrow="ALWAYS" />

@@ -18,8 +18,10 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="820.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
+<AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uned.clientedatamujer.controller.view.PaymentController">
+    <children>
       <GridPane style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -63,14 +65,14 @@
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="txtId" prefHeight="42.0" prefWidth="90.0" promptText="ID" />
-                        <JFXToggleButton unToggleLineColor="#e281be" />
+                        <JFXToggleButton fx:id="toggleState" unToggleLineColor="#e281be" styleClass="jfx-toggle-button" onAction="#searchPayment" text="Pendientes"/>
                      </children>
                   </StackPane>
-                  <ComboBox fx:id="comboBoxSearchType" prefWidth="150.0" promptText="Buscar..." value="EN ACTIVIDAD" HBox.hgrow="ALWAYS">
+                  <ComboBox fx:id="comboBoxSearchType" prefWidth="150.0" promptText="Buscar..." value="ID" HBox.hgrow="ALWAYS" onAction="#changeSearchMethod">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="EN ACTIVIDAD" />
                            <String fx:value="ID" />
+                           <String fx:value="Estado" />
                         </FXCollections>
                      </items>
                   </ComboBox>

@@ -11,12 +11,16 @@ import com.uned.clientedatamujer.service.PaymentService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class NewPaymentController extends BaseSubSceneController{
+    @FXML
+    private HBox HBoxSpinner;
     @FXML
     private TextField txtTotalAmount;
     @FXML
@@ -43,6 +47,7 @@ public class NewPaymentController extends BaseSubSceneController{
         ComponentInitializer.initializeSpinnerMinutes(spinnerPayMinutes);
         ComponentInitializer.initializeToggle(toggleState, "Pendiente", "Pagado");
         ComponentInitializer.initializeTotalAmount(txtTotalAmount);
+        activateDate(null);
     }
 
 
@@ -69,15 +74,39 @@ public class NewPaymentController extends BaseSubSceneController{
         );
     }
 
+    @FXML
+    private void activateDate(ActionEvent event) {
+        dtpPayDate.setVisible(toggleState.isSelected());
+        dtpPayDate.setManaged(toggleState.isSelected());
+
+        spinnerPayHour.setVisible(toggleState.isSelected());
+        spinnerPayHour.setManaged(toggleState.isSelected());
+
+        spinnerPayMinutes.setVisible(toggleState.isSelected());
+        spinnerPayMinutes.setManaged(toggleState.isSelected());
+
+        HBoxSpinner.setVisible(toggleState.isSelected());
+        HBoxSpinner.setManaged(toggleState.isSelected());
+    }
+
     private boolean validateData(){
         if(txtDescription.getText().trim().isEmpty()){
             mainController.showErrorSnackBar("Por favor, complete toda la información del pago");
             return false;
         }
-        if(dtpPayDate.getValue() == null){
-            mainController.showErrorSnackBar("Por favor, complete toda la información del pago");
-            return false;
+
+        if(toggleState.isSelected()){
+            var date = dtpPayDate.getValue();
+            if(date == null){
+                mainController.showErrorSnackBar("Por favor, complete toda la información del pago");
+                return false;
+            }
+            if(date.isAfter(LocalDate.now())){
+                mainController.showErrorSnackBar("La fecha de pago no debe ser una fecha futura.");
+                return false;
+            }
         }
+
         var amount = getTotalAmountValue();
         if(amount == null) return false;
         if(amount.compareTo(BigDecimal.ZERO) <= 0) {
@@ -89,8 +118,12 @@ public class NewPaymentController extends BaseSubSceneController{
     }
 
     private PaymentRegisterDTO getData(){
-        LocalTime start = LocalTime.of(spinnerPayHour.getValue(), spinnerPayMinutes.getValue());
-        LocalDateTime date = LocalDateTime.of(dtpPayDate.getValue(), start);
+        LocalDateTime date = null;
+
+        if(toggleState.isSelected()){
+            LocalTime start = LocalTime.of(spinnerPayHour.getValue(), spinnerPayMinutes.getValue());
+            date = LocalDateTime.of(dtpPayDate.getValue(), start);
+        }
 
         return new PaymentRegisterDTO(
                 txtDescription.getText(),

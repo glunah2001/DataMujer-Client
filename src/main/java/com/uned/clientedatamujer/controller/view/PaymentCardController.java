@@ -3,6 +3,7 @@ package com.uned.clientedatamujer.controller.view;
 import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.dto.response.PaymentDTO;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.PaymentService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +46,7 @@ public class PaymentCardController implements BaseCardController<PaymentDTO> {
     @FXML
     private void pay(ActionEvent event) {
         try {
+            DataUtilities.setLastPaymentDTO(data);
             SceneManager.loadSubScene(parentController.mainController.getSubScenePane(),
                     "/com/uned/clientedatamujer/update-payment-subscene.fxml",
                     parentController.mainController,

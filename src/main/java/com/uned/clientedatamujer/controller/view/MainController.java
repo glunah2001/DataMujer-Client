@@ -161,7 +161,7 @@ public class MainController extends BaseController{
     }
 
     @FXML
-    private void loadPayments(ActionEvent event) {
+    protected void loadPayments(ActionEvent event) {
         try{
             SceneManager.loadSubScene(
                     SubScenePane,

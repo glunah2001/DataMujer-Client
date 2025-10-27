@@ -8,6 +8,7 @@ import com.uned.clientedatamujer.dto.response.PaymentDTO;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
+import java.time.LocalDateTime;
 
 public class PaymentService extends BaseHttpClient {
 
@@ -61,6 +62,19 @@ public class PaymentService extends BaseHttpClient {
                 .build();
 
         return sendRequest(request, Void.class);
+    }
+
+    public Object pay(String accessJwt, String id, LocalDateTime dateTime){
+        String url = URL + "/payment/paid?id="+id+"&date="+dateTime;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .PUT(HttpRequest.BodyPublishers.noBody())
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, PaymentDTO.class);
     }
 
     public Object unpay(String accessJwt, String id) {

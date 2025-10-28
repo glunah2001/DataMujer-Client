@@ -14,6 +14,28 @@ import java.util.function.UnaryOperator;
 
 public class ComponentInitializer {
 
+    public static void initializeParam(TextField textField, ComboBox<String> comboBox) {
+        comboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
+            textField.clear();
+
+            if (newValue == null) return;
+
+            switch (newValue) {
+                case "CÉDULA/DIMEX":
+                case "CÉDULA JURÍDICA":
+                    configureLongOnlyTextField(textField);
+                    break;
+                default:
+                    configureNormalTextField(textField);
+                    break;
+            }
+        });
+
+        if (comboBox.getSelectionModel().isEmpty()) {
+            comboBox.getSelectionModel().selectFirst();
+        }
+    }
+
     public static void initializeCountry(ComboBox<Country> comboCountry){
         comboCountry.getItems().addAll(Arrays.asList(Country.values()));
         comboCountry.setConverter(new StringConverter<>() {
@@ -214,5 +236,9 @@ public class ComponentInitializer {
 
         TextFormatter<Long> textFormatter = new TextFormatter<>(filter);
         txtID.setTextFormatter(textFormatter);
+    }
+
+    private static void configureNormalTextField(TextField textField) {
+        textField.setTextFormatter(null);
     }
 }

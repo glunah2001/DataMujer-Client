@@ -13,7 +13,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="680.0" prefWidth="860.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uned.clientedatamujer.controller.view.AdminController">
     <GridPane style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -54,9 +58,22 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2">
                 <children>
-                    <TextField fx:id="txtParam" prefHeight="42.0" prefWidth="150.0" promptText="PARAM" HBox.hgrow="NEVER" />
-               <ComboBox fx:id="comboBoxParamType" prefWidth="150.0" />
-                    <Button mnemonicParsing="false" onAction="#searchActivity" styleClass="button-primario" text="Buscar" />
+                    <TextField fx:id="txtParam" prefHeight="42.0" prefWidth="150.0" promptText="PARAM"
+                               HBox.hgrow="NEVER"/>
+                    <ComboBox fx:id="comboBoxParamType" prefWidth="150.0">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="USERNAME"/>
+                                <String fx:value="CÉDULA/DIMEX"/>
+                                <String fx:value="CÉDULA JURÍDICA"/>
+                                <String fx:value="NOMBRE"/>
+                                <String fx:value="NOMBRE DE NEGOCIO"/>
+                                <String fx:value="APELLIDOS"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Button mnemonicParsing="false" onAction="#searchUser" styleClass="button-primario"
+                            text="Buscar"/>
                 </children>
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2">

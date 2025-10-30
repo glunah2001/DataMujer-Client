@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.LegalPersonUpdateDTO;
 import com.uned.clientedatamujer.dto.request.PhysicalPersonUpdateDTO;
-import com.uned.clientedatamujer.dto.response.LegalPersonDTO;
-import com.uned.clientedatamujer.dto.response.PhysicalPersonDTO;
-import com.uned.clientedatamujer.dto.response.ProfileDTO;
-import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
+import com.uned.clientedatamujer.dto.response.*;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,6 +15,81 @@ public class UserService extends BaseHttpClient{
     public Object getMyProfile(){
         String url = URL + "/user/me";
         String accessJwt = AuthSession.getAccessToken();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, ProfileDTO.class);
+    }
+
+    public Object getUserBySurname(String accessJwt, int currentPage, String param) {
+        String url = URL + "/user/search/surname?surname="+param+"&page="+currentPage;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, new TypeReference<SimplePage<PhysicalPersonPageDTO>>() {});
+    }
+
+    public Object getUserByBusiness(String accessJwt, int currentPage, String param) {
+        String url = URL + "/user/search/business?businessName="+param+"&page="+currentPage;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, new TypeReference<SimplePage<LegalPersonPageDTO>>() {});
+    }
+
+    public Object getUserByName(String accessJwt, int currentPage, String param) {
+        String url = URL + "/user/search/name?name="+param+"&page="+currentPage;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, new TypeReference<SimplePage<PhysicalPersonPageDTO>>() {});
+    }
+
+    public Object getUserByLegalId(String accessJwt, String param) {
+        String url = URL + "/user/search/legal-id?id="+param;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, ProfileDTO.class);
+    }
+
+    public Object getUserByNationalId(String accessJwt, String param) {
+        String url = URL + "/user/search/national-id?id="+param;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, ProfileDTO.class);
+    }
+
+    public Object getUserByUsername(String accessJwt, String param) {
+        String url = URL + "/user/search/username?username="+param;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -53,78 +125,27 @@ public class UserService extends BaseHttpClient{
         }
     }
 
-    public Object getUserBySurname(String accessJwt, int currentPage, String param) {
-        String url = URL + "/user/search/surname?surname="+param+"&page="+currentPage;
+    public Object updateAffiliate(String accessJwt, String username){
+        String url = URL + "/user/set/Affiliate?username="+username;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .GET()
+                .PUT(HttpRequest.BodyPublishers.noBody())
                 .header("Content-Type", "application/json")
                 .header("AUTHORIZATION", "Bearer "+accessJwt)
                 .build();
-
-        return sendRequest(request, new TypeReference<SimplePage<ProfileDTO>>() {});
+        return sendRequest(request, String.class);
     }
 
-    public Object getUserByBusiness(String accessJwt, int currentPage, String param) {
-        String url = URL + "/user/search/business?businessName="+param+"&page="+currentPage;
+    public Object updateRole(String accessJwt, String username, String role){
+        String url = URL + "/user/set/Role?username="+username+"&role="+role;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .GET()
+                .PUT(HttpRequest.BodyPublishers.noBody())
                 .header("Content-Type", "application/json")
                 .header("AUTHORIZATION", "Bearer "+accessJwt)
                 .build();
-
-        return sendRequest(request, new TypeReference<SimplePage<ProfileDTO>>() {});
-    }
-
-    public Object getUserByName(String accessJwt, int currentPage, String param) {
-        String url = URL + "/user/search/name?name="+param+"&page="+currentPage;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
-                .build();
-
-        return sendRequest(request, new TypeReference<SimplePage<ProfileDTO>>() {});
-    }
-
-    public Object getUserByLegalId(String accessJwt, String param) {
-        String url = URL + "/user/search/legal-id?="+param;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
-                .build();
-
-        return sendRequest(request, ProfileDTO.class);
-    }
-
-    public Object getUserByNationalId(String accessJwt, String param) {
-        String url = URL + "/user/search/national-id?="+param;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
-                .build();
-
-        return sendRequest(request, ProfileDTO.class);
-    }
-
-    public Object getUserByUsername(String accessJwt, String param) {
-        String url = URL + "/user/search/username?="+param;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
-                .build();
-
-        return sendRequest(request, ProfileDTO.class);
+        return sendRequest(request, String.class);
     }
 }

@@ -2,10 +2,9 @@ package com.uned.clientedatamujer.controller.view;
 
 import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.dto.SimplePage;
-import com.uned.clientedatamujer.dto.response.LegalPersonDTO;
-import com.uned.clientedatamujer.dto.response.PhysicalPersonDTO;
-import com.uned.clientedatamujer.dto.response.ProfileDTO;
+import com.uned.clientedatamujer.dto.response.*;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,36 +28,39 @@ public class AdminController extends BaseSubSceneController{
     @FXML
     private VBox VBoxUser;
     private final UserService service = new UserService();
+    private String lastSearch = null;
+    private int lastIndex = 0;
     private int currentPage;
 
     @FXML
     private void initialize(){
         ComponentInitializer.initializeParam(txtParam, comboBoxParamType);
-        currentPage = 0;
+        allowPageableButtons(0,0);
     }
 
     @FXML
     private void searchUser(ActionEvent event) {
         if(txtParam.getText().isEmpty()) return;
-        int index = comboBoxParamType.getSelectionModel().getSelectedIndex();
-        String param = txtParam.getText();
-        switch (index){
-            case 0 -> searchUserByUsername(param);
-            case 1 -> searchUserByNationalId(param);
-            case 2 -> searchUserByLegalId(param);
-            case 3 -> searchUserByName(param);
-            case 4 -> searchUserByBusiness(param);
-            case 5 -> searchUserBySurnames(param);
+        lastSearch = txtParam.getText();
+        lastIndex = comboBoxParamType.getSelectionModel().getSelectedIndex();
+        switch (lastIndex){
+            case 0 -> searchUserByUsername(lastSearch);
+            case 1 -> searchUserByNationalId(lastSearch);
+            case 2 -> searchUserByLegalId(lastSearch);
+            case 3 -> searchUserByName(lastSearch);
+            case 4 -> searchUserByBusiness(lastSearch);
+            case 5 -> searchUserBySurnames(lastSearch);
         }
     }
 
     private void searchUserBySurnames(String param) {
         mainController.executeCall(
                 () -> service.getUserBySurname(AuthSession.getAccessToken(), currentPage, param),
-                (SimplePage<PhysicalPersonDTO> simplePage) -> {
+                (SimplePage<PhysicalPersonPageDTO> simplePage) -> {
                     clearVBox();
-                    allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
-                    List<PhysicalPersonDTO> dto = simplePage.content();
+                    var response = DataUtilities.mapToPhysicalProfile(simplePage);
+                    allowPageableButtons(response.currentPage(), response.totalPages());
+                    List<PhysicalPersonDTO> dto = response.content();
                     dto.forEach(person -> {
                         setCard(
                                 "/com/uned/clientedatamujer/user-container.fxml",
@@ -75,10 +77,11 @@ public class AdminController extends BaseSubSceneController{
     private void searchUserByBusiness(String param) {
         mainController.executeCall(
                 () -> service.getUserByBusiness(AuthSession.getAccessToken(), currentPage, param),
-                (SimplePage<LegalPersonDTO> simplePage) -> {
+                (SimplePage<LegalPersonPageDTO> simplePage) -> {
                     clearVBox();
-                    allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
-                    List<LegalPersonDTO> dto = simplePage.content();
+                    var response = DataUtilities.mapToLegalProfile(simplePage);
+                    allowPageableButtons(response.currentPage(), response.totalPages());
+                    List<LegalPersonDTO> dto = response.content();
                     dto.forEach(person -> {
                         setCard(
                                 "/com/uned/clientedatamujer/user-container.fxml",
@@ -95,10 +98,11 @@ public class AdminController extends BaseSubSceneController{
     private void searchUserByName(String param) {
         mainController.executeCall(
                 () -> service.getUserByName(AuthSession.getAccessToken(), currentPage, param),
-                (SimplePage<PhysicalPersonDTO> simplePage) -> {
+                (SimplePage<PhysicalPersonPageDTO> simplePage) -> {
                     clearVBox();
-                    allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
-                    List<PhysicalPersonDTO> dto = simplePage.content();
+                    var response = DataUtilities.mapToPhysicalProfile(simplePage);
+                    allowPageableButtons(response.currentPage(), response.totalPages());
+                    List<PhysicalPersonDTO> dto = response.content();
                     dto.forEach(person -> {
                         setCard(
                                 "/com/uned/clientedatamujer/user-container.fxml",
@@ -184,22 +188,31 @@ public class AdminController extends BaseSubSceneController{
 
     @FXML
     private void showPrevious(ActionEvent event) {
+        resetToPreviousSearch();
         currentPage--;
-        //getPageData(currentPage);
+        searchUser(null);
     }
 
     @FXML
     private void showNext(ActionEvent event) {
+        resetToPreviousSearch();
         currentPage++;
-        //getPageData(currentPage);
+        searchUser(null);
     }
 
     public void refreshCurrentPage() {
-        if(txtParam.getText().isEmpty()){
+        resetToPreviousSearch();
+        searchUser(null);
+    }
+
+    private void resetToPreviousSearch(){
+        if (lastSearch == null || lastIndex < 0) {
             clearVBox();
+            allowPageableButtons(0, 0);
             return;
         }
-
+        comboBoxParamType.getSelectionModel().select(lastIndex);
+        txtParam.setText(lastSearch);
     }
 
     private void clearVBox(){

@@ -34,7 +34,11 @@ public class ParticipationCardController implements BaseCardController<Participa
     public void setData(ParticipationDTO dto) {
         data = dto;
         labelID.setText(
-                String.format("ID #%d - %S", dto.id(), dto.activity())
+                String.format("ID #%d - (%d) %S",
+                        dto.id(),
+                        dto.activityId(),
+                        dto.activity()
+                )
         );
         txtDescription.setText(
                 String.format("""
@@ -73,6 +77,12 @@ public class ParticipationCardController implements BaseCardController<Participa
         if(data.participationState() != ParticipationState.PENDIENTE){
             btnStart.setVisible(false);
             btnStart.setVisible(false);
+        }
+
+        if(data.participationState() == ParticipationState.CANCELADO ||
+        data.participationState() == ParticipationState.COMPLETADO){
+            btnCancel.setVisible(false);
+            btnCancel.setVisible(false);
         }
     }
 

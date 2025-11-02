@@ -3,7 +3,6 @@ package com.uned.clientedatamujer.controller.view;
 import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.ParticipationDTO;
-import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
 import com.uned.clientedatamujer.service.AuthSession;
 import com.uned.clientedatamujer.service.ParticipationService;
 import com.uned.clientedatamujer.service.ReportService;
@@ -96,7 +95,7 @@ public class ParticipationController extends BaseSubSceneController{
                     List<ParticipationDTO> dto = simplePage.content();
                     dto.forEach(participation -> {
                         setCard(
-                                "/com/uned/clientedatamujer/participation-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/participation-container.fxml",
                                 VBoxParticipations,
                                 participation,
                                 this
@@ -117,7 +116,7 @@ public class ParticipationController extends BaseSubSceneController{
                     List<ParticipationDTO> dto = simplePage.content();
                     dto.forEach(participation -> {
                         setCard(
-                                "/com/uned/clientedatamujer/participation-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/participation-container.fxml",
                                 VBoxParticipations,
                                 participation,
                                 this
@@ -136,7 +135,7 @@ public class ParticipationController extends BaseSubSceneController{
                 (ParticipationDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
-                            "/com/uned/clientedatamujer/participation-container.fxml",
+                            "/com/uned/clientedatamujer/views/card/participation-container.fxml",
                             VBoxParticipations,
                             dto,
                             this

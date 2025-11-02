@@ -70,7 +70,7 @@ public class ActivityController extends BaseSubSceneController{
                     List<ActivityDTO> dto = simplePage.content();
                     dto.forEach(activity -> {
                         setCard(
-                                "/com/uned/clientedatamujer/activity-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/activity-container.fxml",
                                 VBoxActivities,
                                 activity,
                                 this
@@ -88,7 +88,7 @@ public class ActivityController extends BaseSubSceneController{
                 (ActivityDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
-                            "/com/uned/clientedatamujer/activity-container.fxml",
+                            "/com/uned/clientedatamujer/views/card/activity-container.fxml",
                             VBoxActivities,
                             dto,
                             this

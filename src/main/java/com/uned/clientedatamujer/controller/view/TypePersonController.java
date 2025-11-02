@@ -22,8 +22,8 @@ public class TypePersonController {
         String scene;
         int index = comboBoxPersonType.getSelectionModel().getSelectedIndex();
         switch (index) {
-            case 0 -> scene = "/com/uned/clientedatamujer/physical-person-view.fxml";
-            case 1 -> scene = "/com/uned/clientedatamujer/legal-person-view.fxml";
+            case 0 -> scene = "/com/uned/clientedatamujer/views/scene/physical-person-view.fxml";
+            case 1 -> scene = "/com/uned/clientedatamujer/views/scene/legal-person-view.fxml";
             default -> {
                 return;
             }

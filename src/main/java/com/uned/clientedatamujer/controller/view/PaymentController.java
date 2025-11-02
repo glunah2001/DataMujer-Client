@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXToggleButton;
 import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.AffiliatesPaymentReportDTO;
-import com.uned.clientedatamujer.dto.response.ParticipationDTO;
 import com.uned.clientedatamujer.dto.response.PaymentDTO;
 import com.uned.clientedatamujer.service.AuthSession;
 import com.uned.clientedatamujer.service.PaymentService;
@@ -119,7 +118,7 @@ public class PaymentController extends BaseSubSceneController{
                     List<AffiliatesPaymentReportDTO> dto = simplePage.content();
                     dto.forEach(affiliateData -> {
                         setCard(
-                                "/com/uned/clientedatamujer/affiliate-report-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/affiliate-report-container.fxml",
                                 VBoxPayment,
                                 affiliateData,
                                 this
@@ -141,7 +140,7 @@ public class PaymentController extends BaseSubSceneController{
                     List<PaymentDTO> dto = simplePage.content();
                     dto.forEach(payment -> {
                         setCard(
-                                "/com/uned/clientedatamujer/payment-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/payment-container.fxml",
                                 VBoxPayment,
                                 payment,
                                 this
@@ -166,7 +165,7 @@ public class PaymentController extends BaseSubSceneController{
                     List<PaymentDTO> dto = simplePage.content();
                     dto.forEach(payment -> {
                         setCard(
-                                "/com/uned/clientedatamujer/payment-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/payment-container.fxml",
                                 VBoxPayment,
                                 payment,
                                 this
@@ -185,7 +184,7 @@ public class PaymentController extends BaseSubSceneController{
                 (PaymentDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
-                            "/com/uned/clientedatamujer/payment-container.fxml",
+                            "/com/uned/clientedatamujer/views/card/payment-container.fxml",
                             VBoxPayment,
                             dto,
                             this

@@ -84,7 +84,7 @@ public class MainController extends BaseController{
         try {
             SceneManager.loadSubScene(
                     SubScenePane,
-                    "/com/uned/clientedatamujer/new-activity-subscene.fxml",
+                    "/com/uned/clientedatamujer/views/subscene/new-activity-subscene.fxml",
                     this,
                     rootPane,
                     snackBarInfo
@@ -99,7 +99,7 @@ public class MainController extends BaseController{
         try{
             SceneManager.loadSubScene(
                     SubScenePane,
-                    "/com/uned/clientedatamujer/activities-subscene.fxml",
+                    "/com/uned/clientedatamujer/views/subscene/activities-subscene.fxml",
                     this,
                     rootPane,
                     snackBarInfo
@@ -114,7 +114,7 @@ public class MainController extends BaseController{
         try{
             SceneManager.loadSubScene(
                     SubScenePane,
-                    "/com/uned/clientedatamujer/volunteering-subscene.fxml",
+                    "/com/uned/clientedatamujer/views/subscene/volunteering-subscene.fxml",
                     this,
                     rootPane,
                     snackBarInfo
@@ -129,7 +129,7 @@ public class MainController extends BaseController{
         try{
             SceneManager.loadSubScene(
                     SubScenePane,
-                    "/com/uned/clientedatamujer/participations-subscene.fxml",
+                    "/com/uned/clientedatamujer/views/subscene/participations-subscene.fxml",
                     this,
                     rootPane,
                     snackBarInfo
@@ -144,7 +144,7 @@ public class MainController extends BaseController{
         try{
             SceneManager.loadSubScene(
                     SubScenePane,
-                    "/com/uned/clientedatamujer/new-payment-subscene.fxml",
+                    "/com/uned/clientedatamujer/views/subscene/new-payment-subscene.fxml",
                     this,
                     rootPane,
                     snackBarInfo
@@ -159,7 +159,7 @@ public class MainController extends BaseController{
         try{
             SceneManager.loadSubScene(
                     SubScenePane,
-                    "/com/uned/clientedatamujer/payment-subscene.fxml",
+                    "/com/uned/clientedatamujer/views/subscene/payment-subscene.fxml",
                     this,
                     rootPane,
                     snackBarInfo
@@ -174,7 +174,7 @@ public class MainController extends BaseController{
         try{
             SceneManager.loadSubScene(
                     SubScenePane,
-                    "/com/uned/clientedatamujer/admin-subscene.fxml",
+                    "/com/uned/clientedatamujer/views/subscene/admin-subscene.fxml",
                     this,
                     rootPane,
                     snackBarInfo

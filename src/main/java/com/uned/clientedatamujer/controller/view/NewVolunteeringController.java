@@ -91,7 +91,7 @@ public class NewVolunteeringController extends BaseSubSceneController{
 
     private void addForm(){
         setForm(
-                "/com/uned/clientedatamujer/volunteering-form.fxml",
+                "/com/uned/clientedatamujer/views/form/volunteering-form.fxml",
                 VBoxVolunteeringForm,
                 this,
                 VolunteeringRegisterDTO.class
@@ -132,7 +132,7 @@ public class NewVolunteeringController extends BaseSubSceneController{
                         try {
                             DataUtilities.clearActivityDTO();
                             SceneManager.loadSubScene(mainController.getSubScenePane(),
-                                    "/com/uned/clientedatamujer/activities-subscene.fxml",
+                                    "/com/uned/clientedatamujer/views/subscene/activities-subscene.fxml",
                                     mainController,
                                     rootPane,
                                     snackBarInfo);
@@ -155,7 +155,7 @@ public class NewVolunteeringController extends BaseSubSceneController{
                         try {
                             DataUtilities.clearActivityDTO();
                             SceneManager.loadSubScene(mainController.getSubScenePane(),
-                                    "/com/uned/clientedatamujer/activities-subscene.fxml",
+                                    "/com/uned/clientedatamujer/views/subscene/activities-subscene.fxml",
                                     mainController,
                                     rootPane,
                                     snackBarInfo);

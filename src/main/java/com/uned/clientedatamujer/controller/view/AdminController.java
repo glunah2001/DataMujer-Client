@@ -63,7 +63,7 @@ public class AdminController extends BaseSubSceneController{
                     List<PhysicalPersonDTO> dto = response.content();
                     dto.forEach(person -> {
                         setCard(
-                                "/com/uned/clientedatamujer/user-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/user-container.fxml",
                                 VBoxUser,
                                 person,
                                 this
@@ -84,7 +84,7 @@ public class AdminController extends BaseSubSceneController{
                     List<LegalPersonDTO> dto = response.content();
                     dto.forEach(person -> {
                         setCard(
-                                "/com/uned/clientedatamujer/user-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/user-container.fxml",
                                 VBoxUser,
                                 person,
                                 this
@@ -105,7 +105,7 @@ public class AdminController extends BaseSubSceneController{
                     List<PhysicalPersonDTO> dto = response.content();
                     dto.forEach(person -> {
                         setCard(
-                                "/com/uned/clientedatamujer/user-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/user-container.fxml",
                                 VBoxUser,
                                 person,
                                 this
@@ -123,7 +123,7 @@ public class AdminController extends BaseSubSceneController{
                 (LegalPersonDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
-                            "/com/uned/clientedatamujer/user-container.fxml",
+                            "/com/uned/clientedatamujer/views/card/user-container.fxml",
                             VBoxUser,
                             dto,
                             this
@@ -140,7 +140,7 @@ public class AdminController extends BaseSubSceneController{
                 (PhysicalPersonDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
-                            "/com/uned/clientedatamujer/user-container.fxml",
+                            "/com/uned/clientedatamujer/views/card/user-container.fxml",
                             VBoxUser,
                             dto,
                             this
@@ -157,7 +157,7 @@ public class AdminController extends BaseSubSceneController{
                 (ProfileDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
-                            "/com/uned/clientedatamujer/user-container.fxml",
+                            "/com/uned/clientedatamujer/views/card/user-container.fxml",
                             VBoxUser,
                             dto,
                             this

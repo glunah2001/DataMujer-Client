@@ -37,7 +37,7 @@ public class LoginController extends BaseController{
     @FXML
     private void ToForgotPasswordView(ActionEvent event) throws IOException {
         SceneManager.changeScene(
-                "/com/uned/clientedatamujer/forgot-password-view.fxml",
+                "/com/uned/clientedatamujer/views/scene/forgot-password-view.fxml",
                 1080, 720, false
         );
     }
@@ -45,7 +45,7 @@ public class LoginController extends BaseController{
     @FXML
     private void ToTypePersonView(ActionEvent event) throws IOException {
         SceneManager.changeScene(
-                "/com/uned/clientedatamujer/type-person-view.fxml",
+                "/com/uned/clientedatamujer/views/scene/type-person-view.fxml",
                 1080, 720, false
         );
     }

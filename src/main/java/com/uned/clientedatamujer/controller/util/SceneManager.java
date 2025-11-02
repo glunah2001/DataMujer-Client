@@ -34,15 +34,15 @@ public class SceneManager {
     }
 
     public static void toLogIn() throws IOException {
-        changeScene("/com/uned/clientedatamujer/login-view.fxml", 1080, 720, false);
+        changeScene("/com/uned/clientedatamujer/views/scene/login-view.fxml", 1080, 720, false);
     }
 
     public static void toMyProfile(int width, int height) throws IOException {
-        changeScene("/com/uned/clientedatamujer/my-profile-view.fxml", width, height, true);
+        changeScene("/com/uned/clientedatamujer/views/scene/my-profile-view.fxml", width, height, true);
     }
 
     public static void toMainView(int width, int height) throws IOException{
-        changeScene("/com/uned/clientedatamujer/main-view.fxml", width, height, true);
+        changeScene("/com/uned/clientedatamujer/views/scene/main-view.fxml", width, height, true);
     }
 
     public static void loadSubScene(StackPane subScenePane,

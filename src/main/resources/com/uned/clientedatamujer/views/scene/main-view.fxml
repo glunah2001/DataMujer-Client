@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<StackPane fx:id="rootPane" prefHeight="720.0" prefWidth="1080.0" stylesheets="@stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.view.MainController">
+<StackPane fx:id="rootPane" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../../stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.view.MainController">
    <children>
       <JFXSnackbar fx:id="snackBarInfo" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -23,7 +23,7 @@
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/myprofile.jpg" />
+                              <Image url="@../../images/myprofile.jpg" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -53,7 +53,7 @@
                   <Region VBox.vgrow="ALWAYS" />
                   <ImageView fitHeight="138.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                      <image>
-                        <Image url="@images/DataMujer.jpg" />
+                        <Image url="@../../images/DataMujer.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets bottom="3.0" />

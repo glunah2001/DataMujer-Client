@@ -2,7 +2,6 @@ package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
 import com.uned.clientedatamujer.controller.util.SceneManager;
-import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.service.AuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,7 +51,7 @@ public class ForgotPasswordController extends  BaseController{
                         hideLoading();
                         try{
                             SceneManager.changeScene(
-                                    "/com/uned/clientedatamujer/reset-password-view.fxml",
+                                    "/com/uned/clientedatamujer/views/scene/reset-password-view.fxml",
                                     1080, 720, false
                             );
                         }catch(IOException e){

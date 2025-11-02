@@ -88,7 +88,7 @@ public class VolunteeringCardController implements BaseCardController<Volunteeri
                     try{
                         SceneManager.loadSubScene(
                                 parentController.mainController.getSubScenePane(),
-                                "/com/uned/clientedatamujer/update-volunteering-subscene.fxml",
+                                "/com/uned/clientedatamujer/views/subscene/update-volunteering-subscene.fxml",
                                 parentController.mainController,
                                 parentController.rootPane,
                                 parentController.snackBarInfo

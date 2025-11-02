@@ -57,7 +57,7 @@ public class VolunteeringController extends BaseSubSceneController{
                     List<VolunteeringDTO> dto = simplePage.content();
                     dto.forEach(volunteering -> {
                         setCard(
-                                "/com/uned/clientedatamujer/volunteering-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/volunteering-container.fxml",
                                 VBoxVolunteering,
                                 volunteering,
                                 this
@@ -78,7 +78,7 @@ public class VolunteeringController extends BaseSubSceneController{
                     List<VolunteeringDTO> dto = simplePage.content();
                     dto.forEach(volunteering -> {
                         setCard(
-                                "/com/uned/clientedatamujer/volunteering-container.fxml",
+                                "/com/uned/clientedatamujer/views/card/volunteering-container.fxml",
                                 VBoxVolunteering,
                                 volunteering,
                                 this
@@ -97,7 +97,7 @@ public class VolunteeringController extends BaseSubSceneController{
                 (VolunteeringDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
-                            "/com/uned/clientedatamujer/volunteering-container.fxml",
+                            "/com/uned/clientedatamujer/views/card/volunteering-container.fxml",
                             VBoxVolunteering,
                             dto,
                             this

@@ -57,7 +57,7 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
         try{
             SceneManager.loadSubScene(
                     parentController.mainController.getSubScenePane(),
-                    "/com/uned/clientedatamujer/new-volunteering-subscene.fxml",
+                    "/com/uned/clientedatamujer/views/subscene/new-volunteering-subscene.fxml",
                     parentController.mainController,
                     parentController.rootPane,
                     parentController.snackBarInfo

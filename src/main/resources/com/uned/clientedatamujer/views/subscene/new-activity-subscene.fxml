@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css"
+<AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@../../stylesheet/style.css"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.uned.clientedatamujer.controller.view.NewActivityController">
    <GridPane style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

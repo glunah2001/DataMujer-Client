@@ -9,6 +9,8 @@ module com.uned.clientedatamujer {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.annotation;
+    requires net.sf.jasperreports.core;
+    requires java.sql;
 
     opens com.uned.clientedatamujer to javafx.fxml;
     exports com.uned.clientedatamujer;

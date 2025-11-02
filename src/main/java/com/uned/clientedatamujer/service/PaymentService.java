@@ -3,6 +3,7 @@ package com.uned.clientedatamujer.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.PaymentRegisterDTO;
+import com.uned.clientedatamujer.dto.response.AffiliatesPaymentReportDTO;
 import com.uned.clientedatamujer.dto.response.PaymentDTO;
 
 import java.io.IOException;
@@ -49,6 +50,19 @@ public class PaymentService extends BaseHttpClient {
                 .build();
 
         return sendRequest(request, new TypeReference<SimplePage<PaymentDTO>>() {});
+    }
+
+    public Object getAffiliateReport(String accessJwt, int page) {
+        String url = URL + "/payment/affiliates-report?page="+page;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, new TypeReference<SimplePage<AffiliatesPaymentReportDTO>>() {});
     }
 
     public Object deletePayment(String accessJwt, String id) {

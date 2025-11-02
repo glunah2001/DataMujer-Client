@@ -4,7 +4,7 @@ import com.uned.clientedatamujer.enums.Country;
 
 import java.time.LocalDate;
 
-public record PhysicalPersonPageDTO(
+public record NoPoliPhysicalPersonDTO(
         String nationalId,
         String firstSurname,
         String secondSurname,

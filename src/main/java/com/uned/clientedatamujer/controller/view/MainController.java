@@ -20,8 +20,6 @@ public class MainController extends BaseController{
     @FXML
     private Button btnMyVolunteering;
     @FXML
-    private Button btnGenReport;
-    @FXML
     private Button btnAdminOps;
     @FXML
     private StackPane SubScenePane;
@@ -54,8 +52,6 @@ public class MainController extends BaseController{
         if(role.equals("ROLE_ADMIN")) {
             return;
         }else{
-            btnGenReport.setVisible(false);
-            btnGenReport.setManaged(false);
             btnAdminOps.setVisible(false);
             btnAdminOps.setManaged(false);
         }
@@ -73,8 +69,6 @@ public class MainController extends BaseController{
         btnNewActivity.setManaged(true);
         btnMyVolunteering.setVisible(true);
         btnMyVolunteering.setManaged(true);
-        btnGenReport.setVisible(true);
-        btnGenReport.setManaged(true);
         btnAdminOps.setVisible(true);
         btnAdminOps.setManaged(true);
     }

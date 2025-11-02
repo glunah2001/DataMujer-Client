@@ -48,12 +48,17 @@
                   <Insets left="20.0" />
                </padding>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2">
-               <children>
-                  <Button fx:id="btnPrev" mnemonicParsing="false" onAction="#showPrevious" styleClass="button-secundario" text="Anterior" />
-                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#showNext" styleClass="button-secundario" text="Siguiente" />
-               </children>
-            </HBox>
+             <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                 <children>
+                     <Button fx:id="btnPrint" mnemonicParsing="false" onAction="#showPrint" styleClass="button-secundario" text="Imprimir" />
+                     <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                         <children>
+                             <Button fx:id="btnPrev" mnemonicParsing="false" onAction="#showPrevious" styleClass="button-secundario" text="Anterior" />
+                             <Button fx:id="btnNext" mnemonicParsing="false" onAction="#showNext" styleClass="button-secundario" text="Siguiente" />
+                         </children>
+                     </HBox>
+                 </children>
+             </VBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2">
                <children>
                   <TextField fx:id="txtId" prefHeight="42.0" prefWidth="90.0" promptText="ID" />

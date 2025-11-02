@@ -38,7 +38,7 @@ public class DataUtilities {
 
     public static void clearVolunteeringDTO(){setLastVolunteeringDTO(null);}
 
-    public static SimplePage<PhysicalPersonDTO> mapToPhysicalProfile(SimplePage<PhysicalPersonPageDTO> plainPage) {
+    public static SimplePage<PhysicalPersonDTO> mapToPhysicalProfile(SimplePage<NoPoliPhysicalPersonDTO> plainPage) {
         List<PhysicalPersonDTO> dtos = plainPage.content().stream()
                 .map(p -> new PhysicalPersonDTO(
                         p.nationalId(),
@@ -63,7 +63,7 @@ public class DataUtilities {
         );
     }
 
-    public static SimplePage<LegalPersonDTO> mapToLegalProfile(SimplePage<LegalPersonPageDTO> plainPage) {
+    public static SimplePage<LegalPersonDTO> mapToLegalProfile(SimplePage<NoPoliLegalPersonDTO> plainPage) {
         List<LegalPersonDTO> dtos = plainPage.content().stream()
                 .map(p -> new LegalPersonDTO(
                         p.legalId(),

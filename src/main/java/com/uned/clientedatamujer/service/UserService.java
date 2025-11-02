@@ -35,7 +35,7 @@ public class UserService extends BaseHttpClient{
                 .header("AUTHORIZATION", "Bearer "+accessJwt)
                 .build();
 
-        return sendRequest(request, new TypeReference<SimplePage<PhysicalPersonPageDTO>>() {});
+        return sendRequest(request, new TypeReference<SimplePage<NoPoliPhysicalPersonDTO>>() {});
     }
 
     public Object getUserByBusiness(String accessJwt, int currentPage, String param) {
@@ -48,7 +48,7 @@ public class UserService extends BaseHttpClient{
                 .header("AUTHORIZATION", "Bearer "+accessJwt)
                 .build();
 
-        return sendRequest(request, new TypeReference<SimplePage<LegalPersonPageDTO>>() {});
+        return sendRequest(request, new TypeReference<SimplePage<NoPoliLegalPersonDTO>>() {});
     }
 
     public Object getUserByName(String accessJwt, int currentPage, String param) {
@@ -61,7 +61,7 @@ public class UserService extends BaseHttpClient{
                 .header("AUTHORIZATION", "Bearer "+accessJwt)
                 .build();
 
-        return sendRequest(request, new TypeReference<SimplePage<PhysicalPersonPageDTO>>() {});
+        return sendRequest(request, new TypeReference<SimplePage<NoPoliPhysicalPersonDTO>>() {});
     }
 
     public Object getUserByLegalId(String accessJwt, String param) {

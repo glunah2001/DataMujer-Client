@@ -49,7 +49,6 @@
                   <Button fx:id="btnMyVolunteering" mnemonicParsing="false" onAction="#loadVolunteering" text="Mis Voluntariados" />
                   <Button mnemonicParsing="false" text="Nuevo Pago" onAction="#loadNewPayment"/>
                   <Button mnemonicParsing="false" text="Mis Pagos" onAction="#loadPayments"/>
-                  <Button fx:id="btnGenReport" mnemonicParsing="false" text="Generar Reporte" />
                   <Button fx:id="btnAdminOps" mnemonicParsing="false" text="Operac. Administrador" onAction="#loadAdminOps"/>
                   <Region VBox.vgrow="ALWAYS" />
                   <ImageView fitHeight="138.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">

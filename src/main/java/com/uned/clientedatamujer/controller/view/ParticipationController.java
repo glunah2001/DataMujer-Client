@@ -3,8 +3,10 @@ package com.uned.clientedatamujer.controller.view;
 import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.ParticipationDTO;
+import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
 import com.uned.clientedatamujer.service.AuthSession;
 import com.uned.clientedatamujer.service.ParticipationService;
+import com.uned.clientedatamujer.service.ReportService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,10 +16,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ParticipationController extends BaseSubSceneController{
 
-    public VBox VBoxParticipations;
+    @FXML
+    private VBox VBoxParticipations;
+    @FXML
+    private Button btnPrint;
     @FXML
     private Button btnPrev;
     @FXML
@@ -99,6 +105,7 @@ public class ParticipationController extends BaseSubSceneController{
                     mainController.hideLoading();
                 }
         );
+        allowPrintButtons(false);
     }
 
     private void getPageDataInActivity(int page, String id) {
@@ -119,6 +126,7 @@ public class ParticipationController extends BaseSubSceneController{
                     mainController.hideLoading();
                 }
         );
+        allowPrintButtons(true);
     }
 
     private void getSingleData(String id){
@@ -136,6 +144,7 @@ public class ParticipationController extends BaseSubSceneController{
                     mainController.hideLoading();
                 }
         );
+        allowPrintButtons(false);
     }
 
     private void allowPageableButtons(int currentPage, int totalPages){
@@ -159,5 +168,29 @@ public class ParticipationController extends BaseSubSceneController{
 
     public void refreshCurrentPage() {
         getPageDataMyPending(currentPage);
+    }
+
+    @FXML
+    private void showPrint(ActionEvent event) {
+        String id = txtId.getText().trim();
+        if(id.isEmpty()) return;
+        mainController.executeCall(
+                () -> service.getParticipationInActivity(AuthSession.getAccessToken(), id, currentPage),
+                (SimplePage<ParticipationDTO> simplePage) -> {
+                    ReportService.genReportParticipation(simplePage.content());
+                    mainController.hideLoading();
+                }
+        );
+    }
+
+    private void allowPrintButtons(boolean allow){
+        if(!Objects.equals(AuthSession.getRole(), "ROLE_ADMIN")) return;
+        if(allow && VBoxParticipations.getChildren().isEmpty()){
+            btnPrint.setVisible(false);
+            btnPrint.setManaged(false);
+            return;
+        }
+        btnPrint.setVisible(allow);
+        btnPrint.setManaged(allow);
     }
 }

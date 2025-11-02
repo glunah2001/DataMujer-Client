@@ -3,9 +3,12 @@ package com.uned.clientedatamujer.controller.view;
 import com.jfoenix.controls.JFXToggleButton;
 import com.uned.clientedatamujer.controller.util.ComponentInitializer;
 import com.uned.clientedatamujer.dto.SimplePage;
+import com.uned.clientedatamujer.dto.response.AffiliatesPaymentReportDTO;
+import com.uned.clientedatamujer.dto.response.ParticipationDTO;
 import com.uned.clientedatamujer.dto.response.PaymentDTO;
 import com.uned.clientedatamujer.service.AuthSession;
 import com.uned.clientedatamujer.service.PaymentService;
+import com.uned.clientedatamujer.service.ReportService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PaymentController extends BaseSubSceneController{
+    @FXML
+    private Button btnPrint;
     @FXML
     private JFXToggleButton toggleState;
     @FXML
@@ -85,9 +91,44 @@ public class PaymentController extends BaseSubSceneController{
         toggleState.setManaged(index == 1);
         if(index == 0){
             getPageDataMyPayments(currentPage);
-        }else{
+        }else if(index == 1){
             getPageDataStatus(currentPage);
+        }else{
+            getPageDataAffiliate();
         }
+    }
+
+    @FXML
+    private void showPrint(ActionEvent event) {
+        mainController.executeCall(
+                () -> service.getAffiliateReport(AuthSession.getAccessToken(), currentPage),
+                (SimplePage<AffiliatesPaymentReportDTO> simplePage) -> {
+                    ReportService.genReportAffiliate(simplePage.content());
+                    mainController.hideLoading();
+                }
+        );
+    }
+
+    private void getPageDataAffiliate() {
+        VBoxPayment.getChildren().clear();
+        mainController.executeCall(
+                () -> service.getAffiliateReport(AuthSession.getAccessToken(), currentPage),
+                (SimplePage<AffiliatesPaymentReportDTO> simplePage) -> {
+                    VBoxPayment.getChildren().clear();
+                    allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
+                    List<AffiliatesPaymentReportDTO> dto = simplePage.content();
+                    dto.forEach(affiliateData -> {
+                        setCard(
+                                "/com/uned/clientedatamujer/affiliate-report-container.fxml",
+                                VBoxPayment,
+                                affiliateData,
+                                this
+                        );
+                    });
+                    mainController.hideLoading();
+                    allowPrintButtons(true);
+                }
+        );
     }
 
     private void getPageDataMyPayments(int currentPage){
@@ -107,6 +148,7 @@ public class PaymentController extends BaseSubSceneController{
                         );
                     });
                     mainController.hideLoading();
+                    allowPrintButtons(false);
                 }
         );
     }
@@ -131,6 +173,7 @@ public class PaymentController extends BaseSubSceneController{
                         );
                     });
                     mainController.hideLoading();
+                    allowPrintButtons(false);
                 }
         );
     }
@@ -185,6 +228,17 @@ public class PaymentController extends BaseSubSceneController{
             toggleState.setVisible(false);
             toggleState.setManaged(false);
         }
+    }
+
+    private void allowPrintButtons(boolean allow){
+        if(!Objects.equals(AuthSession.getRole(), "ROLE_ADMIN")) return;
+        if(allow && VBoxPayment.getChildren().isEmpty()){
+            btnPrint.setVisible(false);
+            btnPrint.setManaged(false);
+            return;
+        }
+        btnPrint.setVisible(allow);
+        btnPrint.setManaged(allow);
     }
 
     public void refreshCurrentPage() {

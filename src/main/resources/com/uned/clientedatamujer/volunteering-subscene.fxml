@@ -17,8 +17,7 @@
 
 <AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@stylesheet/style.css"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.uned.clientedatamujer.controller.view.VolunteeringController">
-    <children>
+            fx:controller="com.uned.clientedatamujer.controller.view.VolunteeringController"><children>
       <GridPane style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -63,15 +62,20 @@
                            </FXCollections>
                        </items>
                   </ComboBox>
-                  <Button mnemonicParsing="false" styleClass="button-primario" text="Buscar" onAction="#searchVolunteering"/>
+                  <Button mnemonicParsing="false" onAction="#searchVolunteering" styleClass="button-primario" text="Buscar" />
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="btnPrev" onAction="#showPrevious" mnemonicParsing="false" styleClass="button-secundario" text="Anterior" />
-                  <Button fx:id="btnNext" onAction="#showNext" mnemonicParsing="false" styleClass="button-secundario" text="Siguiente" />
+                  <Button fx:id="btnPrint" mnemonicParsing="false" onAction="#showPrint" styleClass="button-secundario" text="Imprimir" />
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="btnPrev" mnemonicParsing="false" onAction="#showPrevious" styleClass="button-secundario" text="Anterior" />
+                        <Button fx:id="btnNext" mnemonicParsing="false" onAction="#showNext" styleClass="button-secundario" text="Siguiente" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="3" GridPane.rowSpan="6">
                <content>
                   <VBox fx:id="VBoxVolunteering" spacing="20.0" style="-fx-background-color: TRANSPARENT;">

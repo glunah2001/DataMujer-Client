@@ -56,7 +56,7 @@ public class AdminController extends BaseSubSceneController{
     private void searchUserBySurnames(String param) {
         mainController.executeCall(
                 () -> service.getUserBySurname(AuthSession.getAccessToken(), currentPage, param),
-                (SimplePage<PhysicalPersonPageDTO> simplePage) -> {
+                (SimplePage<NoPoliPhysicalPersonDTO> simplePage) -> {
                     clearVBox();
                     var response = DataUtilities.mapToPhysicalProfile(simplePage);
                     allowPageableButtons(response.currentPage(), response.totalPages());
@@ -77,7 +77,7 @@ public class AdminController extends BaseSubSceneController{
     private void searchUserByBusiness(String param) {
         mainController.executeCall(
                 () -> service.getUserByBusiness(AuthSession.getAccessToken(), currentPage, param),
-                (SimplePage<LegalPersonPageDTO> simplePage) -> {
+                (SimplePage<NoPoliLegalPersonDTO> simplePage) -> {
                     clearVBox();
                     var response = DataUtilities.mapToLegalProfile(simplePage);
                     allowPageableButtons(response.currentPage(), response.totalPages());
@@ -98,7 +98,7 @@ public class AdminController extends BaseSubSceneController{
     private void searchUserByName(String param) {
         mainController.executeCall(
                 () -> service.getUserByName(AuthSession.getAccessToken(), currentPage, param),
-                (SimplePage<PhysicalPersonPageDTO> simplePage) -> {
+                (SimplePage<NoPoliPhysicalPersonDTO> simplePage) -> {
                     clearVBox();
                     var response = DataUtilities.mapToPhysicalProfile(simplePage);
                     allowPageableButtons(response.currentPage(), response.totalPages());

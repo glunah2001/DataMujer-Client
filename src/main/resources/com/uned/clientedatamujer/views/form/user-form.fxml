@@ -5,7 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="200.0" style="-fx-background-color: #e0d7cf; -fx-background-radius: 15;" stylesheets="@../../stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="144.0" prefWidth="200.0" style="-fx-background-color: #e0d7cf; -fx-background-radius: 15;"
+      stylesheets="@../../stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.uned.clientedatamujer.controller.view.UserFormController">
    <children>
       <AnchorPane prefHeight="194.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
          <children>
@@ -16,7 +20,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="14.0" layoutY="73.0" prefHeight="50.0" prefWidth="200.0" spacing="30.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                <children>
-                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteActivity" styleClass="button-primario" text="Eliminar" />
+                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteForm" styleClass="button-primario" text="Eliminar" />
                </children>
             </HBox>
          </children>

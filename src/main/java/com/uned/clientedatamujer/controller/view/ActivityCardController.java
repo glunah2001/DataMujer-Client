@@ -7,9 +7,11 @@ import com.uned.clientedatamujer.service.ActivityService;
 import com.uned.clientedatamujer.service.AuthSession;
 import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.ParticipationService;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
@@ -19,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ActivityCardController implements BaseCardController<ActivityDTO>{
 
+    public Button btnMultipleParticipation;
     @FXML
     private Label labelID;
     @FXML
@@ -29,6 +32,13 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
     private Button btnVolunteering;
     private BaseSubSceneController parentController;
     private ActivityDTO data;
+
+    @FXML
+    private void initialize(){
+        btnMultipleParticipation.setVisible(!AuthSession.getRole().equals("ROLE_STANDARD"));
+        btnMultipleParticipation.setManaged(!AuthSession.getRole().equals("ROLE_STANDARD"));
+    }
+
 
     @FXML
     private void deleteActivity(ActionEvent event) {
@@ -69,17 +79,7 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
 
     @FXML
     private void applyToParticipate(ActionEvent event) {
-        var service = new ParticipationService();
-        parentController.mainController.executeCall(
-                () -> service.createParticipation(AuthSession.getAccessToken(), data.id()),
-                (ParticipationDTO dto) -> {
-                    parentController.mainController.hideLoading();
-                    parentController.mainController.showSuccessSnackBar(
-                            "Se ha registrado exitosamente en la actividad "+dto.activityId()
-                                    + " compruébelo en la sección \"Mis Participaciones\""
-                    );
-                }
-        );
+        createParticipation();
     }
 
     @Override
@@ -117,8 +117,38 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
         return formatter.format(date);
     }
 
+
     @Override
     public void setParentController(BaseSubSceneController parent) {
         this.parentController = parent;
+    }
+
+    private void createParticipation(){
+        var service = new ParticipationService();
+        parentController.mainController.executeCall(
+                () -> service.createParticipation(AuthSession.getAccessToken(), data.id()),
+                (ParticipationDTO dto) -> {
+                    parentController.mainController.hideLoading();
+                    parentController.mainController.showSuccessSnackBar(
+                            "Se ha registrado exitosamente en la actividad "+dto.activityId()
+                                    + " compruébelo en la sección \"Mis Participaciones\""
+                    );
+                }
+        );
+    }
+
+    public void multipleParticipation(ActionEvent event) {
+        DataUtilities.setLastActivityDTO(data);
+        try{
+            SceneManager.loadSubScene(
+                    parentController.mainController.getSubScenePane(),
+                    "/com/uned/clientedatamujer/views/subscene/new-participation-subscene.fxml",
+                    parentController.mainController,
+                    parentController.rootPane,
+                    parentController.snackBarInfo
+            );
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }

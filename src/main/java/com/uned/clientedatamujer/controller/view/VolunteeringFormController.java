@@ -106,7 +106,7 @@ public class VolunteeringFormController implements BaseFormController<Volunteeri
 
     private boolean verifyDates(LocalDate date){return date == null;}
 
-    public void deleteActivity(ActionEvent event) {
+    public void deleteForm(ActionEvent event) {
         if (root != null && root.getParent() instanceof VBox vbox) {
             vbox.getChildren().remove(root);
         }

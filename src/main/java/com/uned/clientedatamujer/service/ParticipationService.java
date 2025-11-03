@@ -1,9 +1,12 @@
 package com.uned.clientedatamujer.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.uned.clientedatamujer.dto.SimplePage;
+import com.uned.clientedatamujer.dto.request.ParticipationWrapperDTO;
 import com.uned.clientedatamujer.dto.response.ParticipationDTO;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
 
@@ -20,6 +23,21 @@ public class ParticipationService extends BaseHttpClient{
                 .build();
 
         return sendRequest(request, ParticipationDTO.class);
+    }
+
+    public Object createParticipations(String accessJwt, ParticipationWrapperDTO dto) throws IOException {
+        String url = URL + "/participation/multiple";
+
+        String json = objectMapper.writeValueAsString(dto);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .build();
+
+        return sendRequest(request, Void.class);
     }
 
     public Object getMyParticipation(String accessJwt, int page){

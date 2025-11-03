@@ -34,13 +34,6 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
     private ActivityDTO data;
 
     @FXML
-    private void initialize(){
-        btnMultipleParticipation.setVisible(!AuthSession.getRole().equals("ROLE_STANDARD"));
-        btnMultipleParticipation.setManaged(!AuthSession.getRole().equals("ROLE_STANDARD"));
-    }
-
-
-    @FXML
     private void deleteActivity(ActionEvent event) {
         var service = new ActivityService();
         parentController.mainController.executeCall(
@@ -109,6 +102,8 @@ public class ActivityCardController implements BaseCardController<ActivityDTO>{
             btnVolunteering.setManaged(false);
             btnDelete.setVisible(false);
             btnDelete.setManaged(false);
+            btnMultipleParticipation.setVisible(false);
+            btnMultipleParticipation.setManaged(false);
         }
     }
 

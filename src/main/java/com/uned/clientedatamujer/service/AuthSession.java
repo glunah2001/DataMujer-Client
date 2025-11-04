@@ -23,6 +23,8 @@ public class AuthSession {
 
     public static String getPersonType(){return getClaim("personType");}
 
+    public static boolean noSession(){return tokens == null;}
+
     public static LocalDateTime getExpiration(){
         var expEpoch = decode().getClaim("exp").asLong();
         return LocalDateTime.ofInstant(

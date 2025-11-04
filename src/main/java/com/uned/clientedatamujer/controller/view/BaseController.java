@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXSnackbar;
 import com.uned.clientedatamujer.controller.util.ThrowingSupplier;
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.dto.ApiError;
+import com.uned.clientedatamujer.service.TokenRefresher;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.scene.layout.StackPane;
@@ -24,6 +25,7 @@ public abstract class BaseController {
             String errorTitle
     ){
         showLoading();
+        TokenRefresher.refreshIfNeeded();
         runAsync(() ->{
             try{
                 Object response = serviceCall.get();

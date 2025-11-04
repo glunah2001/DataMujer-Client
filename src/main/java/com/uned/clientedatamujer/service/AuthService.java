@@ -46,6 +46,18 @@ public class AuthService extends BaseHttpClient{
         return sendRequest(request, TokenResponse.class);
     }
 
+    public Object refresh() {
+        String url = URL + "/auth/refresh";
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .header("Content-Type", "application/json")
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getRefreshToken())
+                .build();
+        return sendRequest(request, TokenResponse.class);
+    }
+
     public void logout(String accessJwt){
         String url = URL + "/auth/logout";
 

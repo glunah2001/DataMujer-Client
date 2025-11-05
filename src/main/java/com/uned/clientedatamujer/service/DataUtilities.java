@@ -38,6 +38,12 @@ public class DataUtilities {
 
     public static void clearVolunteeringDTO(){setLastVolunteeringDTO(null);}
 
+    public static void clearAll() {
+        if(lastActivityDTO != null) clearActivityDTO();
+        if(lastVolunteeringDTO != null) clearVolunteeringDTO();
+        if(lastPaymentDTO != null) clearPaymentDTO();
+    }
+
     public static SimplePage<PhysicalPersonDTO> mapToPhysicalProfile(SimplePage<NoPoliPhysicalPersonDTO> plainPage) {
         List<PhysicalPersonDTO> dtos = plainPage.content().stream()
                 .map(p -> new PhysicalPersonDTO(

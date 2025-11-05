@@ -58,17 +58,18 @@ public class AuthService extends BaseHttpClient{
         return sendRequest(request, TokenResponse.class);
     }
 
-    public void logout(String accessJwt){
+    public void logout(){
         String url = URL + "/auth/logout";
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         AuthSession.clear();
+        DataUtilities.clearAll();
 
         sendRequest(request, Void.class);
     }

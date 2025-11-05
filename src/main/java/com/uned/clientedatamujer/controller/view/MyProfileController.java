@@ -105,7 +105,7 @@ public class MyProfileController extends BaseController{
 
     @FXML
     private void logout(ActionEvent event) {
-        authService.logout(AuthSession.getAccessToken());
+        authService.logout();
         try {
             SceneManager.toLogIn();
         } catch (IOException e) {

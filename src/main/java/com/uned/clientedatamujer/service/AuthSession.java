@@ -1,6 +1,5 @@
 package com.uned.clientedatamujer.service;
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.uned.clientedatamujer.dto.token.TokenResponse;
 
@@ -13,17 +12,21 @@ public class AuthSession {
 
     public static void setTokens(TokenResponse tokens) {AuthSession.tokens = tokens;}
 
-    public static String getAccessToken(){return tokens.accessToken();}
+    public static void clear(){tokens = null;}
 
-    public static String getRefreshToken(){return tokens.refreshToken();}
+    public static boolean noSession(){return tokens == null;}
+
+    public static String getAccessToken(){
+        return noSession() ? "" : tokens.accessToken();
+    }
+
+    public static String getRefreshToken(){return noSession() ? "" : tokens.refreshToken();}
 
     public static String getSubject(){return decode().getSubject();}
 
     public static String getRole(){return getClaim("role");}
 
     public static String getPersonType(){return getClaim("personType");}
-
-    public static boolean noSession(){return tokens == null;}
 
     public static LocalDateTime getExpiration(){
         var expEpoch = decode().getClaim("exp").asLong();
@@ -32,8 +35,6 @@ public class AuthSession {
                 ZoneId.systemDefault()
         );
     }
-
-    public static void clear(){tokens = null;}
 
     private static DecodedJWT decode(){
         return JWT.decode(AuthSession.tokens.accessToken());

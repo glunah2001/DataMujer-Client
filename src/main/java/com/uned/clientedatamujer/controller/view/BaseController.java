@@ -1,6 +1,7 @@
 package com.uned.clientedatamujer.controller.view;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.controller.util.ThrowingSupplier;
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.dto.ApiError;
@@ -10,6 +11,7 @@ import javafx.application.Platform;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -32,8 +34,11 @@ public abstract class BaseController {
                 if(response instanceof ApiError error){
                     runLater(()->{
                         handleApiError(error, errorTitle);
-                        if(onError != null)onError.accept(error);
-                        else hideLoading();
+                        if(error.status() != 401 && error.status() != 403
+                                && error.status() != 500 && error.status() != 502){
+                            if(onError != null) onError.accept(error);
+                            else hideLoading();
+                        }
                     });
                 }else{
                     T data = (T) response;
@@ -111,5 +116,17 @@ public abstract class BaseController {
 
         String message = error.error() + ": " + error.message();
         showErrorSnackBar(message);
+
+        if (error.status() == 401 || error.status() == 403 ||
+                error.status() == 500 || error.status() == 502) {
+            withDelay(4, () -> {
+                try {
+                    hideLoading();
+                    SceneManager.toLogIn();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 }

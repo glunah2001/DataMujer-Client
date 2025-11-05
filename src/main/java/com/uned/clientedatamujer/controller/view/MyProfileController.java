@@ -66,12 +66,13 @@ public class MyProfileController extends BaseController{
         snackBarInfo = new JFXSnackbar(rootPane);
         setRootPane(rootPane);
         setSnackBarInfo(snackBarInfo);
-        showLoading();
         ComponentInitializer.initializeCountry(comboBoxCountry);
         ComponentInitializer.initializePhone(txtPhone);
         prepareSceneElements();
+        //showLoading();
+
         getData();
-        hideLoading();
+        //hideLoading();
     }
 
     @FXML
@@ -177,6 +178,7 @@ public class MyProfileController extends BaseController{
             }
         }
         btnUpdateProfile.setDisable(false);
+        hideLoading();
     }
 
     private void sendUpdateRequest(Object dto){

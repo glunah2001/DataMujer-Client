@@ -15,16 +15,24 @@ module com.uned.clientedatamujer {
     opens com.uned.clientedatamujer to javafx.fxml;
     exports com.uned.clientedatamujer;
     exports com.uned.clientedatamujer.controller.util;
-    exports com.uned.clientedatamujer.controller.view;
+    exports com.uned.clientedatamujer.controller.view.base;
+    exports com.uned.clientedatamujer.controller.view.scene;
+    exports com.uned.clientedatamujer.controller.view.subscene;
+    exports com.uned.clientedatamujer.controller.view.card;
+    exports com.uned.clientedatamujer.controller.view.form;
     exports com.uned.clientedatamujer.enums;
     exports com.uned.clientedatamujer.dto.request;
     exports com.uned.clientedatamujer.dto.response;
     exports com.uned.clientedatamujer.dto to com.fasterxml.jackson.databind;
 
-    opens com.uned.clientedatamujer.controller.view to javafx.fxml;
     opens com.uned.clientedatamujer.controller.util to javafx.fxml;
     opens com.uned.clientedatamujer.dto.authentication to com.fasterxml.jackson.databind;
     opens com.uned.clientedatamujer.dto.request to com.fasterxml.jackson.databind;
     opens com.uned.clientedatamujer.dto.response to com.fasterxml.jackson.databind;
     opens com.uned.clientedatamujer.dto.token to com.fasterxml.jackson.databind;
+    opens com.uned.clientedatamujer.controller.view.base to javafx.fxml;
+    opens com.uned.clientedatamujer.controller.view.scene to javafx.fxml;
+    opens com.uned.clientedatamujer.controller.view.subscene to javafx.fxml;
+    opens com.uned.clientedatamujer.controller.view.card to javafx.fxml;
+    opens com.uned.clientedatamujer.controller.view.form to javafx.fxml;
 }

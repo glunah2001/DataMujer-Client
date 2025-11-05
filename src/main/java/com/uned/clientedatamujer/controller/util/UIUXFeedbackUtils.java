@@ -18,34 +18,26 @@ import java.util.Optional;
 
 public class UIUXFeedbackUtils {
 
-    private static StackPane overlayPane;
+    private static StackPane rootPane;
+    private static JFXSnackbar snackbar;
 
-    private static void showSnackbar(String message, JFXSnackbar snackbar, String BgColor, String txtColor){
-        Label text = new Label(message);
-        text.setStyle("-fx-text-fill: "+txtColor+"; -fx-font-size: 14px;");
+    public static StackPane getRootPane() {return rootPane;}
 
-        StackPane container = new StackPane(text);
-        container.setStyle("-fx-background-color: "+BgColor+"; "
-                + "-fx-padding: 12px 24px; "
-                + "-fx-background-radius: 8px;");
+    public static JFXSnackbar getSnackbar() {return snackbar;}
 
-        snackbar.enqueue(
-                new JFXSnackbar.SnackbarEvent(
-                        container,
-                        javafx.util.Duration.seconds(3)
-                )
-        );
+    public static void setRootPane(StackPane rootPane) {UIUXFeedbackUtils.rootPane = rootPane;}
+
+    public static void setSnackbar(JFXSnackbar snackbar) {UIUXFeedbackUtils.snackbar = snackbar;}
+
+    public static void showErrorSnackbar(String message){
+        showSnackbar(message, "#D32F2F", "white");
     }
 
-    public static void errorSnackbar(String message, JFXSnackbar snackbar){
-        showSnackbar(message, snackbar, "#D32F2F", "white");
+    public static void showSuccessSnackbar(String message){
+        showSnackbar(message, "#48B458", "black");
     }
 
-    public static void successSnackbar(String message, JFXSnackbar snackbar){
-        showSnackbar(message, snackbar, "#48B458", "black");
-    }
-
-    public static void showLoadingOverlay(StackPane rootPane){
+    public static void showLoading(){
         Optional<Node> existingOverlay = rootPane.getChildren().stream()
                 .filter(node -> "overlay-pane".equals(node.getId()))
                 .findFirst();
@@ -69,13 +61,13 @@ public class UIUXFeedbackUtils {
         Platform.runLater(() -> rootPane.getChildren().add(overlay));
     }
 
-    public static void hideLoadingOverlay(StackPane rootPane){
+    public static void hideLoading(){
         Platform.runLater(() ->
                 rootPane.getChildren().removeIf(node -> "overlay-pane".equals(node.getId()))
         );
     }
 
-    public static void showErrorDialog(StackPane rootPane, String title, String message) {
+    public static void showErrorDialog(String title, String message) {
         VBox content = new VBox(15);
         content.setAlignment(Pos.CENTER_LEFT);
         content.setPadding(new Insets(20));
@@ -114,5 +106,23 @@ public class UIUXFeedbackUtils {
 
         dialog.show();
     }
+
+    private static void showSnackbar(String message, String BgColor, String txtColor){
+        Label text = new Label(message);
+        text.setStyle("-fx-text-fill: "+txtColor+"; -fx-font-size: 14px;");
+
+        StackPane container = new StackPane(text);
+        container.setStyle("-fx-background-color: "+BgColor+"; "
+                + "-fx-padding: 12px 24px; "
+                + "-fx-background-radius: 8px;");
+
+        snackbar.enqueue(
+                new JFXSnackbar.SnackbarEvent(
+                        container,
+                        javafx.util.Duration.seconds(3)
+                )
+        );
+    }
+
 
 }

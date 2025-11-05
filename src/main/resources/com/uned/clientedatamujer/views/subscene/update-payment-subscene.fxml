@@ -16,7 +16,7 @@
 
 <AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@../../stylesheet/style.css"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.uned.clientedatamujer.controller.view.PaymentUpdateController">
+            fx:controller="com.uned.clientedatamujer.controller.view.subscene.PaymentUpdateController">
     <children>
       <GridPane layoutX="321.0" layoutY="140.0" style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@../../stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.view.NewVolunteeringController">
+<AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@../../stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.view.subscene.NewVolunteeringController">
     <children>
         <GridPane layoutX="395.0" layoutY="204.0" style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane fx:id="rootPane" prefHeight="720.0" prefWidth="1080.0" styleClass="grid-background" stylesheets="@../../stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.view.LoginController">
+<StackPane fx:id="rootPane" prefHeight="720.0" prefWidth="1080.0" styleClass="grid-background" stylesheets="@../../stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.view.scene.LoginController">
    <JFXSnackbar fx:id="snackBarInfo" />
 <GridPane prefHeight="720.0" prefWidth="1080.0" styleClass="grid-background" stylesheets="@../../stylesheet/style.css">
     <columnConstraints>

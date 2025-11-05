@@ -20,7 +20,7 @@
 
 <AnchorPane style="-fx-background-color: TRANSPARENT;" stylesheets="@../../stylesheet/style.css"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.uned.clientedatamujer.controller.view.PaymentController">
+            fx:controller="com.uned.clientedatamujer.controller.view.subscene.PaymentController">
     <children>
       <GridPane style="-fx-background-color: TRANSPARENT;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>

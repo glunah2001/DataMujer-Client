@@ -241,4 +241,8 @@ public class ComponentInitializer {
     private static void configureNormalTextField(TextField textField) {
         textField.setTextFormatter(null);
     }
+
+    public static <T> boolean isComboBoxValueNull(ComboBox<T> combo){
+        return combo.getValue() == null;
+    }
 }

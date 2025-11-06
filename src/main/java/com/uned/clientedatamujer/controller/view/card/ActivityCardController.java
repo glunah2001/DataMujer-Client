@@ -63,9 +63,7 @@ public class ActivityCardController implements BaseCardController<ActivityDTO> {
             SceneManager.loadSubScene(
                     parentController.getMainController().getSubScenePane(),
                     "/com/uned/clientedatamujer/views/subscene/new-volunteering-subscene.fxml",
-                    parentController.getMainController(),
-                    parentController.getRootPane(),
-                    parentController.getSnackBarInfo()
+                    parentController.getMainController()
             );
         }catch(IOException e){
             e.printStackTrace();
@@ -140,9 +138,7 @@ public class ActivityCardController implements BaseCardController<ActivityDTO> {
             SceneManager.loadSubScene(
                     parentController.getMainController().getSubScenePane(),
                     "/com/uned/clientedatamujer/views/subscene/new-participation-subscene.fxml",
-                    parentController.getMainController(),
-                    parentController.getRootPane(),
-                    parentController.getSnackBarInfo()
+                    parentController.getMainController()
             );
         }catch(IOException e){
             e.printStackTrace();

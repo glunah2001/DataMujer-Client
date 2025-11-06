@@ -47,9 +47,7 @@ public class SceneManager {
 
     public static void loadSubScene(StackPane subScenePane,
                                     String fxml,
-                                    MainController mainController,
-                                    StackPane rootPane,
-                                    JFXSnackbar snackbar) throws IOException {
+                                    MainController mainController) throws IOException {
         FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxml));
         Parent root = loader.load();
 
@@ -58,8 +56,6 @@ public class SceneManager {
         //cargar controlador
         BaseSubSceneController controller = loader.getController();
         controller.setMainController(mainController);
-        controller.setRootPane(rootPane);
-        controller.setSnackBarInfo(snackbar);
 
         subScenePane.getChildren().add(root);
     }

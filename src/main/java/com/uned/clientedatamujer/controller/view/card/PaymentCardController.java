@@ -53,9 +53,7 @@ public class PaymentCardController implements BaseCardController<PaymentDTO> {
             DataUtilities.setLastPaymentDTO(data);
             SceneManager.loadSubScene(parentController.getMainController().getSubScenePane(),
                     "/com/uned/clientedatamujer/views/subscene/update-payment-subscene.fxml",
-                    parentController.getMainController(),
-                    parentController.getRootPane(),
-                    parentController.getSnackBarInfo()
+                    parentController.getMainController()
             );
         } catch (IOException e) {
             e.printStackTrace();

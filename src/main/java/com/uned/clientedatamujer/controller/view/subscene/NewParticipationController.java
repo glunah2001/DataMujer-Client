@@ -74,9 +74,8 @@ public class NewParticipationController extends BaseSubSceneController {
                             DataUtilities.clearActivityDTO();
                             SceneManager.loadSubScene(mainController.getSubScenePane(),
                                     "/com/uned/clientedatamujer/views/subscene/activities-subscene.fxml",
-                                    mainController,
-                                    rootPane,
-                                    snackBarInfo);
+                                    mainController
+                            );
                         } catch (IOException e) {
                             UIUXFeedbackUtils.showErrorSnackbar("Ocurrió una corrupción en los datos");
                         }

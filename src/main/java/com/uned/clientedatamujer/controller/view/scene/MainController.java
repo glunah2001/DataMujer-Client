@@ -87,9 +87,7 @@ public class MainController extends BaseController {
             SceneManager.loadSubScene(
                     SubScenePane,
                     "/com/uned/clientedatamujer/views/subscene/new-activity-subscene.fxml",
-                    this,
-                    rootPane,
-                    snackBarInfo
+                    this
             );
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,9 +100,7 @@ public class MainController extends BaseController {
             SceneManager.loadSubScene(
                     SubScenePane,
                     "/com/uned/clientedatamujer/views/subscene/activities-subscene.fxml",
-                    this,
-                    rootPane,
-                    snackBarInfo
+                    this
             );
         }catch(IOException e) {
             e.printStackTrace();
@@ -117,9 +113,7 @@ public class MainController extends BaseController {
             SceneManager.loadSubScene(
                     SubScenePane,
                     "/com/uned/clientedatamujer/views/subscene/volunteering-subscene.fxml",
-                    this,
-                    rootPane,
-                    snackBarInfo
+                    this
             );
         }catch(IOException e) {
             e.printStackTrace();
@@ -132,9 +126,7 @@ public class MainController extends BaseController {
             SceneManager.loadSubScene(
                     SubScenePane,
                     "/com/uned/clientedatamujer/views/subscene/participations-subscene.fxml",
-                    this,
-                    rootPane,
-                    snackBarInfo
+                    this
             );
         }catch(IOException e) {
             e.printStackTrace();
@@ -147,9 +139,7 @@ public class MainController extends BaseController {
             SceneManager.loadSubScene(
                     SubScenePane,
                     "/com/uned/clientedatamujer/views/subscene/new-payment-subscene.fxml",
-                    this,
-                    rootPane,
-                    snackBarInfo
+                    this
             );
         }catch(IOException e) {
             e.printStackTrace();
@@ -162,9 +152,7 @@ public class MainController extends BaseController {
             SceneManager.loadSubScene(
                     SubScenePane,
                     "/com/uned/clientedatamujer/views/subscene/payment-subscene.fxml",
-                    this,
-                    rootPane,
-                    snackBarInfo
+                    this
             );
         }catch(IOException e) {
             e.printStackTrace();
@@ -177,9 +165,7 @@ public class MainController extends BaseController {
             SceneManager.loadSubScene(
                     SubScenePane,
                     "/com/uned/clientedatamujer/views/subscene/admin-subscene.fxml",
-                    this,
-                    rootPane,
-                    snackBarInfo
+                    this
             );
         }catch(IOException e) {
             e.printStackTrace();

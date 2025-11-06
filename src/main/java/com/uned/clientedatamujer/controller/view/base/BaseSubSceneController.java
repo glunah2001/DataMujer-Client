@@ -13,24 +13,10 @@ import java.io.IOException;
 public abstract class BaseSubSceneController {
 
     protected MainController mainController;
-    protected StackPane rootPane;
-    protected JFXSnackbar snackBarInfo;
 
     public MainController getMainController() {return mainController;}
 
-    public StackPane getRootPane() {return rootPane;}
-
-    public JFXSnackbar getSnackBarInfo() {return snackBarInfo;}
-
     public void setMainController(MainController mainController) {this.mainController = mainController;}
-
-    public void setRootPane(StackPane rootPane) {
-        this.rootPane = rootPane;
-    }
-
-    public void setSnackBarInfo(JFXSnackbar snackBarInfo) {
-        this.snackBarInfo = snackBarInfo;
-    }
 
     public <T> void setCard(String fxml, VBox vBox, T content, BaseSubSceneController parent){
         try {

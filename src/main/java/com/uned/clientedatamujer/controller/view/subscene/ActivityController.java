@@ -29,11 +29,12 @@ public class ActivityController extends BaseSubSceneController {
     private VBox VBoxActivities;
     private final ActivityService service = new ActivityService();
 
-    private int currentPage;
-
     @FXML
     private void initialize(){
         ComponentInitializer.configureLongOnlyTextField(txtID);
+        setPrev(btnPrev);
+        setNext(btnNext);
+        setVBox(VBoxActivities);
         Platform.runLater(() -> {
             DataUtilities.clearAll();
             currentPage = 0;
@@ -100,25 +101,7 @@ public class ActivityController extends BaseSubSceneController {
         );
     }
 
-    private void allowPageableButtons(int currentPage, int totalPages){
-        this.currentPage = currentPage;
-        if(totalPages == 0){
-            btnNext.setVisible(false);
-            btnNext.setManaged(false);
-            btnPrev.setVisible(false);
-            btnPrev.setManaged(false);
-            return;
-        }
-
-        boolean allowNext = currentPage < totalPages-1;
-        boolean allowPrev = currentPage > 0;
-
-        btnNext.setVisible(allowNext);
-        btnNext.setManaged(allowNext);
-        btnPrev.setVisible(allowPrev);
-        btnPrev.setManaged(allowPrev);
-    }
-
+    @Override
     public void refreshCurrentPage() {
         getPageData();
     }

@@ -43,6 +43,12 @@ public class VolunteeringController extends BaseSubSceneController {
         if(AuthSession.getRole().equals("ROLE_MENTOR")){
             comboBoxSearchType.getItems().remove("ID");
         }
+
+        setPrev(btnPrev);
+        setNext(btnNext);
+        setPrint(btnPrint);
+        setVBox(VBoxVolunteering);
+
         Platform.runLater(() -> {
             DataUtilities.clearAll();
             currentPage = 0;
@@ -125,36 +131,6 @@ public class VolunteeringController extends BaseSubSceneController {
         getPageDataMyPending();
     }
 
-    private void allowPageableButtons(int currentPage, int totalPages){
-        this.currentPage = currentPage;
-        if(totalPages == 0){
-            btnNext.setVisible(false);
-            btnNext.setManaged(false);
-            btnPrev.setVisible(false);
-            btnPrev.setManaged(false);
-            return;
-        }
-
-        boolean allowNext = currentPage < totalPages-1;
-        boolean allowPrev = currentPage > 0;
-
-        btnNext.setVisible(allowNext);
-        btnNext.setManaged(allowNext);
-        btnPrev.setVisible(allowPrev);
-        btnPrev.setManaged(allowPrev);
-    }
-
-    private void allowPrintButtons(boolean allow){
-        if(!Objects.equals(AuthSession.getRole(), "ROLE_ADMIN")) return;
-        if(allow && VBoxVolunteering.getChildren().isEmpty()){
-            btnPrint.setVisible(false);
-            btnPrint.setManaged(false);
-            return;
-        }
-        btnPrint.setVisible(allow);
-        btnPrint.setManaged(allow);
-    }
-
     @FXML
     private void searchVolunteering(ActionEvent event) {
         String id = txtId.getText().trim();
@@ -177,6 +153,7 @@ public class VolunteeringController extends BaseSubSceneController {
         ReportService.genReportVolunteering();
     }
 
+    @Override
     public void refreshCurrentPage() {
         getPageDataMyPending();
     }

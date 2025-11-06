@@ -1,4 +1,5 @@
 package com.uned.clientedatamujer.controller.view.card;
+
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseCardController;
 import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;

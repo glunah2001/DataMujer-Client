@@ -1,6 +1,5 @@
 package com.uned.clientedatamujer.controller.util;
 
-import com.jfoenix.controls.JFXSnackbar;
 import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.controller.view.scene.MainController;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +52,6 @@ public class SceneManager {
 
         subScenePane.getChildren().clear();
 
-        //cargar controlador
         BaseSubSceneController controller = loader.getController();
         controller.setMainController(mainController);
 

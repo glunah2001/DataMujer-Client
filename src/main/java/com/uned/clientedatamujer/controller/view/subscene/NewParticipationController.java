@@ -106,4 +106,7 @@ public class NewParticipationController extends BaseSubSceneController {
                 String.class
         );
     }
+
+    @Override
+    protected void refreshCurrentPage() {}
 }

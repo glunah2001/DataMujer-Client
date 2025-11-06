@@ -197,4 +197,7 @@ public class NewVolunteeringController extends BaseSubSceneController {
     public boolean isToggleActive(){
         return toggleVolunteeringType.isSelected();
     }
+
+    @Override
+    protected void refreshCurrentPage() {}
 }

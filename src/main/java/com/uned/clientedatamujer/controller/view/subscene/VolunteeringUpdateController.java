@@ -131,4 +131,6 @@ public class VolunteeringUpdateController extends BaseSubSceneController {
         return new VolunteeringUpdateDTO(startShift, endShift, txtRole.getText().trim());
     }
 
+    @Override
+    protected void refreshCurrentPage() {}
 }

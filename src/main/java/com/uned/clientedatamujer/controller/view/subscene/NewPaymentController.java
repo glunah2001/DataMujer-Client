@@ -152,4 +152,7 @@ public class NewPaymentController extends BaseSubSceneController {
         txtTotalAmount.clear();
         txtDescription.clear();
     }
+
+    @Override
+    protected void refreshCurrentPage() {}
 }

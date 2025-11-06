@@ -38,6 +38,9 @@ public class AdminController extends BaseSubSceneController {
     private void initialize(){
         ComponentInitializer.initializeParam(txtParam, comboBoxParamType);
         DataUtilities.clearAll();
+        setPrev(btnPrev);
+        setNext(btnNext);
+        setVBox(VBoxUser);
         allowPageableButtons(0,0);
     }
 
@@ -170,25 +173,6 @@ public class AdminController extends BaseSubSceneController {
         );
     }
 
-    private void allowPageableButtons(int currentPage, int totalPages){
-        this.currentPage = currentPage;
-        if(totalPages == 0){
-            btnNext.setVisible(false);
-            btnNext.setManaged(false);
-            btnPrev.setVisible(false);
-            btnPrev.setManaged(false);
-            return;
-        }
-
-        boolean allowNext = currentPage < totalPages-1;
-        boolean allowPrev = currentPage > 0;
-
-        btnNext.setVisible(allowNext);
-        btnNext.setManaged(allowNext);
-        btnPrev.setVisible(allowPrev);
-        btnPrev.setManaged(allowPrev);
-    }
-
     @FXML
     private void showPrevious(ActionEvent event) {
         resetToPreviousSearch();
@@ -203,6 +187,7 @@ public class AdminController extends BaseSubSceneController {
         searchUser(null);
     }
 
+    @Override
     public void refreshCurrentPage() {
         resetToPreviousSearch();
         searchUser(null);

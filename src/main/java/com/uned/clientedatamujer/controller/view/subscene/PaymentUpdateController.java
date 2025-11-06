@@ -104,4 +104,6 @@ public class PaymentUpdateController extends BaseSubSceneController {
         return true;
     }
 
+    @Override
+    protected void refreshCurrentPage() {}
 }

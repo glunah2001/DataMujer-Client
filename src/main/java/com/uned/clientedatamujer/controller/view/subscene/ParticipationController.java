@@ -54,6 +54,10 @@ public class ParticipationController extends BaseSubSceneController {
         }else if(AuthSession.getRole().equals("ROLE_MENTOR")){
             comboBoxSearchType.getItems().remove("ID");
         }
+        setPrev(btnPrev);
+        setNext(btnNext);
+        setVBox(VBoxParticipations);
+        setPrint(btnPrint);
         Platform.runLater(() -> {
             DataUtilities.clearAll();
             currentPage = 0;
@@ -153,25 +157,7 @@ public class ParticipationController extends BaseSubSceneController {
         );
     }
 
-    private void allowPageableButtons(int currentPage, int totalPages){
-        this.currentPage = currentPage;
-        if(totalPages == 0){
-            btnNext.setVisible(false);
-            btnNext.setManaged(false);
-            btnPrev.setVisible(false);
-            btnPrev.setManaged(false);
-            return;
-        }
-
-        boolean allowNext = currentPage < totalPages-1;
-        boolean allowPrev = currentPage > 0;
-
-        btnNext.setVisible(allowNext);
-        btnNext.setManaged(allowNext);
-        btnPrev.setVisible(allowPrev);
-        btnPrev.setManaged(allowPrev);
-    }
-
+    @Override
     public void refreshCurrentPage() {
         getPageDataMyPending(currentPage);
     }
@@ -179,16 +165,5 @@ public class ParticipationController extends BaseSubSceneController {
     @FXML
     private void showPrint(ActionEvent event) {
         ReportService.genReportParticipation();
-    }
-
-    private void allowPrintButtons(boolean allow){
-        if(!Objects.equals(AuthSession.getRole(), "ROLE_ADMIN")) return;
-        if(allow && VBoxParticipations.getChildren().isEmpty()){
-            btnPrint.setVisible(false);
-            btnPrint.setManaged(false);
-            return;
-        }
-        btnPrint.setVisible(allow);
-        btnPrint.setManaged(allow);
     }
 }

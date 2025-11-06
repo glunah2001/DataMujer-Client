@@ -111,4 +111,7 @@ public class NewActivityController extends BaseSubSceneController {
         txtDescription.clear();
         txtLocation.clear();
     }
+
+    @Override
+    protected void refreshCurrentPage() {}
 }

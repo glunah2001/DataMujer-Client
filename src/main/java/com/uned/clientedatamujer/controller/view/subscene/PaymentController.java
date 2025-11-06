@@ -48,6 +48,11 @@ public class PaymentController extends BaseSubSceneController {
         ComponentInitializer.configureLongOnlyTextField(txtId);
         onlyAdminPaymentSearchOptions();
 
+        setPrev(btnPrev);
+        setNext(btnNext);
+        setPrint(btnPrint);
+        setVBox(VBoxPayment);
+
         Platform.runLater(() -> {
             DataUtilities.clearAll();
             currentPage = 0;
@@ -197,25 +202,6 @@ public class PaymentController extends BaseSubSceneController {
         );
     }
 
-    private void allowPageableButtons(int currentPage, int totalPages){
-        this.currentPage = currentPage;
-        if(totalPages == 0){
-            btnNext.setVisible(false);
-            btnNext.setManaged(false);
-            btnPrev.setVisible(false);
-            btnPrev.setManaged(false);
-            return;
-        }
-
-        boolean allowNext = currentPage < totalPages-1;
-        boolean allowPrev = currentPage > 0;
-
-        btnNext.setVisible(allowNext);
-        btnNext.setManaged(allowNext);
-        btnPrev.setVisible(allowPrev);
-        btnPrev.setManaged(allowPrev);
-    }
-
     private void onlyAdminPaymentSearchOptions(){
         if(!AuthSession.getRole().equals("ROLE_ADMIN")){
             toggleState.setVisible(false);
@@ -232,17 +218,7 @@ public class PaymentController extends BaseSubSceneController {
         }
     }
 
-    private void allowPrintButtons(boolean allow){
-        if(!Objects.equals(AuthSession.getRole(), "ROLE_ADMIN")) return;
-        if(allow && VBoxPayment.getChildren().isEmpty()){
-            btnPrint.setVisible(false);
-            btnPrint.setManaged(false);
-            return;
-        }
-        btnPrint.setVisible(allow);
-        btnPrint.setManaged(allow);
-    }
-
+    @Override
     public void refreshCurrentPage() {
         searchPayment(null);
     }

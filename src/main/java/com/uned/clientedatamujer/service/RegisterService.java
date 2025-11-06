@@ -1,4 +1,5 @@
 package com.uned.clientedatamujer.service;
+
 import com.uned.clientedatamujer.dto.request.LegalPersonRegisterDTO;
 import com.uned.clientedatamujer.dto.request.PhysicalPersonRegisterDTO;
 

@@ -1,6 +1,5 @@
 package com.uned.clientedatamujer.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.ParticipationWrapperDTO;

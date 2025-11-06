@@ -38,7 +38,7 @@ public class PaymentCardController implements BaseCardController<PaymentDTO> {
     @FXML
     private void deletePayment(ActionEvent event) {
         parentController.getMainController().executeCall(
-                () -> service.deletePayment(AuthSession.getAccessToken(), String.valueOf(data.id())),
+                () -> service.deletePayment(String.valueOf(data.id())),
                 (_) -> {
                     UIUXFeedbackUtils.showSuccessSnackbar("Pago eliminado exitosamente");
                     if(parentController instanceof PaymentController paymentController)
@@ -63,7 +63,7 @@ public class PaymentCardController implements BaseCardController<PaymentDTO> {
     @FXML
     private void unpay(ActionEvent event) {
         parentController.getMainController().executeCall(
-                () -> service.unpay(AuthSession.getAccessToken(), String.valueOf(data.id())),
+                () -> service.unpay(String.valueOf(data.id())),
                 (PaymentDTO dto) -> {
                     UIUXFeedbackUtils.showSuccessSnackbar("Pago #"+dto.id()+
                             " actualizado exitosamente a estado: PENDIENTE");

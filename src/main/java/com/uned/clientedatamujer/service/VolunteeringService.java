@@ -13,46 +13,46 @@ import java.net.http.HttpRequest;
 
 public class VolunteeringService extends BaseHttpClient{
 
-    public Object getVolunteeringById(String accessJwt, String id) {
+    public Object getVolunteeringById(String id) {
         String url = URL + "/volunteering?id="+id;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer " + accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, VolunteeringDTO.class);
     }
 
-    public Object getMyPendingVolunteering(String accessJwt, int page) {
+    public Object getMyPendingVolunteering(int page) {
         String url = URL + "/volunteering/me?page="+page;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, new TypeReference<SimplePage<VolunteeringDTO>>() {});
     }
 
-    public Object getVolunteeringInActivity(String accessJwt, String activityId, int page) {
+    public Object getVolunteeringInActivity(String activityId, int page) {
         String url = URL + "/volunteering/InActivity?activityId="+activityId+"&page="+page;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, new TypeReference<SimplePage<VolunteeringDTO>>() {});
     }
 
-    public Object createVolunteering(String accessJwt, BaseVolunteeringRegisterDTO dto) throws IOException {
+    public Object createVolunteering(BaseVolunteeringRegisterDTO dto) throws IOException {
         String url = URL + "/volunteering";
 
         String json = objectMapper.writeValueAsString(dto);
@@ -61,13 +61,13 @@ public class VolunteeringService extends BaseHttpClient{
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, VolunteeringDTO.class);
     }
 
-    public Object createVolunteering(String accessJwt, VolunteeringWrapperDTO dto) throws IOException {
+    public Object createVolunteering(VolunteeringWrapperDTO dto) throws IOException {
         String url = URL + "/volunteering/multiple";
 
         String json = objectMapper.writeValueAsString(dto);
@@ -76,26 +76,26 @@ public class VolunteeringService extends BaseHttpClient{
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, Void.class);
     }
 
-    public Object deleteVolunteering(String accessJwt, String id){
+    public Object deleteVolunteering(String id){
         String url = URL + "/volunteering?id="+id;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, Void.class);
     }
 
-    public Object updateVolunteering(String accessJwt, VolunteeringUpdateDTO dto, String id) throws IOException{
+    public Object updateVolunteering(VolunteeringUpdateDTO dto, String id) throws IOException{
         String url = URL + "/volunteering?id="+id;
 
         String json = objectMapper.writeValueAsString(dto);
@@ -104,7 +104,7 @@ public class VolunteeringService extends BaseHttpClient{
                 .uri(URI.create(url))
                 .PUT(HttpRequest.BodyPublishers.ofString(json))
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, VolunteeringDTO.class);

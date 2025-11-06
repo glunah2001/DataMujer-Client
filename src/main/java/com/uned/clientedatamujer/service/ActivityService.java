@@ -11,7 +11,7 @@ import java.net.http.HttpRequest;
 
 public class ActivityService extends BaseHttpClient{
 
-    public Object postActivity(ActivityRegisterDTO dto, String accessJwt) throws IOException {
+    public Object postActivity(ActivityRegisterDTO dto) throws IOException {
         String url = URL + "/activity";
 
         String json = objectMapper.writeValueAsString(dto);
@@ -20,46 +20,46 @@ public class ActivityService extends BaseHttpClient{
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, ActivityDTO.class);
     }
 
-    public Object getActivityById(String accessJwt, String id) {
+    public Object getActivityById(String id) {
         String url = URL + "/activity?id="+id;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer " + accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, ActivityDTO.class);
     }
 
-    public Object getNonFinishedActivities(String accessJwt, int page) {
+    public Object getNonFinishedActivities(int page) {
         String url = URL + "/activity/all?page="+page;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, new TypeReference<SimplePage<ActivityDTO>>() {});
     }
 
-    public Object deleteActivity(String accessJwt, String id){
+    public Object deleteActivity(String id){
         String url = URL + "/activity?id="+id;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .DELETE()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+accessJwt)
+                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, Void.class);

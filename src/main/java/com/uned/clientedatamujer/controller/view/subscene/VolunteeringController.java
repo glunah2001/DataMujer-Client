@@ -50,7 +50,7 @@ public class VolunteeringController extends BaseSubSceneController {
 
     private void getPageDataMyPending() {
         mainController.executeCall(
-                () -> service.getMyPendingVolunteering(AuthSession.getAccessToken(), currentPage),
+                () -> service.getMyPendingVolunteering(currentPage),
                 (SimplePage<VolunteeringDTO> simplePage) -> {
                     VBoxVolunteering.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
@@ -71,7 +71,7 @@ public class VolunteeringController extends BaseSubSceneController {
 
     private void getPageDataInActivity(String id) {
         mainController.executeCall(
-                () -> service.getVolunteeringInActivity(AuthSession.getAccessToken(), id, currentPage),
+                () -> service.getVolunteeringInActivity(id, currentPage),
                 (SimplePage<VolunteeringDTO> simplePage) -> {
                     VBoxVolunteering.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
@@ -93,7 +93,7 @@ public class VolunteeringController extends BaseSubSceneController {
     private void getSingleData(String id){
         VBoxVolunteering.getChildren().clear();
         mainController.executeCall(
-                () -> service.getVolunteeringById(AuthSession.getAccessToken(), id),
+                () -> service.getVolunteeringById(id),
                 (VolunteeringDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
@@ -172,7 +172,7 @@ public class VolunteeringController extends BaseSubSceneController {
         String id = txtId.getText().trim();
         if(id.isEmpty()) return;
         mainController.executeCall(
-                () -> service.getVolunteeringInActivity(AuthSession.getAccessToken(), id, currentPage),
+                () -> service.getVolunteeringInActivity(id, currentPage),
                 (SimplePage<VolunteeringDTO> simplePage) -> {
                     ReportService.genReportVolunteering(simplePage.content());
                     UIUXFeedbackUtils.hideLoading();

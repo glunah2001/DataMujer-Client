@@ -39,7 +39,7 @@ public class ActivityCardController implements BaseCardController<ActivityDTO> {
     private void deleteActivity(ActionEvent event) {
         var service = new ActivityService();
         parentController.getMainController().executeCall(
-                () -> service.deleteActivity(AuthSession.getAccessToken(), String.valueOf(data.id())),
+                () -> service.deleteActivity(String.valueOf(data.id())),
                 (_) -> {
                     UIUXFeedbackUtils.hideLoading();
                     UIUXFeedbackUtils.showSuccessSnackbar("Actividad eliminada exitosamente");
@@ -121,7 +121,7 @@ public class ActivityCardController implements BaseCardController<ActivityDTO> {
     private void createParticipation(){
         var service = new ParticipationService();
         parentController.getMainController().executeCall(
-                () -> service.createParticipation(AuthSession.getAccessToken(), data.id()),
+                () -> service.createParticipation(data.id()),
                 (ParticipationDTO dto) -> {
                     UIUXFeedbackUtils.hideLoading();
                     UIUXFeedbackUtils.showSuccessSnackbar(

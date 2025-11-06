@@ -60,7 +60,7 @@ public class NewActivityController extends BaseSubSceneController {
         var data = getData();
 
         mainController.executeCall(
-                () -> service.postActivity(data, AuthSession.getAccessToken()),
+                () -> service.postActivity(data),
                 (ActivityDTO dto) -> {
                     UIUXFeedbackUtils.hideLoading();
                     String message = String.format(

@@ -57,7 +57,7 @@ public class AdminController extends BaseSubSceneController {
 
     private void searchUserBySurnames(String param) {
         mainController.executeCall(
-                () -> service.getUserBySurname(AuthSession.getAccessToken(), currentPage, param),
+                () -> service.getUserBySurname(currentPage, param),
                 (SimplePage<NoPoliPhysicalPersonDTO> simplePage) -> {
                     clearVBox();
                     var response = DataUtilities.mapToPhysicalProfile(simplePage);
@@ -78,7 +78,7 @@ public class AdminController extends BaseSubSceneController {
 
     private void searchUserByBusiness(String param) {
         mainController.executeCall(
-                () -> service.getUserByBusiness(AuthSession.getAccessToken(), currentPage, param),
+                () -> service.getUserByBusiness(currentPage, param),
                 (SimplePage<NoPoliLegalPersonDTO> simplePage) -> {
                     clearVBox();
                     var response = DataUtilities.mapToLegalProfile(simplePage);
@@ -99,7 +99,7 @@ public class AdminController extends BaseSubSceneController {
 
     private void searchUserByName(String param) {
         mainController.executeCall(
-                () -> service.getUserByName(AuthSession.getAccessToken(), currentPage, param),
+                () -> service.getUserByName(currentPage, param),
                 (SimplePage<NoPoliPhysicalPersonDTO> simplePage) -> {
                     clearVBox();
                     var response = DataUtilities.mapToPhysicalProfile(simplePage);
@@ -121,7 +121,7 @@ public class AdminController extends BaseSubSceneController {
     private void searchUserByLegalId(String param) {
         clearVBox();
         mainController.executeCall(
-                () -> service.getUserByLegalId(AuthSession.getAccessToken(), param),
+                () -> service.getUserByLegalId(param),
                 (LegalPersonDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
@@ -138,7 +138,7 @@ public class AdminController extends BaseSubSceneController {
     private void searchUserByNationalId(String param) {
         clearVBox();
         mainController.executeCall(
-                () -> service.getUserByNationalId(AuthSession.getAccessToken(), param),
+                () -> service.getUserByNationalId(param),
                 (PhysicalPersonDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
@@ -155,7 +155,7 @@ public class AdminController extends BaseSubSceneController {
     private void searchUserByUsername(String param) {
         clearVBox();
         mainController.executeCall(
-                () -> service.getUserByUsername(AuthSession.getAccessToken(), param),
+                () -> service.getUserByUsername(param),
                 (ProfileDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(

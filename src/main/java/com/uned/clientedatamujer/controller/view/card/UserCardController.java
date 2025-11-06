@@ -46,7 +46,7 @@ public class UserCardController implements BaseCardController<ProfileDTO> {
     @FXML
     private void changeAffiliate(ActionEvent event) {
         parentController.getMainController().executeCall(
-                () -> service.updateAffiliate(AuthSession.getAccessToken(), getUsername()),
+                () -> service.updateAffiliate(getUsername()),
                 (String response) -> {
                     UIUXFeedbackUtils.hideLoading();
                     UIUXFeedbackUtils.showSuccessSnackbar(response);
@@ -61,7 +61,7 @@ public class UserCardController implements BaseCardController<ProfileDTO> {
     private void changeRole(ActionEvent event) {
         var index = comboBoxRole.getSelectionModel().getSelectedIndex();
         parentController.getMainController().executeCall(
-                () -> service.updateRole(AuthSession.getAccessToken(), getUsername(), String.valueOf(index)),
+                () -> service.updateRole(getUsername(), String.valueOf(index)),
                 (String response) -> {
                     UIUXFeedbackUtils.hideLoading();
                     UIUXFeedbackUtils.showSuccessSnackbar(response);

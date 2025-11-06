@@ -71,7 +71,7 @@ public class VolunteeringCardController implements BaseCardController<Volunteeri
     private void deleteVolunteering(ActionEvent event) {
         var service = new VolunteeringService();
         parentController.getMainController().executeCall(
-                () -> service.deleteVolunteering(AuthSession.getAccessToken(), String.valueOf(data.id())),
+                () -> service.deleteVolunteering(String.valueOf(data.id())),
                 (_) -> {
                     UIUXFeedbackUtils.showSuccessSnackbar("Voluntariado eliminada exitosamente");
                     if(parentController instanceof VolunteeringController volunteeringController)
@@ -84,7 +84,7 @@ public class VolunteeringCardController implements BaseCardController<Volunteeri
     private void updateVolunteering(ActionEvent event) {
         var service = new ActivityService();
         parentController.getMainController().executeCall(
-                () -> service.getActivityById(AuthSession.getAccessToken(), String.valueOf(data.activityId())),
+                () -> service.getActivityById(String.valueOf(data.activityId())),
                 (ActivityDTO dto) -> {
                     UIUXFeedbackUtils.hideLoading();
                     DataUtilities.setLastActivityDTO(dto);

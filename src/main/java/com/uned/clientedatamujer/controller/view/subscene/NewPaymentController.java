@@ -60,7 +60,7 @@ public class NewPaymentController extends BaseSubSceneController {
         var data = getData();
 
         mainController.executeCall(
-                () -> service.postPayment(data, AuthSession.getAccessToken()),
+                () -> service.postPayment(data),
                 (PaymentDTO dto) -> {
                     UIUXFeedbackUtils.hideLoading();
                     String message = String.format(

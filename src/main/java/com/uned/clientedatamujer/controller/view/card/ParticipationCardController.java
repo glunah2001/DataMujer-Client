@@ -98,7 +98,7 @@ public class ParticipationCardController implements BaseCardController<Participa
     @FXML
     private void deleteParticipation(ActionEvent event) {
         parentController.getMainController().executeCall(
-                () -> service.deleteParticipation(AuthSession.getAccessToken(), String.valueOf(data.id())),
+                () -> service.deleteParticipation(String.valueOf(data.id())),
                 (_) -> {
                     UIUXFeedbackUtils.showSuccessSnackbar("Participación eliminada exitosamente");
                     if(parentController instanceof ParticipationController participationController)
@@ -110,7 +110,7 @@ public class ParticipationCardController implements BaseCardController<Participa
     @FXML
     private void startParticipation(ActionEvent event) {
         parentController.getMainController().executeCall(
-                () -> service.startParticipation(AuthSession.getAccessToken(), String.valueOf(data.id())),
+                () -> service.startParticipation(String.valueOf(data.id())),
                 (_) -> {
                     UIUXFeedbackUtils.showSuccessSnackbar("Participación iniciada exitosamente");
                     if(parentController instanceof ParticipationController participationController)
@@ -122,7 +122,7 @@ public class ParticipationCardController implements BaseCardController<Participa
     @FXML
     private void cancelParticipation(ActionEvent event) {
         parentController.getMainController().executeCall(
-                () -> service.cancelParticipation(AuthSession.getAccessToken(), String.valueOf(data.id())),
+                () -> service.cancelParticipation(String.valueOf(data.id())),
                 (_) -> {
                     UIUXFeedbackUtils.showSuccessSnackbar("Participación cancelada exitosamente");
                     if(parentController instanceof ParticipationController participationController)

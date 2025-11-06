@@ -64,7 +64,7 @@ public class NewParticipationController extends BaseSubSceneController {
 
     private void sendData(ParticipationWrapperDTO dto){
         mainController.executeCall(
-                () -> service.createParticipations(AuthSession.getAccessToken(), dto),
+                () -> service.createParticipations(dto),
                 ( _) -> {
                     UIUXFeedbackUtils.showSuccessSnackbar("Participaciones insertadas exitosamente" +
                             " para la actividad #"+dto.activityId());

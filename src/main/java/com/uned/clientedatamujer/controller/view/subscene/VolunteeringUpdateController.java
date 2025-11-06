@@ -64,7 +64,7 @@ public class VolunteeringUpdateController extends BaseSubSceneController {
         }
         var dto = getData();
         mainController.executeCall(
-                () -> service.updateVolunteering(AuthSession.getAccessToken(), dto, txtID.getText()),
+                () -> service.updateVolunteering(dto, txtID.getText()),
                 (VolunteeringDTO response) ->{
                     UIUXFeedbackUtils.showSuccessSnackbar("Voluntariado #"+response.id()+" se ha actualizado, " +
                             "correctamente.");

@@ -90,7 +90,7 @@ public class ParticipationController extends BaseSubSceneController {
 
     private void getPageDataMyPending(int page) {
         mainController.executeCall(
-                () -> service.getMyParticipation(AuthSession.getAccessToken(), page),
+                () -> service.getMyParticipation(page),
                 (SimplePage<ParticipationDTO> simplePage) -> {
                     VBoxParticipations.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
@@ -111,7 +111,7 @@ public class ParticipationController extends BaseSubSceneController {
 
     private void getPageDataInActivity(int page, String id) {
         mainController.executeCall(
-                () -> service.getParticipationInActivity(AuthSession.getAccessToken(), id, page),
+                () -> service.getParticipationInActivity(id, page),
                 (SimplePage<ParticipationDTO> simplePage) -> {
                     VBoxParticipations.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
@@ -133,7 +133,7 @@ public class ParticipationController extends BaseSubSceneController {
     private void getSingleData(String id){
         VBoxParticipations.getChildren().clear();
         mainController.executeCall(
-                () -> service.getParticipationById(AuthSession.getAccessToken(), id),
+                () -> service.getParticipationById(id),
                 (ParticipationDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(
@@ -176,7 +176,7 @@ public class ParticipationController extends BaseSubSceneController {
         String id = txtId.getText().trim();
         if(id.isEmpty()) return;
         mainController.executeCall(
-                () -> service.getParticipationInActivity(AuthSession.getAccessToken(), id, currentPage),
+                () -> service.getParticipationInActivity(id, currentPage),
                 (SimplePage<ParticipationDTO> simplePage) -> {
                     ReportService.genReportParticipation(simplePage.content());
                     UIUXFeedbackUtils.hideLoading();

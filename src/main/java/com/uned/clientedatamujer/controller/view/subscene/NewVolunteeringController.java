@@ -127,7 +127,7 @@ public class NewVolunteeringController extends BaseSubSceneController {
 
     private void sendData(BaseVolunteeringRegisterDTO dto){
         mainController.executeCall(
-                () -> service.createVolunteering(AuthSession.getAccessToken(), dto),
+                () -> service.createVolunteering(dto),
                 (VolunteeringDTO response) ->{
                     UIUXFeedbackUtils.showSuccessSnackbar("Se ha insertado su voluntariado Id#"+response.id());
                     mainController.withDelay(4, () ->{
@@ -148,7 +148,7 @@ public class NewVolunteeringController extends BaseSubSceneController {
 
     private void sendData(VolunteeringWrapperDTO dto){
         mainController.executeCall(
-                () -> service.createVolunteering(AuthSession.getAccessToken(), dto),
+                () -> service.createVolunteering(dto),
                 (_) ->{
                     UIUXFeedbackUtils.showSuccessSnackbar("Voluntariados insertados exitosamente" +
                             " para la actividad #"+dto.activityId());

@@ -102,7 +102,7 @@ public class PaymentController extends BaseSubSceneController {
     @FXML
     private void showPrint(ActionEvent event) {
         mainController.executeCall(
-                () -> service.getAffiliateReport(AuthSession.getAccessToken(), currentPage),
+                () -> service.getAffiliateReport(currentPage),
                 (SimplePage<AffiliatesPaymentReportDTO> simplePage) -> {
                     ReportService.genReportAffiliate(simplePage.content());
                     UIUXFeedbackUtils.hideLoading();
@@ -113,7 +113,7 @@ public class PaymentController extends BaseSubSceneController {
     private void getPageDataAffiliate() {
         VBoxPayment.getChildren().clear();
         mainController.executeCall(
-                () -> service.getAffiliateReport(AuthSession.getAccessToken(), currentPage),
+                () -> service.getAffiliateReport(currentPage),
                 (SimplePage<AffiliatesPaymentReportDTO> simplePage) -> {
                     VBoxPayment.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
@@ -135,7 +135,7 @@ public class PaymentController extends BaseSubSceneController {
     private void getPageDataMyPayments(int currentPage){
         VBoxPayment.getChildren().clear();
         mainController.executeCall(
-                () -> service.getMyPayment(AuthSession.getAccessToken(), currentPage),
+                () -> service.getMyPayment(currentPage),
                 (SimplePage<PaymentDTO> simplePage) -> {
                     VBoxPayment.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
@@ -157,7 +157,7 @@ public class PaymentController extends BaseSubSceneController {
     private void getPageDataStatus(int currentPage){
         VBoxPayment.getChildren().clear();
         mainController.executeCall(
-                () -> service.getPaymentByStatus(AuthSession.getAccessToken(),
+                () -> service.getPaymentByStatus(
                         toggleState.isSelected(),
                         currentPage
                 ),
@@ -182,7 +182,7 @@ public class PaymentController extends BaseSubSceneController {
     private void getSingleData(String id){
         VBoxPayment.getChildren().clear();
         mainController.executeCall(
-                () -> service.getPaymentById(AuthSession.getAccessToken(), id),
+                () -> service.getPaymentById(id),
                 (PaymentDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(

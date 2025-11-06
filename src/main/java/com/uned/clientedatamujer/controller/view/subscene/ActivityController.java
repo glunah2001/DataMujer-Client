@@ -63,7 +63,7 @@ public class ActivityController extends BaseSubSceneController {
 
     private void getPageData(int page) {
         mainController.executeCall(
-                () -> service.getNonFinishedActivities(AuthSession.getAccessToken(), page),
+                () -> service.getNonFinishedActivities(page),
                 (SimplePage<ActivityDTO> simplePage) -> {
                     VBoxActivities.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
@@ -84,7 +84,7 @@ public class ActivityController extends BaseSubSceneController {
     private void getSingleData(String id){
         VBoxActivities.getChildren().clear();
         mainController.executeCall(
-                () -> service.getActivityById(AuthSession.getAccessToken(), id),
+                () -> service.getActivityById(id),
                 (ActivityDTO dto) -> {
                     allowPageableButtons(0, 0);
                     setCard(

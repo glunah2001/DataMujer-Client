@@ -5,8 +5,8 @@ import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
-import com.uned.clientedatamujer.service.AuthSession;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.AuthSession;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.ReportService;
 import com.uned.clientedatamujer.service.VolunteeringService;
 import javafx.application.Platform;
@@ -18,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
-import java.util.Objects;
 
 public class VolunteeringController extends BaseSubSceneController {
     @FXML
@@ -63,14 +62,7 @@ public class VolunteeringController extends BaseSubSceneController {
                     VBoxVolunteering.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
                     List<VolunteeringDTO> dto = simplePage.content();
-                    dto.forEach(volunteering -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/volunteering-container.fxml",
-                                VBoxVolunteering,
-                                volunteering,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
@@ -85,14 +77,7 @@ public class VolunteeringController extends BaseSubSceneController {
                     VBoxVolunteering.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
                     List<VolunteeringDTO> dto = simplePage.content();
-                    dto.forEach(volunteering -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/volunteering-container.fxml",
-                                VBoxVolunteering,
-                                volunteering,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     DataUtilities.setLastContent(dto);
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(true);
@@ -106,12 +91,7 @@ public class VolunteeringController extends BaseSubSceneController {
                 () -> service.getVolunteeringById(id),
                 (VolunteeringDTO dto) -> {
                     allowPageableButtons(0, 0);
-                    setCard(
-                            "/com/uned/clientedatamujer/views/card/volunteering-container.fxml",
-                            VBoxVolunteering,
-                            dto,
-                            this
-                    );
+                    addCard(dto);
                     DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(false);
@@ -151,6 +131,14 @@ public class VolunteeringController extends BaseSubSceneController {
     @FXML
     private void showPrint(ActionEvent event) {
         ReportService.genReportVolunteering();
+    }
+
+    private void addCard(VolunteeringDTO dto){
+        setCard(
+                "/com/uned/clientedatamujer/views/card/volunteering-container.fxml",
+                dto,
+                this
+        );
     }
 
     @Override

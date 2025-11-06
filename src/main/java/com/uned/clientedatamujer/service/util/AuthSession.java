@@ -1,4 +1,4 @@
-package com.uned.clientedatamujer.service;
+package com.uned.clientedatamujer.service.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;

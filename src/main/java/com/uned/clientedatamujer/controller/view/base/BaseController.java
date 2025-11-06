@@ -5,7 +5,7 @@ import com.uned.clientedatamujer.controller.util.ThrowingSupplier;
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.service.AuthService;
-import com.uned.clientedatamujer.service.TokenRefresher;
+import com.uned.clientedatamujer.service.util.TokenRefresher;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.util.Duration;

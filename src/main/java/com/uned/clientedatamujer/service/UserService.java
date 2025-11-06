@@ -5,6 +5,7 @@ import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.LegalPersonUpdateDTO;
 import com.uned.clientedatamujer.dto.request.PhysicalPersonUpdateDTO;
 import com.uned.clientedatamujer.dto.response.*;
+import com.uned.clientedatamujer.service.util.AuthSession;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,7 +19,7 @@ public class UserService extends BaseHttpClient{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
+                .header("AUTHORIZATION", "Bearer "+ AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, ProfileDTO.class);

@@ -5,8 +5,8 @@ import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.ParticipationDTO;
-import com.uned.clientedatamujer.service.AuthSession;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.AuthSession;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.ParticipationService;
 import com.uned.clientedatamujer.service.ReportService;
 import javafx.application.Platform;
@@ -18,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ParticipationController extends BaseSubSceneController {
 
@@ -61,20 +60,20 @@ public class ParticipationController extends BaseSubSceneController {
         Platform.runLater(() -> {
             DataUtilities.clearAll();
             currentPage = 0;
-            getPageDataMyPending(currentPage);
+            getPageDataMyPending();
         });
     }
 
     @FXML
     private void showPrevious(ActionEvent event) {
         currentPage--;
-        getPageDataMyPending(currentPage);
+        getPageDataMyPending();
     }
 
     @FXML
     private void showNext(ActionEvent event) {
         currentPage++;
-        getPageDataMyPending(currentPage);
+        getPageDataMyPending();
     }
 
     @FXML
@@ -82,33 +81,26 @@ public class ParticipationController extends BaseSubSceneController {
         String id = txtId.getText().trim();
         if(id.isEmpty()){
             currentPage = 0;
-            getPageDataMyPending(currentPage);
+            getPageDataMyPending();
             return;
         }
         int index = comboBoxSearchType.getSelectionModel().getSelectedIndex();
         if(index == 0){
             currentPage = 0;
-            getPageDataInActivity(currentPage, id);
+            getPageDataInActivity(id);
         }else if(index == 1){
             getSingleData(id);
         }
     }
 
-    private void getPageDataMyPending(int page) {
+    private void getPageDataMyPending() {
         mainController.executeCall(
-                () -> service.getMyParticipation(page),
+                () -> service.getMyParticipation(currentPage),
                 (SimplePage<ParticipationDTO> simplePage) -> {
                     VBoxParticipations.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
                     List<ParticipationDTO> dto = simplePage.content();
-                    dto.forEach(participation -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/participation-container.fxml",
-                                VBoxParticipations,
-                                participation,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(false);
@@ -116,21 +108,14 @@ public class ParticipationController extends BaseSubSceneController {
         );
     }
 
-    private void getPageDataInActivity(int page, String id) {
+    private void getPageDataInActivity(String id) {
         mainController.executeCall(
-                () -> service.getParticipationInActivity(id, page),
+                () -> service.getParticipationInActivity(id, currentPage),
                 (SimplePage<ParticipationDTO> simplePage) -> {
                     VBoxParticipations.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
                     List<ParticipationDTO> dto = simplePage.content();
-                    dto.forEach(participation -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/participation-container.fxml",
-                                VBoxParticipations,
-                                participation,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     DataUtilities.setLastContent(dto);
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(true);
@@ -144,12 +129,7 @@ public class ParticipationController extends BaseSubSceneController {
                 () -> service.getParticipationById(id),
                 (ParticipationDTO dto) -> {
                     allowPageableButtons(0, 0);
-                    setCard(
-                            "/com/uned/clientedatamujer/views/card/participation-container.fxml",
-                            VBoxParticipations,
-                            dto,
-                            this
-                    );
+                    addCard(dto);
                     DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(false);
@@ -157,9 +137,17 @@ public class ParticipationController extends BaseSubSceneController {
         );
     }
 
+    private void addCard(ParticipationDTO dto){
+        setCard(
+                "/com/uned/clientedatamujer/views/card/participation-container.fxml",
+                dto,
+                this
+        );
+    }
+
     @Override
     public void refreshCurrentPage() {
-        getPageDataMyPending(currentPage);
+        getPageDataMyPending();
     }
 
     @FXML

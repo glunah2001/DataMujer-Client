@@ -8,8 +8,7 @@ import com.uned.clientedatamujer.controller.view.subscene.VolunteeringController
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
 import com.uned.clientedatamujer.service.ActivityService;
-import com.uned.clientedatamujer.service.AuthSession;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.VolunteeringService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXSnackbar;
 import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseController;
-import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.util.AuthSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

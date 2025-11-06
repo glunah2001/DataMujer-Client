@@ -6,7 +6,7 @@ import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.controller.view.subscene.ParticipationController;
 import com.uned.clientedatamujer.dto.response.ParticipationDTO;
 import com.uned.clientedatamujer.enums.ParticipationState;
-import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.util.AuthSession;
 import com.uned.clientedatamujer.service.ParticipationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

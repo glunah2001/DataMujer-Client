@@ -13,7 +13,7 @@ import com.uned.clientedatamujer.dto.response.PhysicalPersonDTO;
 import com.uned.clientedatamujer.dto.response.ProfileDTO;
 import com.uned.clientedatamujer.enums.Country;
 import com.uned.clientedatamujer.service.AuthService;
-import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.util.AuthSession;
 import com.uned.clientedatamujer.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

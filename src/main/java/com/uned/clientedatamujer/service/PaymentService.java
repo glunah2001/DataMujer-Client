@@ -5,6 +5,7 @@ import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.PaymentRegisterDTO;
 import com.uned.clientedatamujer.dto.response.AffiliatesPaymentReportDTO;
 import com.uned.clientedatamujer.dto.response.PaymentDTO;
+import com.uned.clientedatamujer.service.util.AuthSession;
 
 import java.io.IOException;
 import java.net.URI;
@@ -20,7 +21,7 @@ public class PaymentService extends BaseHttpClient {
                 .uri(URI.create(url))
                 .GET()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
+                .header("AUTHORIZATION", "Bearer "+ AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, PaymentDTO.class);

@@ -6,6 +6,7 @@ import com.uned.clientedatamujer.dto.request.BaseVolunteeringRegisterDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringUpdateDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringWrapperDTO;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
+import com.uned.clientedatamujer.service.util.AuthSession;
 
 import java.io.IOException;
 import java.net.URI;
@@ -20,7 +21,7 @@ public class VolunteeringService extends BaseHttpClient{
                 .uri(URI.create(url))
                 .GET()
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
+                .header("AUTHORIZATION", "Bearer "+ AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, VolunteeringDTO.class);

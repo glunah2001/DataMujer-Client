@@ -1,7 +1,8 @@
-package com.uned.clientedatamujer.service;
+package com.uned.clientedatamujer.service.util;
 
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.token.TokenResponse;
+import com.uned.clientedatamujer.service.AuthService;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

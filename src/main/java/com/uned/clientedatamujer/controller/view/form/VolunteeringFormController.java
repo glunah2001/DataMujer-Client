@@ -6,7 +6,7 @@ import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.controller.view.subscene.NewVolunteeringController;
 import com.uned.clientedatamujer.dto.request.BaseVolunteeringRegisterDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringRegisterDTO;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

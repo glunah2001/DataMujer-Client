@@ -5,8 +5,7 @@ import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.*;
-import com.uned.clientedatamujer.service.AuthSession;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,14 +66,7 @@ public class AdminController extends BaseSubSceneController {
                     var response = DataUtilities.mapToPhysicalProfile(simplePage);
                     allowPageableButtons(response.currentPage(), response.totalPages());
                     List<PhysicalPersonDTO> dto = response.content();
-                    dto.forEach(person -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/user-container.fxml",
-                                VBoxUser,
-                                person,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
@@ -88,14 +80,7 @@ public class AdminController extends BaseSubSceneController {
                     var response = DataUtilities.mapToLegalProfile(simplePage);
                     allowPageableButtons(response.currentPage(), response.totalPages());
                     List<LegalPersonDTO> dto = response.content();
-                    dto.forEach(person -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/user-container.fxml",
-                                VBoxUser,
-                                person,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
@@ -109,14 +94,7 @@ public class AdminController extends BaseSubSceneController {
                     var response = DataUtilities.mapToPhysicalProfile(simplePage);
                     allowPageableButtons(response.currentPage(), response.totalPages());
                     List<PhysicalPersonDTO> dto = response.content();
-                    dto.forEach(person -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/user-container.fxml",
-                                VBoxUser,
-                                person,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
@@ -128,12 +106,7 @@ public class AdminController extends BaseSubSceneController {
                 () -> service.getUserByLegalId(param),
                 (LegalPersonDTO dto) -> {
                     allowPageableButtons(0, 0);
-                    setCard(
-                            "/com/uned/clientedatamujer/views/card/user-container.fxml",
-                            VBoxUser,
-                            dto,
-                            this
-                    );
+                    addCard(dto);
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
@@ -145,12 +118,7 @@ public class AdminController extends BaseSubSceneController {
                 () -> service.getUserByNationalId(param),
                 (PhysicalPersonDTO dto) -> {
                     allowPageableButtons(0, 0);
-                    setCard(
-                            "/com/uned/clientedatamujer/views/card/user-container.fxml",
-                            VBoxUser,
-                            dto,
-                            this
-                    );
+                    addCard(dto);
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
@@ -162,12 +130,7 @@ public class AdminController extends BaseSubSceneController {
                 () -> service.getUserByUsername(param),
                 (ProfileDTO dto) -> {
                     allowPageableButtons(0, 0);
-                    setCard(
-                            "/com/uned/clientedatamujer/views/card/user-container.fxml",
-                            VBoxUser,
-                            dto,
-                            this
-                    );
+                    addCard(dto);
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
@@ -201,6 +164,14 @@ public class AdminController extends BaseSubSceneController {
         }
         comboBoxParamType.getSelectionModel().select(lastIndex);
         txtParam.setText(lastSearch);
+    }
+
+    private void addCard(ProfileDTO dto){
+        setCard(
+                "/com/uned/clientedatamujer/views/card/user-container.fxml",
+                dto,
+                this
+        );
     }
 
     private void clearVBox(){

@@ -3,6 +3,8 @@ package com.uned.clientedatamujer.service;
 import com.uned.clientedatamujer.dto.authentication.ResetPasswordDTO;
 import com.uned.clientedatamujer.dto.authentication.UserLoginDTO;
 import com.uned.clientedatamujer.dto.token.TokenResponse;
+import com.uned.clientedatamujer.service.util.AuthSession;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 
 import java.io.IOException;
 import java.net.URI;
@@ -53,7 +55,7 @@ public class AuthService extends BaseHttpClient{
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getRefreshToken())
+                .header("AUTHORIZATION", "Bearer "+ AuthSession.getRefreshToken())
                 .build();
         return sendRequest(request, TokenResponse.class);
     }

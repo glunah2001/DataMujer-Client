@@ -6,8 +6,7 @@ import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
 import com.uned.clientedatamujer.service.ActivityService;
-import com.uned.clientedatamujer.service.AuthSession;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,14 +70,7 @@ public class ActivityController extends BaseSubSceneController {
                     VBoxActivities.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
                     List<ActivityDTO> dto = simplePage.content();
-                    dto.forEach(activity -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/activity-container.fxml",
-                                VBoxActivities,
-                                activity,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
@@ -90,14 +82,17 @@ public class ActivityController extends BaseSubSceneController {
                 () -> service.getActivityById(id),
                 (ActivityDTO dto) -> {
                     allowPageableButtons(0, 0);
-                    setCard(
-                            "/com/uned/clientedatamujer/views/card/activity-container.fxml",
-                            VBoxActivities,
-                            dto,
-                            this
-                    );
+                    addCard(dto);
                     UIUXFeedbackUtils.hideLoading();
                 }
+        );
+    }
+
+    private void addCard(ActivityDTO dto){
+        setCard(
+                "/com/uned/clientedatamujer/views/card/activity-container.fxml",
+                dto,
+                this
         );
     }
 

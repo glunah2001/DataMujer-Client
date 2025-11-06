@@ -2,7 +2,7 @@ package com.uned.clientedatamujer.controller.view.base;
 
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.scene.MainController;
-import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.util.AuthSession;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -29,7 +29,7 @@ public abstract class BaseSubSceneController {
         this.mainController = mainController;
     }
 
-    protected <T> void setCard(String fxml, VBox vBox, T content, BaseSubSceneController parent){
+    protected <T> void setCard(String fxml, T content, BaseSubSceneController parent){
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(fxml)
@@ -48,7 +48,7 @@ public abstract class BaseSubSceneController {
         }
     }
 
-    protected <T> void setForm(String fxml, VBox vBox, BaseSubSceneController parent, T type){
+    protected <T> void setForm(String fxml, BaseSubSceneController parent, T type){
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(fxml)

@@ -10,8 +10,7 @@ import com.uned.clientedatamujer.dto.request.BaseVolunteeringRegisterDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringRegisterDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringWrapperDTO;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
-import com.uned.clientedatamujer.service.AuthSession;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.VolunteeringService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -40,6 +39,7 @@ public class NewVolunteeringController extends BaseSubSceneController {
                 "Mi voluntariado",
                 "Multiple"
         );
+        setVBox(VBoxVolunteeringForm);
         Platform.runLater(() -> {
             toggleVolunteeringType.setSelected(false);
             changeVolunteeringType(null);
@@ -98,7 +98,6 @@ public class NewVolunteeringController extends BaseSubSceneController {
     private void addForm(){
         setForm(
                 "/com/uned/clientedatamujer/views/form/volunteering-form.fxml",
-                VBoxVolunteeringForm,
                 this,
                 VolunteeringRegisterDTO.class
         );

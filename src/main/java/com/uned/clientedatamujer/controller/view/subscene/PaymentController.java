@@ -7,8 +7,8 @@ import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.AffiliatesPaymentReportDTO;
 import com.uned.clientedatamujer.dto.response.PaymentDTO;
-import com.uned.clientedatamujer.service.AuthSession;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.AuthSession;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.PaymentService;
 import com.uned.clientedatamujer.service.ReportService;
 import javafx.application.Platform;
@@ -20,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
-import java.util.Objects;
 
 public class PaymentController extends BaseSubSceneController {
     @FXML
@@ -119,14 +118,7 @@ public class PaymentController extends BaseSubSceneController {
                     VBoxPayment.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
                     List<AffiliatesPaymentReportDTO> dto = simplePage.content();
-                    dto.forEach(affiliateData -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/affiliate-report-container.fxml",
-                                VBoxPayment,
-                                affiliateData,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     DataUtilities.setLastContent(dto);
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(true);
@@ -142,14 +134,7 @@ public class PaymentController extends BaseSubSceneController {
                     VBoxPayment.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
                     List<PaymentDTO> dto = simplePage.content();
-                    dto.forEach(payment -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/payment-container.fxml",
-                                VBoxPayment,
-                                payment,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(false);
@@ -168,14 +153,7 @@ public class PaymentController extends BaseSubSceneController {
                     VBoxPayment.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
                     List<PaymentDTO> dto = simplePage.content();
-                    dto.forEach(payment -> {
-                        setCard(
-                                "/com/uned/clientedatamujer/views/card/payment-container.fxml",
-                                VBoxPayment,
-                                payment,
-                                this
-                        );
-                    });
+                    dto.forEach(this::addCard);
                     DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(false);
@@ -189,12 +167,7 @@ public class PaymentController extends BaseSubSceneController {
                 () -> service.getPaymentById(id),
                 (PaymentDTO dto) -> {
                     allowPageableButtons(0, 0);
-                    setCard(
-                            "/com/uned/clientedatamujer/views/card/payment-container.fxml",
-                            VBoxPayment,
-                            dto,
-                            this
-                    );
+                    addCard(dto);
                     DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(false);
@@ -216,6 +189,22 @@ public class PaymentController extends BaseSubSceneController {
             toggleState.setVisible(false);
             toggleState.setManaged(false);
         }
+    }
+
+    private void addCard(PaymentDTO dto){
+        setCard(
+                "/com/uned/clientedatamujer/views/card/payment-container.fxml",
+                dto,
+                this
+        );
+    }
+
+    private void addCard(AffiliatesPaymentReportDTO dto) {
+        setCard(
+                "/com/uned/clientedatamujer/views/card/affiliate-report-container.fxml",
+                dto,
+                this
+        );
     }
 
     @Override

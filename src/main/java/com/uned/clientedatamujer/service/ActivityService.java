@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.ActivityRegisterDTO;
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
+import com.uned.clientedatamujer.service.util.AuthSession;
 
 import java.io.IOException;
 import java.net.URI;
@@ -20,7 +21,7 @@ public class ActivityService extends BaseHttpClient{
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
+                .header("AUTHORIZATION", "Bearer "+ AuthSession.getAccessToken())
                 .build();
 
         return sendRequest(request, ActivityDTO.class);

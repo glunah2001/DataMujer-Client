@@ -1,4 +1,4 @@
-package com.uned.clientedatamujer.service;
+package com.uned.clientedatamujer.service.util;
 
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.*;

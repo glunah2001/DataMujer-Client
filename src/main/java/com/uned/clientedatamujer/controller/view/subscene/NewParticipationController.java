@@ -5,8 +5,7 @@ import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseFormController;
 import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.dto.request.ParticipationWrapperDTO;
-import com.uned.clientedatamujer.service.AuthSession;
-import com.uned.clientedatamujer.service.DataUtilities;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.ParticipationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +25,7 @@ public class NewParticipationController extends BaseSubSceneController {
 
     @FXML
     private void initialize(){
+        setVBox(VBoxParticipationForm);
         addForm();
     }
 
@@ -101,7 +101,6 @@ public class NewParticipationController extends BaseSubSceneController {
     private void addForm(){
         setForm(
                 "/com/uned/clientedatamujer/views/form/user-form.fxml",
-                VBoxParticipationForm,
                 this,
                 String.class
         );

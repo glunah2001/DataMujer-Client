@@ -9,6 +9,7 @@ import com.uned.clientedatamujer.dto.response.PaymentDTO;
 import com.uned.clientedatamujer.enums.Classification;
 import com.uned.clientedatamujer.enums.Method;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.PaymentService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +50,7 @@ public class NewPaymentController extends BaseSubSceneController {
         ComponentInitializer.initializeSpinnerMinutes(spinnerPayMinutes);
         ComponentInitializer.initializeToggle(toggleState, "Pendiente", "Pagado");
         ComponentInitializer.initializeTotalAmount(txtTotalAmount);
+        DataUtilities.clearAll();
         activateDate(null);
     }
 

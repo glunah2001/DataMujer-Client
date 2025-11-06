@@ -6,6 +6,7 @@ import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.ReportService;
 import com.uned.clientedatamujer.service.VolunteeringService;
 import javafx.application.Platform;
@@ -43,6 +44,7 @@ public class VolunteeringController extends BaseSubSceneController {
             comboBoxSearchType.getItems().remove("ID");
         }
         Platform.runLater(() -> {
+            DataUtilities.clearAll();
             currentPage = 0;
             getPageDataMyPending();
         });
@@ -66,6 +68,7 @@ public class VolunteeringController extends BaseSubSceneController {
                     UIUXFeedbackUtils.hideLoading();
                 }
         );
+        DataUtilities.clearLastContent();
         allowPrintButtons(false);
     }
 
@@ -84,10 +87,11 @@ public class VolunteeringController extends BaseSubSceneController {
                                 this
                         );
                     });
+                    DataUtilities.setLastContent(dto);
                     UIUXFeedbackUtils.hideLoading();
+                    allowPrintButtons(true);
                 }
         );
-        allowPrintButtons(true);
     }
 
     private void getSingleData(String id){
@@ -102,10 +106,11 @@ public class VolunteeringController extends BaseSubSceneController {
                             dto,
                             this
                     );
+                    DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
+                    allowPrintButtons(false);
                 }
         );
-        allowPrintButtons(false);
     }
 
     @FXML
@@ -169,15 +174,7 @@ public class VolunteeringController extends BaseSubSceneController {
 
     @FXML
     private void showPrint(ActionEvent event) {
-        String id = txtId.getText().trim();
-        if(id.isEmpty()) return;
-        mainController.executeCall(
-                () -> service.getVolunteeringInActivity(id, currentPage),
-                (SimplePage<VolunteeringDTO> simplePage) -> {
-                    ReportService.genReportVolunteering(simplePage.content());
-                    UIUXFeedbackUtils.hideLoading();
-                }
-        );
+        ReportService.genReportVolunteering();
     }
 
     public void refreshCurrentPage() {

@@ -48,6 +48,9 @@ public class VolunteeringUpdateController extends BaseSubSceneController {
         ComponentInitializer.initializeSpinnerMinutes(spinnerEndHour);
         ComponentInitializer.initializeSpinnerMinutes(spinnerEndMinutes);
 
+        DataUtilities.clearActivityDTO();
+        DataUtilities.clearPaymentDTO();
+        DataUtilities.clearLastContent();
         setData();
     }
 

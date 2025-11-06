@@ -37,6 +37,7 @@ public class AdminController extends BaseSubSceneController {
     @FXML
     private void initialize(){
         ComponentInitializer.initializeParam(txtParam, comboBoxParamType);
+        DataUtilities.clearAll();
         allowPageableButtons(0,0);
     }
 

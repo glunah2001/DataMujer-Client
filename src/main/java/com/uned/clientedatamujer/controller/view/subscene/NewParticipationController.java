@@ -34,6 +34,9 @@ public class NewParticipationController extends BaseSubSceneController {
         UIUXFeedbackUtils.showLoading();
         addForm();
         UIUXFeedbackUtils.hideLoading();
+        DataUtilities.clearVolunteeringDTO();
+        DataUtilities.clearPaymentDTO();
+        DataUtilities.clearLastContent();
     }
 
     @FXML

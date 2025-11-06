@@ -8,6 +8,7 @@ import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.AffiliatesPaymentReportDTO;
 import com.uned.clientedatamujer.dto.response.PaymentDTO;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.PaymentService;
 import com.uned.clientedatamujer.service.ReportService;
 import javafx.application.Platform;
@@ -48,6 +49,7 @@ public class PaymentController extends BaseSubSceneController {
         onlyAdminPaymentSearchOptions();
 
         Platform.runLater(() -> {
+            DataUtilities.clearAll();
             currentPage = 0;
             getPageDataMyPayments(currentPage);
         });
@@ -101,13 +103,7 @@ public class PaymentController extends BaseSubSceneController {
 
     @FXML
     private void showPrint(ActionEvent event) {
-        mainController.executeCall(
-                () -> service.getAffiliateReport(currentPage),
-                (SimplePage<AffiliatesPaymentReportDTO> simplePage) -> {
-                    ReportService.genReportAffiliate(simplePage.content());
-                    UIUXFeedbackUtils.hideLoading();
-                }
-        );
+        ReportService.genReportAffiliate();
     }
 
     private void getPageDataAffiliate() {
@@ -126,6 +122,7 @@ public class PaymentController extends BaseSubSceneController {
                                 this
                         );
                     });
+                    DataUtilities.setLastContent(dto);
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(true);
                 }
@@ -148,6 +145,7 @@ public class PaymentController extends BaseSubSceneController {
                                 this
                         );
                     });
+                    DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(false);
                 }
@@ -173,6 +171,7 @@ public class PaymentController extends BaseSubSceneController {
                                 this
                         );
                     });
+                    DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
                     allowPrintButtons(false);
                 }
@@ -191,7 +190,9 @@ public class PaymentController extends BaseSubSceneController {
                             dto,
                             this
                     );
+                    DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
+                    allowPrintButtons(false);
                 }
         );
     }

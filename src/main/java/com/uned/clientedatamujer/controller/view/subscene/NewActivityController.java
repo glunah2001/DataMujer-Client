@@ -8,6 +8,7 @@ import com.uned.clientedatamujer.dto.request.ActivityRegisterDTO;
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
 import com.uned.clientedatamujer.service.ActivityService;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -51,6 +52,7 @@ public class NewActivityController extends BaseSubSceneController {
                 "Virtual",
                 "Presencial"
                 );
+        DataUtilities.clearAll();
     }
 
     @FXML

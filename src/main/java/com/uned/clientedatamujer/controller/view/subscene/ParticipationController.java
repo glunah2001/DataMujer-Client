@@ -6,6 +6,7 @@ import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
 import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.ParticipationDTO;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import com.uned.clientedatamujer.service.ParticipationService;
 import com.uned.clientedatamujer.service.ReportService;
 import javafx.application.Platform;
@@ -54,6 +55,7 @@ public class ParticipationController extends BaseSubSceneController {
             comboBoxSearchType.getItems().remove("ID");
         }
         Platform.runLater(() -> {
+            DataUtilities.clearAll();
             currentPage = 0;
             getPageDataMyPending(currentPage);
         });
@@ -103,10 +105,11 @@ public class ParticipationController extends BaseSubSceneController {
                                 this
                         );
                     });
+                    DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
+                    allowPrintButtons(false);
                 }
         );
-        allowPrintButtons(false);
     }
 
     private void getPageDataInActivity(int page, String id) {
@@ -124,10 +127,11 @@ public class ParticipationController extends BaseSubSceneController {
                                 this
                         );
                     });
+                    DataUtilities.setLastContent(dto);
                     UIUXFeedbackUtils.hideLoading();
+                    allowPrintButtons(true);
                 }
         );
-        allowPrintButtons(true);
     }
 
     private void getSingleData(String id){
@@ -142,10 +146,11 @@ public class ParticipationController extends BaseSubSceneController {
                             dto,
                             this
                     );
+                    DataUtilities.clearLastContent();
                     UIUXFeedbackUtils.hideLoading();
+                    allowPrintButtons(false);
                 }
         );
-        allowPrintButtons(false);
     }
 
     private void allowPageableButtons(int currentPage, int totalPages){
@@ -173,15 +178,7 @@ public class ParticipationController extends BaseSubSceneController {
 
     @FXML
     private void showPrint(ActionEvent event) {
-        String id = txtId.getText().trim();
-        if(id.isEmpty()) return;
-        mainController.executeCall(
-                () -> service.getParticipationInActivity(id, currentPage),
-                (SimplePage<ParticipationDTO> simplePage) -> {
-                    ReportService.genReportParticipation(simplePage.content());
-                    UIUXFeedbackUtils.hideLoading();
-                }
-        );
+        ReportService.genReportParticipation();
     }
 
     private void allowPrintButtons(boolean allow){

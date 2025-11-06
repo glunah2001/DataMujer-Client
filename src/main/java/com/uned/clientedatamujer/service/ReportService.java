@@ -1,5 +1,6 @@
 package com.uned.clientedatamujer.service;
 
+import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.dto.response.AffiliatesPaymentReportDTO;
 import com.uned.clientedatamujer.dto.response.ParticipationDTO;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 
 public class ReportService {
 
-    public static void genReportVolunteering(List<VolunteeringDTO> content) {
+    public static void genReportVolunteering() {
         try {
             JasperReport jasperReport = getReportTemplate(
                     "/com/uned/clientedatamujer/reports/VolunteeringReport.jasper"
@@ -29,6 +30,9 @@ public class ReportService {
 
             Map<String, Object> parameters = new HashMap<>();
             loadImage(parameters);
+
+            var content = castList(VolunteeringDTO.class);
+            if(content == null) return;
 
             VolunteeringDTO ref = content.isEmpty() ? null : content.getFirst();
             if(ref == null) return;
@@ -55,7 +59,7 @@ public class ReportService {
         }
     }
 
-    public static void genReportParticipation(List<ParticipationDTO> content) {
+    public static void genReportParticipation() {
         try {
             JasperReport jasperReport = getReportTemplate(
                     "/com/uned/clientedatamujer/reports/ParticipationReport.jasper"
@@ -63,6 +67,9 @@ public class ReportService {
 
             Map<String, Object> parameters = new HashMap<>();
             loadImage(parameters);
+
+            var content = castList(ParticipationDTO.class);
+            if(content == null) return;
 
             ParticipationDTO ref = content.isEmpty() ? null : content.getFirst();
             if(ref == null) return;
@@ -90,7 +97,7 @@ public class ReportService {
         }
     }
 
-    public static void genReportAffiliate(List<AffiliatesPaymentReportDTO> content) {
+    public static void genReportAffiliate() {
         try {
             JasperReport jasperReport = getReportTemplate(
                     "/com/uned/clientedatamujer/reports/AffiliateReport.jasper"
@@ -98,6 +105,9 @@ public class ReportService {
 
             Map<String, Object> parameters = new HashMap<>();
             loadImage(parameters);
+
+            var content = castList(AffiliatesPaymentReportDTO.class);
+            if(content == null) return;
 
             List<Map<String, Object>> reportData = content.stream()
                     .map(dto -> {
@@ -118,6 +128,23 @@ public class ReportService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static <T> List<T> castList(Class<T> dataType){
+        var data = DataUtilities.getLastContent();
+        if(data == null){
+            UIUXFeedbackUtils.showErrorSnackbar("No existen datos almacenados para generación de reporte");
+            return null;
+        }
+        if(!data.stream().allMatch(dataType::isInstance)){
+            UIUXFeedbackUtils.showErrorSnackbar("Datos almacenados no corresponden al tipo de información " +
+                    "que se desea imprimir.");
+            return null;
+        }
+
+        return data.stream()
+                .map(dataType::cast)
+                .toList();
     }
 
     private static String formatDateTime(LocalDateTime dateTime) {
@@ -189,5 +216,6 @@ public class ReportService {
         }
 
         JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath.toString());
+        UIUXFeedbackUtils.showSuccessSnackbar("Reporte creado exitosamente");
     }
 }

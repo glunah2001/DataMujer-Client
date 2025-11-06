@@ -7,6 +7,7 @@ import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.response.ActivityDTO;
 import com.uned.clientedatamujer.service.ActivityService;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,8 +35,9 @@ public class ActivityController extends BaseSubSceneController {
     private void initialize(){
         ComponentInitializer.configureLongOnlyTextField(txtID);
         Platform.runLater(() -> {
+            DataUtilities.clearAll();
             currentPage = 0;
-            getPageData(currentPage);
+            getPageData();
         });
     }
 
@@ -44,7 +46,7 @@ public class ActivityController extends BaseSubSceneController {
         String id = txtID.getText().trim();
         if(id.isEmpty()){
             currentPage = 0;
-            getPageData(currentPage);
+            getPageData();
         }
         else getSingleData(id);
     }
@@ -52,18 +54,18 @@ public class ActivityController extends BaseSubSceneController {
     @FXML
     private void showPrevious(ActionEvent event) {
         currentPage--;
-        getPageData(currentPage);
+        getPageData();
     }
 
     @FXML
     private void showNext(ActionEvent event) {
         currentPage++;
-        getPageData(currentPage);
+        getPageData();
     }
 
-    private void getPageData(int page) {
+    private void getPageData() {
         mainController.executeCall(
-                () -> service.getNonFinishedActivities(page),
+                () -> service.getNonFinishedActivities(currentPage),
                 (SimplePage<ActivityDTO> simplePage) -> {
                     VBoxActivities.getChildren().clear();
                     allowPageableButtons(simplePage.currentPage(), simplePage.totalPages());
@@ -118,6 +120,6 @@ public class ActivityController extends BaseSubSceneController {
     }
 
     public void refreshCurrentPage() {
-        getPageData(currentPage);
+        getPageData();
     }
 }

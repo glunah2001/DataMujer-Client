@@ -40,6 +40,10 @@ public class PaymentUpdateController extends BaseSubSceneController {
         UIUXFeedbackUtils.showLoading();
         setData();
         UIUXFeedbackUtils.hideLoading();
+
+        DataUtilities.clearVolunteeringDTO();
+        DataUtilities.clearActivityDTO();
+        DataUtilities.clearLastContent();
     }
 
     @FXML
@@ -63,7 +67,7 @@ public class PaymentUpdateController extends BaseSubSceneController {
                     if(error.status() == 404){
                         mainController.withDelay(4, () -> {
                             UIUXFeedbackUtils.hideLoading();
-                            DataUtilities.clearVolunteeringDTO();
+                            DataUtilities.clearPaymentDTO();
                             mainController.forceLoadPayments();
                         });
                     }else

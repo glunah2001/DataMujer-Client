@@ -9,6 +9,7 @@ import com.uned.clientedatamujer.dto.authentication.UserLoginDTO;
 import com.uned.clientedatamujer.dto.token.TokenResponse;
 import com.uned.clientedatamujer.service.AuthService;
 import com.uned.clientedatamujer.service.AuthSession;
+import com.uned.clientedatamujer.service.DataUtilities;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -34,6 +35,7 @@ public class LoginController extends BaseController {
         snackBarInfo = new JFXSnackbar(rootPane);
         UIUXFeedbackUtils.setRootPane(rootPane);
         UIUXFeedbackUtils.setSnackbar(snackBarInfo);
+        DataUtilities.clearAll();
     }
 
     @FXML

@@ -43,6 +43,9 @@ public class NewVolunteeringController extends BaseSubSceneController {
         Platform.runLater(() -> {
             toggleVolunteeringType.setSelected(false);
             changeVolunteeringType(null);
+            DataUtilities.clearVolunteeringDTO();
+            DataUtilities.clearPaymentDTO();
+            DataUtilities.clearLastContent();
         });
     }
 

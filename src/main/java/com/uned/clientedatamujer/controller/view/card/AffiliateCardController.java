@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -37,8 +38,13 @@ public class AffiliateCardController implements BaseCardController<AffiliatesPay
     @Override
     public void setParentController(BaseSubSceneController parent) {}
 
-    private String textFormatter(LocalDateTime date){
+    @Override
+    public String textFormatter(LocalDateTime date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy  HH:mm");
         return formatter.format(date);
     }
+
+    @Override
+    public String textFormatter(LocalDate date){return "";}
+
 }

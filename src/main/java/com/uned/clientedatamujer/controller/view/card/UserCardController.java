@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class UserCardController implements BaseCardController<ProfileDTO> {
@@ -134,11 +135,6 @@ public class UserCardController implements BaseCardController<ProfileDTO> {
         disableComboBox();
     }
 
-    private String textFormatter(LocalDate date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return formatter.format(date);
-    }
-
     private void showRole() {
         int index = switch(AuthSession.getRole()){
             case "ROLE_MENTOR" ->  1;
@@ -164,4 +160,14 @@ public class UserCardController implements BaseCardController<ProfileDTO> {
             case LegalPersonDTO lp -> {return lp.username();}
         }
     }
+
+    @Override
+    public String textFormatter(LocalDateTime date){return "";}
+
+    @Override
+    public String textFormatter(LocalDate date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return formatter.format(date);
+    }
+
 }

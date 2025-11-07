@@ -10,7 +10,6 @@ import com.uned.clientedatamujer.service.ParticipationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -18,8 +17,6 @@ import java.util.ArrayList;
 public class NewParticipationController extends BaseSubSceneController {
     @FXML
     private VBox VBoxParticipationForm;
-    @FXML
-    private Button btnAddParticipation;
     private final ParticipationService service = new ParticipationService();
 
     @FXML

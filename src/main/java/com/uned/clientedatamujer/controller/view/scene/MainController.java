@@ -175,4 +175,5 @@ public class MainController extends BaseController {
     public StackPane getSubScenePane() {return SubScenePane;}
     public void forceLoadPayments(){loadPayments(null);}
     public void forceLoadVolunteering(){loadVolunteering(null);}
+    public void forceLoadActivities(){loadActivities(null);}
 }

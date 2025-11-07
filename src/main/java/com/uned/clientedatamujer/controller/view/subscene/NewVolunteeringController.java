@@ -2,10 +2,10 @@ package com.uned.clientedatamujer.controller.view.subscene;
 
 import com.jfoenix.controls.JFXToggleButton;
 import com.uned.clientedatamujer.controller.util.ComponentInitializer;
-import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseFormController;
 import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
+import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.request.BaseVolunteeringRegisterDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringRegisterDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringWrapperDTO;
@@ -19,7 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class NewVolunteeringController extends BaseSubSceneController {
@@ -134,16 +133,19 @@ public class NewVolunteeringController extends BaseSubSceneController {
                     UIUXFeedbackUtils.showSuccessSnackbar("Se ha insertado su voluntariado Id#"+response.id());
                     mainController.withDelay(4, () ->{
                         UIUXFeedbackUtils.hideLoading();
-                        try {
-                            DataUtilities.clearActivityDTO();
-                            SceneManager.loadSubScene(mainController.getSubScenePane(),
-                                    "/com/uned/clientedatamujer/views/subscene/activities-subscene.fxml",
-                                    mainController
-                            );
-                        } catch (IOException e) {
-                            UIUXFeedbackUtils.showErrorSnackbar("Ocurrió una corrupción en los datos");
-                        }
+                        DataUtilities.clearActivityDTO();
+                        mainController.forceLoadVolunteering();
                     });
+                },
+                (ApiError error) -> {
+                    if(error.status() == 404){
+                        mainController.withDelay(4, () -> {
+                            UIUXFeedbackUtils.hideLoading();
+                            DataUtilities.clearActivityDTO();
+                            mainController.forceLoadActivities();
+                        });
+                    }else
+                        UIUXFeedbackUtils.hideLoading();
                 }, "Error en el formulario de voluntariado."
         );
     }
@@ -156,17 +158,20 @@ public class NewVolunteeringController extends BaseSubSceneController {
                             " para la actividad #"+dto.activityId());
                     mainController.withDelay(4, () ->{
                         UIUXFeedbackUtils.hideLoading();
-                        try {
-                            DataUtilities.clearActivityDTO();
-                            SceneManager.loadSubScene(mainController.getSubScenePane(),
-                                    "/com/uned/clientedatamujer/views/subscene/activities-subscene.fxml",
-                                    mainController
-                            );
-                        } catch (IOException e) {
-                            UIUXFeedbackUtils.showErrorSnackbar("Ocurrió una corrupción en los datos");
-                        }
+                        DataUtilities.clearActivityDTO();
+                        mainController.forceLoadActivities();
                     });
-                }, "Error en el formulario de voluntariado."
+                },
+                (ApiError error) -> {
+                    if(error.status() == 404){
+                        mainController.withDelay(4, () -> {
+                            UIUXFeedbackUtils.hideLoading();
+                            DataUtilities.clearActivityDTO();
+                            mainController.forceLoadActivities();
+                        });
+                    }else
+                        UIUXFeedbackUtils.hideLoading();
+                },"Error en el formulario de voluntariado."
         );
     }
 

@@ -1,9 +1,9 @@
 package com.uned.clientedatamujer.controller.view.subscene;
 
-import com.uned.clientedatamujer.controller.util.SceneManager;
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseFormController;
 import com.uned.clientedatamujer.controller.view.base.BaseSubSceneController;
+import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.dto.request.ParticipationWrapperDTO;
 import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.ParticipationService;
@@ -13,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class NewParticipationController extends BaseSubSceneController {
@@ -73,17 +72,20 @@ public class NewParticipationController extends BaseSubSceneController {
                             " para la actividad #"+dto.activityId());
                     mainController.withDelay(4, () ->{
                         UIUXFeedbackUtils.hideLoading();
-                        try {
-                            DataUtilities.clearActivityDTO();
-                            SceneManager.loadSubScene(mainController.getSubScenePane(),
-                                    "/com/uned/clientedatamujer/views/subscene/activities-subscene.fxml",
-                                    mainController
-                            );
-                        } catch (IOException e) {
-                            UIUXFeedbackUtils.showErrorSnackbar("Ocurrió una corrupción en los datos");
-                        }
+                        DataUtilities.clearActivityDTO();
+                        mainController.forceLoadActivities();
                     });
-                }, "Error en el formulario de participantes."
+                },
+                (ApiError error) -> {
+                    if(error.status() == 404){
+                        mainController.withDelay(4, () -> {
+                            UIUXFeedbackUtils.hideLoading();
+                            DataUtilities.clearActivityDTO();
+                            mainController.forceLoadActivities();
+                        });
+                    }else
+                        UIUXFeedbackUtils.hideLoading();
+                },"Error en el formulario de participantes."
         );
     }
 

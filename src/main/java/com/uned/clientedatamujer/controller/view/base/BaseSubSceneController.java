@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public abstract class BaseSubSceneController {
     protected MainController mainController;
-    protected int currentPage;
+    protected Integer currentPage;
     protected Button prev;
     protected Button next;
     protected Button print;

@@ -59,7 +59,7 @@
                 </ScrollPane>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="2">
                     <children>
-                        <Button fx:id="btnAddParticipation" mnemonicParsing="false" onAction="#addParticipation" styleClass="button-primario" text="Agregar" />
+                        <Button mnemonicParsing="false" onAction="#addParticipation" styleClass="button-primario" text="Agregar" />
                         <Button mnemonicParsing="false" onAction="#verifyData" styleClass="button-primario" text="Enviar" />
                     </children>
                 </HBox>

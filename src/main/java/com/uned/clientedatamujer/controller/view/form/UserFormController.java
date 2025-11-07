@@ -13,15 +13,10 @@ import javafx.scene.layout.VBox;
 public class UserFormController implements BaseFormController<String> {
     @FXML
     private TextField txtUsername;
-    @FXML
-    private Button btnDelete;
-    private BaseSubSceneController parent;
     private Node root;
 
     @Override
-    public void setParentController(BaseSubSceneController parent) {
-        this.parent = parent;
-    }
+    public void setParentController(BaseSubSceneController parent) {}
 
     @Override
     public void setRoot(HBox node) {

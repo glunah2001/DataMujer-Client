@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ParticipationCardController implements BaseCardController<ParticipationDTO> {
@@ -131,10 +132,14 @@ public class ParticipationCardController implements BaseCardController<Participa
         );
     }
 
-    private String textFormatter(LocalDate date){
+    @Override
+    public String textFormatter(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return formatter.format(date);
     }
+
+    @Override
+    public String textFormatter(LocalDateTime date){return "";}
 
     private String isDateRegistered(LocalDate date){
         return date == null ? "No Registrada": textFormatter(date);

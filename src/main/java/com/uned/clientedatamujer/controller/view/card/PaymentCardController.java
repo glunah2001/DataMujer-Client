@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -117,10 +118,14 @@ public class PaymentCardController implements BaseCardController<PaymentDTO> {
         parentController = parent;
     }
 
-    private String textFormatter(LocalDateTime date){
+    @Override
+    public String textFormatter(LocalDateTime date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy  HH:mm");
         return formatter.format(date);
     }
+
+    @Override
+    public String textFormatter(LocalDate date){return "";}
 
     private String isDateRegistered(LocalDateTime date){
         return date == null ? "No Registrada": textFormatter(date);

@@ -5,6 +5,8 @@ import com.uned.clientedatamujer.controller.util.ThrowingSupplier;
 import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.dto.ApiError;
 import com.uned.clientedatamujer.service.AuthService;
+import com.uned.clientedatamujer.service.util.AuthSession;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 import com.uned.clientedatamujer.service.util.TokenRefresher;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -95,7 +97,8 @@ public abstract class BaseController {
                 try {
                     UIUXFeedbackUtils.hideLoading();
                     var service = new AuthService();
-                    service.logout();
+                    if(!AuthSession.noSession()) service.logout();
+                    else DataUtilities.clearAll();
                     SceneManager.toLogIn();
                 } catch (IOException e) {
                     e.printStackTrace();

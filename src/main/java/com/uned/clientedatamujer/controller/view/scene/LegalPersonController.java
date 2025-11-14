@@ -9,6 +9,7 @@ import com.uned.clientedatamujer.dto.request.CommonRegisterDTO;
 import com.uned.clientedatamujer.dto.request.LegalPersonRegisterDTO;
 import com.uned.clientedatamujer.enums.Country;
 import com.uned.clientedatamujer.service.RegisterService;
+import com.uned.clientedatamujer.service.util.TermsReader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -68,6 +69,19 @@ public class LegalPersonController extends BaseController {
         var legal = getLegalData(common);
         if(!validateFormData(legal)) return;
 
+        String dataMujerRules = TermsReader.loadText("/com/uned/clientedatamujer/terms/DataMujerRules.txt");
+        String law = TermsReader.loadText("/com/uned/clientedatamujer/terms/LeyN8968.txt");
+
+        UIUXFeedbackUtils.showTwoStepTermsDialog(
+                "TERMINOS Y CONDICIONES: \nReglamento Data Mujer",
+                dataMujerRules,
+                "TERMINOS Y CONDICIONES: \nLey N° 8968",
+                law,
+                () -> {register(legal);}
+        );
+    }
+
+    private void register(LegalPersonRegisterDTO legal){
         UIUXFeedbackUtils.showLoading();
 
         executeCall(

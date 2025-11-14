@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -107,6 +108,64 @@ public class UIUXFeedbackUtils {
         dialog.show();
     }
 
+    public static void showTwoStepTermsDialog(
+            String title1, String content1,
+            String title2, String content2,
+            Runnable onAcceptBoth
+    ) {
+        showTermsDialog(title1, content1, () -> {
+            // Segundo diálogo si se aceptó el primero
+            showTermsDialog(title2, content2, onAcceptBoth);
+        });
+    }
+
+    private static void showTermsDialog(String title, String content, Runnable onAccept) {
+
+        VBox container = new VBox(20);
+        container.setPadding(new Insets(20));
+        container.setAlignment(Pos.CENTER_LEFT);
+
+        Label titleLabel = new Label(title);
+        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        titleLabel.setAlignment(Pos.CENTER);
+        titleLabel.setMaxWidth(Double.MAX_VALUE);
+
+        Label text = new Label(content);
+        text.setWrapText(true);
+        text.setStyle("-fx-font-size: 14px;");
+
+        ScrollPane scroll = new ScrollPane(text);
+        scroll.setFitToWidth(true);
+        scroll.setPrefHeight(400);
+
+        JFXButton btnAccept = new JFXButton("Aceptar");
+        btnAccept.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 6px;");
+
+        JFXButton btnCancel = new JFXButton("Cancelar");
+        btnCancel.setStyle("-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 6px;");
+
+        HBox buttonBox = new HBox(15, btnAccept, btnCancel);
+        buttonBox.setAlignment(Pos.CENTER_RIGHT);
+
+        container.getChildren().addAll(titleLabel, scroll, buttonBox);
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setBody(container);
+
+        // El rootPane ya está configurado en initialize()
+        JFXDialog dialog = new JFXDialog(rootPane, layout, JFXDialog.DialogTransition.CENTER);
+        dialog.setOverlayClose(false); // NO cerrar clickeando afuera
+
+        btnAccept.setOnAction(e -> {
+            dialog.close();
+            if (onAccept != null) onAccept.run();
+        });
+
+        btnCancel.setOnAction(e -> dialog.close());
+
+        dialog.show();
+    }
+
     private static void showSnackbar(String message, String BgColor, String txtColor){
         Label text = new Label(message);
         text.setStyle("-fx-text-fill: "+txtColor+"; -fx-font-size: 14px;");
@@ -123,6 +182,4 @@ public class UIUXFeedbackUtils {
                 )
         );
     }
-
-
 }

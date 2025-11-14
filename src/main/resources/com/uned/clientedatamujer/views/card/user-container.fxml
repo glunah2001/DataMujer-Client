@@ -29,7 +29,7 @@
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="STANDARD" />
-                           <String fx:value="MENTOR" />
+                           <String fx:value="VOLUNTARIO" />
                            <String fx:value="ADMIN" />
                            <String fx:value="ROL" />
                         </FXCollections>

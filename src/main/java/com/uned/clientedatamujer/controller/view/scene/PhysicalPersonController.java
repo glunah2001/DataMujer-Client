@@ -8,8 +8,10 @@ import com.uned.clientedatamujer.controller.util.UIUXFeedbackUtils;
 import com.uned.clientedatamujer.controller.view.base.BaseController;
 import com.uned.clientedatamujer.dto.request.CommonRegisterDTO;
 import com.uned.clientedatamujer.dto.request.PhysicalPersonRegisterDTO;
+import com.uned.clientedatamujer.dto.response.PhysicalPersonDTO;
 import com.uned.clientedatamujer.enums.Country;
 import com.uned.clientedatamujer.service.RegisterService;
+import com.uned.clientedatamujer.service.util.TermsReader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -83,6 +85,33 @@ public class PhysicalPersonController extends BaseController {
         var physical = getPhysicalData(common);
         if(!validateFormData(physical)) return;
 
+        String dataMujerRules = TermsReader.loadText("/com/uned/clientedatamujer/terms/DataMujerRules.txt");
+        String law = TermsReader.loadText("/com/uned/clientedatamujer/terms/LeyN8968.txt");
+
+        UIUXFeedbackUtils.showTwoStepTermsDialog(
+                "TERMINOS Y CONDICIONES: \nReglamento Data Mujer",
+                dataMujerRules,
+                "TERMINOS Y CONDICIONES: \nLey N° 8968",
+                law,
+                () -> {register(physical);}
+        );
+    }
+
+    @FXML
+    public void clearCedula(ActionEvent event) {txtCedula.clear();}
+
+    private CommonRegisterDTO getCommonData(){
+        return new CommonRegisterDTO(
+                txtUser.getText().trim(),
+                txtMail.getText().trim(),
+                txtPassword.getText().trim(),
+                txtPhone.getText().trim(),
+                comboCountry.getValue(),
+                txtLocation.getText().trim()
+        );
+    }
+
+    private void register(PhysicalPersonRegisterDTO physical){
         executeCall(
                 () -> service.register(physical),
                 (String success) -> {
@@ -99,20 +128,6 @@ public class PhysicalPersonController extends BaseController {
                     });
                 },
                 "Error en los datos de registro"
-        );
-    }
-
-    @FXML
-    public void clearCedula(ActionEvent event) {txtCedula.clear();}
-
-    private CommonRegisterDTO getCommonData(){
-        return new CommonRegisterDTO(
-                txtUser.getText().trim(),
-                txtMail.getText().trim(),
-                txtPassword.getText().trim(),
-                txtPhone.getText().trim(),
-                comboCountry.getValue(),
-                txtLocation.getText().trim()
         );
     }
 

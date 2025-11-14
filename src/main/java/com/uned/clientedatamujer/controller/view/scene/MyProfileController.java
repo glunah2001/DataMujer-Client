@@ -15,6 +15,7 @@ import com.uned.clientedatamujer.enums.Country;
 import com.uned.clientedatamujer.service.AuthService;
 import com.uned.clientedatamujer.service.util.AuthSession;
 import com.uned.clientedatamujer.service.UserService;
+import com.uned.clientedatamujer.service.util.TermsReader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -36,6 +37,10 @@ public class MyProfileController extends BaseController {
     private Label labelUsername;
     @FXML
     private Label labelId;
+    @FXML
+    private Label labelRules;
+    @FXML
+    private Label labelLaw;
     @FXML
     private TextField txtName;
     @FXML
@@ -174,7 +179,17 @@ public class MyProfileController extends BaseController {
             }
         }
         btnUpdateProfile.setDisable(false);
+        setDocumentData();
         UIUXFeedbackUtils.hideLoading();
+    }
+
+    private void setDocumentData(){
+        String dataMujerRules = TermsReader.loadText("/com/uned/clientedatamujer/terms/DataMujerRules.txt");
+        String law = TermsReader.loadText("/com/uned/clientedatamujer/terms/LeyN8968.txt");
+        System.out.println(TermsReader.class.getClassLoader().getResource("com/uned/clientedatamujer/terms/"));
+
+        labelRules.setText(dataMujerRules);
+        labelLaw.setText(law);
     }
 
     private void sendUpdateRequest(Object dto){

@@ -112,8 +112,8 @@ public class ParticipationCardController implements BaseCardController<Participa
     private void startParticipation(ActionEvent event) {
         parentController.getMainController().executeCall(
                 () -> service.startParticipation(String.valueOf(data.id())),
-                (_) -> {
-                    UIUXFeedbackUtils.showSuccessSnackbar("Participación iniciada exitosamente");
+                (ParticipationDTO dto) -> {
+                    UIUXFeedbackUtils.showSuccessSnackbar("Participación #"+dto.id()+" iniciada exitosamente");
                     if(parentController instanceof ParticipationController participationController)
                         participationController.refreshCurrentPage();
                 }
@@ -124,8 +124,8 @@ public class ParticipationCardController implements BaseCardController<Participa
     private void cancelParticipation(ActionEvent event) {
         parentController.getMainController().executeCall(
                 () -> service.cancelParticipation(String.valueOf(data.id())),
-                (_) -> {
-                    UIUXFeedbackUtils.showSuccessSnackbar("Participación cancelada exitosamente");
+                (ParticipationDTO dto) -> {
+                    UIUXFeedbackUtils.showSuccessSnackbar("Participación #"+dto.id()+" cancelada exitosamente");
                     if(parentController instanceof ParticipationController participationController)
                         participationController.refreshCurrentPage();
                 }

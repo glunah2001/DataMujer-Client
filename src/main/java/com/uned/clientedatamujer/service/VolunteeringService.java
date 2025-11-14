@@ -5,6 +5,7 @@ import com.uned.clientedatamujer.dto.SimplePage;
 import com.uned.clientedatamujer.dto.request.BaseVolunteeringRegisterDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringUpdateDTO;
 import com.uned.clientedatamujer.dto.request.VolunteeringWrapperDTO;
+import com.uned.clientedatamujer.dto.response.ProfileDTO;
 import com.uned.clientedatamujer.dto.response.VolunteeringDTO;
 import com.uned.clientedatamujer.service.util.AuthSession;
 
@@ -15,99 +16,104 @@ import java.net.http.HttpRequest;
 public class VolunteeringService extends BaseHttpClient{
 
     public Object getVolunteeringById(String id) {
-        String url = URL + "/volunteering?id="+id;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+ AuthSession.getAccessToken())
-                .build();
-
-        return sendRequest(request, VolunteeringDTO.class);
+        try{
+            var request = buildRequest(
+                    "/volunteering?id="+id,
+                    "GET",
+                    null,
+                    true
+            );
+            return sendRequest(request, VolunteeringDTO.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object getMyPendingVolunteering(int page) {
-        String url = URL + "/volunteering/me?page="+page;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
-                .build();
-
-        return sendRequest(request, new TypeReference<SimplePage<VolunteeringDTO>>() {});
+        try{
+            var request = buildRequest(
+                    "/volunteering/me?page="+page,
+                    "GET",
+                    null,
+                    true
+            );
+            return sendRequest(request, new TypeReference<SimplePage<VolunteeringDTO>>() {});
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object getVolunteeringInActivity(String activityId, int page) {
-        String url = URL + "/volunteering/InActivity?activityId="+activityId+"&page="+page;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
-                .build();
-
-        return sendRequest(request, new TypeReference<SimplePage<VolunteeringDTO>>() {});
+        try{
+            var request = buildRequest(
+                    "/volunteering/InActivity?activityId="+activityId+"&page="+page,
+                    "GET",
+                    null,
+                    true
+            );
+            return sendRequest(request, new TypeReference<SimplePage<VolunteeringDTO>>() {});
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object createVolunteering(BaseVolunteeringRegisterDTO dto) throws IOException {
-        String url = URL + "/volunteering";
-
         String json = objectMapper.writeValueAsString(dto);
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .POST(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
-                .build();
-
-        return sendRequest(request, VolunteeringDTO.class);
+        try{
+            var request = buildRequest(
+                    "/volunteering",
+                    "POST",
+                    json,
+                    true
+            );
+            return sendRequest(request, VolunteeringDTO.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object createVolunteering(VolunteeringWrapperDTO dto) throws IOException {
-        String url = URL + "/volunteering/multiple";
-
         String json = objectMapper.writeValueAsString(dto);
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .POST(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
-                .build();
-
-        return sendRequest(request, Void.class);
+        try{
+            var request = buildRequest(
+                    "/volunteering/multiple",
+                    "POST",
+                    json,
+                    true
+            );
+            return sendRequest(request, Void.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object deleteVolunteering(String id){
-        String url = URL + "/volunteering?id="+id;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .DELETE()
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
-                .build();
-
-        return sendRequest(request, Void.class);
+        try{
+            var request = buildRequest(
+                    "/volunteering?id="+id,
+                    "DELETE",
+                    null,
+                    true
+            );
+            return sendRequest(request, Void.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object updateVolunteering(VolunteeringUpdateDTO dto, String id) throws IOException{
-        String url = URL + "/volunteering?id="+id;
-
         String json = objectMapper.writeValueAsString(dto);
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .PUT(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
-                .build();
-
-        return sendRequest(request, VolunteeringDTO.class);
+        try{
+            var request = buildRequest(
+                    "/volunteering?id="+id,
+                    "PUT",
+                    json,
+                    true
+            );
+            return sendRequest(request, VolunteeringDTO.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 }

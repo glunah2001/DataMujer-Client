@@ -5,8 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.uned.clientedatamujer.dto.ApiError;
+import com.uned.clientedatamujer.service.util.AuthSession;
+import com.uned.clientedatamujer.service.util.DataUtilities;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -44,6 +47,46 @@ public abstract class BaseHttpClient {
                 url,
                 null
         );
+    }
+
+    protected HttpRequest buildRequest(
+            String url,
+            String method,
+            String body,
+            boolean auth
+    ){
+        HttpRequest.Builder builder = HttpRequest.newBuilder()
+                .uri(URI.create(URL+url))
+                .header("Content-Type", "application/json")
+                .header("X-Client-Name", DataUtilities.CLIENT_NAME)
+                .header("X-Client-Version", DataUtilities.CLIENT_VERSION);
+
+        if (auth) {
+            builder.header("AUTHORIZATION", "Bearer " + AuthSession.getAccessToken());
+        }
+
+        switch (method.toUpperCase()) {
+            case "GET":
+                builder.GET();
+                break;
+            case "POST":
+                builder.POST(body == null ?
+                        HttpRequest.BodyPublishers.noBody() :
+                        HttpRequest.BodyPublishers.ofString(body));
+                break;
+            case "PUT":
+                builder.PUT(body == null ?
+                        HttpRequest.BodyPublishers.noBody() :
+                        HttpRequest.BodyPublishers.ofString(body));
+                break;
+            case "DELETE":
+                if (body == null) builder.DELETE();
+                else builder.method("DELETE", HttpRequest.BodyPublishers.ofString(body));
+                break;
+            default:
+                throw new IllegalArgumentException("Método HTTP no soportado: " + method);
+        }
+        return builder.build();
     }
 
     protected <T> Object sendRequest(HttpRequest request, Class<T> responseType){

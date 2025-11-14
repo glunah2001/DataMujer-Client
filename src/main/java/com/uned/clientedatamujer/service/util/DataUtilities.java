@@ -6,6 +6,8 @@ import com.uned.clientedatamujer.dto.response.*;
 import java.util.List;
 
 public class DataUtilities {
+    public static final String CLIENT_NAME = "DataMujer-Client";
+    public static final String CLIENT_VERSION = "1.1.0";
     private static ActivityDTO lastActivityDTO;
     private static VolunteeringDTO lastVolunteeringDTO;
     private static PaymentDTO lastPaymentDTO;

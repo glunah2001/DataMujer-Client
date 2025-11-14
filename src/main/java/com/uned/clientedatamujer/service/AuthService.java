@@ -13,39 +13,49 @@ import java.net.http.HttpRequest;
 public class AuthService extends BaseHttpClient{
 
     public Object forgotPassword(String email) {
-        String url = URL + "/auth/forgot-password?email="+email;
-        HttpRequest request = HttpRequest.newBuilder()
-                                         .uri(URI.create(url))
-                                         .POST(HttpRequest.BodyPublishers.noBody())
-                                         .header("Content-Type", "application/json")
-                                         .build();
-
-        return sendRequest(request, String.class);
+        try{
+            var request = buildRequest(
+                    "/auth/forgot-password?email="+email,
+                    "POST",
+                    null,
+                    false
+            );
+            return sendRequest(request, String.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object resetPassword(ResetPasswordDTO dto) throws IOException {
-        String url = URL + "/auth/reset-password";
         String json = objectMapper.writeValueAsString(dto);
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .POST(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "application/json")
-                .build();
-
-        return sendRequest(request, String.class);
+        try{
+            var request = buildRequest(
+                    "/auth/reset-password",
+                    "POST",
+                    json,
+                    false
+            );
+            return sendRequest(request, String.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object login(UserLoginDTO dto) throws IOException{
-        String url = URL + "/auth/login";
         String json = objectMapper.writeValueAsString(dto);
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .POST(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "application/json")
-                .build();
-        return sendRequest(request, TokenResponse.class);
+        try{
+            var request = buildRequest(
+                    "/auth/login",
+                    "POST",
+                    json,
+                    false
+            );
+            return sendRequest(request, TokenResponse.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
     }
 
     public Object refresh() {
@@ -56,23 +66,28 @@ public class AuthService extends BaseHttpClient{
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .header("Content-Type", "application/json")
                 .header("AUTHORIZATION", "Bearer "+ AuthSession.getRefreshToken())
+                .header("X-Client-Name", DataUtilities.CLIENT_NAME)
+                .header("X-Client-Version", DataUtilities.CLIENT_VERSION)
                 .build();
         return sendRequest(request, TokenResponse.class);
     }
 
     public void logout(){
-        String url = URL + "/auth/logout";
+        try{
+            var request = buildRequest(
+                    "/auth/logout",
+                    "POST",
+                    null,
+                    true
+            );
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .POST(HttpRequest.BodyPublishers.noBody())
-                .header("Content-Type", "application/json")
-                .header("AUTHORIZATION", "Bearer "+AuthSession.getAccessToken())
-                .build();
+            AuthSession.clear();
+            DataUtilities.clearAll();
 
-        AuthSession.clear();
-        DataUtilities.clearAll();
-
-        sendRequest(request, Void.class);
+            sendRequest(request, Void.class);
+        }catch(IllegalArgumentException _){
+            AuthSession.clear();
+            DataUtilities.clearAll();
+        }
     }
 }

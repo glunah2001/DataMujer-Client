@@ -2,6 +2,7 @@ package com.uned.clientedatamujer.service;
 
 import com.uned.clientedatamujer.dto.request.LegalPersonRegisterDTO;
 import com.uned.clientedatamujer.dto.request.PhysicalPersonRegisterDTO;
+import com.uned.clientedatamujer.dto.response.ActivityDTO;
 
 import java.io.IOException;
 import java.net.URI;
@@ -13,18 +14,24 @@ public class RegisterService extends BaseHttpClient{
         String url = "";
         String json = "";
         if(data instanceof PhysicalPersonRegisterDTO dto){
-            url = URL + "/register/physical";
+            url = "/register/physical";
             json = objectMapper.writeValueAsString(dto);
         }else if(data instanceof LegalPersonRegisterDTO dto){
-            url = URL + "/register/legal";
+            url = "/register/legal";
             json = objectMapper.writeValueAsString(dto);
         }
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .POST(HttpRequest.BodyPublishers.ofString(json))
-                .header("Content-Type", "application/json")
-                .build();
-        return sendRequest(request, String.class);
+        try{
+            var request = buildRequest(
+                    url,
+                    "POST",
+                    json,
+                    false
+            );
+            return sendRequest(request, String.class);
+        }catch(IllegalArgumentException e){
+            return failedErrorJsonLecture("/");
+        }
+
     }
 }

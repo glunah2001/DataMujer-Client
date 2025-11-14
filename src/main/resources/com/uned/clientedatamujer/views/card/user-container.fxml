@@ -25,12 +25,13 @@
             <HBox alignment="CENTER" layoutX="14.0" layoutY="151.0" prefHeight="50.0" prefWidth="200.0" spacing="30.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#changeAffiliate" styleClass="button-primario" text="Cambiar Afiliación" />
-                  <ComboBox fx:id="comboBoxRole" onAction="#changeRole" value="STANDARD" prefWidth="150.0" promptText="ROL">
+                  <ComboBox fx:id="comboBoxRole" onAction="#changeRole" value="ROL" prefWidth="150.0" promptText="ROL">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="STANDARD" />
                            <String fx:value="MENTOR" />
                            <String fx:value="ADMIN" />
+                           <String fx:value="ROL" />
                         </FXCollections>
                      </items>
                   </ComboBox>

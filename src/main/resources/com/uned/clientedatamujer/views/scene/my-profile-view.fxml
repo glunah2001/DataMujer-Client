@@ -44,9 +44,9 @@
                   </VBox>
                </children>
             </HBox>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="14.0" layoutY="80.0" prefHeight="620.0" prefWidth="1060.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="255.0">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="14.0" layoutY="80.0" prefHeight="620.0" prefWidth="1060.0" vvalue="0.63" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="255.0">
                <content>
-                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1450.0" prefWidth="0.0" style="-fx-background-color: transparent;">
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1650.0" prefWidth="0.0" style="-fx-background-color: transparent;">
                      <children>
                         <HBox layoutY="14.0" prefHeight="227.0" prefWidth="1045.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
@@ -111,6 +111,55 @@
                            <children>
                               <Button fx:id="btnUpdateProfile" mnemonicParsing="false" onAction="#updateProfile" styleClass="button-primario" text="Guardar" />
                               <Button mnemonicParsing="false" onAction="#resetData" styleClass="button-primario" text="Cancelar" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutY="581.0" prefHeight="41.0" prefWidth="200.0" style="-fx-background-color: #e0d7cf;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Label styleClass="etiqueta-menor" text="Sobre Data Mujer">
+                                 <HBox.margin>
+                                    <Insets left="40.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutY="645.0" maxWidth="1.7976931348623157E308" prefHeight="161.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="161.0" style="-fx-background-color: #a98be4;" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="etiqueta-mayor" text="Misión" />
+                                    <Label maxWidth="1.7976931348623157E308" prefHeight="101.0" prefWidth="474.0" styleClass="etiqueta-menor" text="Nuestra misión es impulsar a las mujeres de todas las edades a incursionar en el campo de las ciencias de datos y brindarles capacitación y acompañamiento para que puedan desarrollarse profesionalmente en esta área, mejorar su calidad de vida y aportar al desarrollo socioeconómico del país." textAlignment="CENTER" wrapText="true" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="200.0" style="-fx-background-color: #e281be;" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="etiqueta-mayor" text="Visión" />
+                                    <Label maxWidth="1.7976931348623157E308" prefHeight="101.0" prefWidth="474.0" styleClass="etiqueta-menor" text="Nuestra visión es liderar a las nuevas generaciones de profesionales en ciencias de datos de Costa Rica al exhortar el aprendizaje continuo, la colaboración técnica, la inspiración mutua y el alcance de sueños juntas." textAlignment="CENTER" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="14.0" layoutY="840.0" prefHeight="592.0" prefWidth="1050.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" prefHeight="592.0" HBox.hgrow="ALWAYS">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e281be;">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="14.0" prefHeight="85.0" prefWidth="430.0" styleClass="etiqueta-mayor" text="Reglamento Asociación Data Mujer" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                                          <Label fx:id="labelRules" alignment="CENTER" layoutX="14.0" layoutY="107.0" text="label" textAlignment="JUSTIFY" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" prefHeight="200.0" HBox.hgrow="ALWAYS">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #a98be4;">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="221.0" layoutY="70.0" styleClass="etiqueta-mayor" text="Ley de Protección de la Persona Frente al Tratamiento de sus Datos Personales" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                                          <Label fx:id="labelLaw" alignment="CENTER" layoutX="234.0" layoutY="235.0" text="Label" textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutY="1403.0" prefHeight="114.0" prefWidth="1045.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

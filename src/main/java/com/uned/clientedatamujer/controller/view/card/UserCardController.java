@@ -135,22 +135,22 @@ public class UserCardController implements BaseCardController<ProfileDTO> {
         disableComboBox();
     }
 
-    private void showRole() {
+    /*private void showRole() {
         int index = switch(AuthSession.getRole()){
             case "ROLE_MENTOR" ->  1;
             case "ROLE_ADMIN" -> 2;
-            default -> 0;
+            default -> 4;
         };
 
         comboBoxRole.getSelectionModel().select(index);
-    }
+    }*/
 
     private void disableComboBox(){
         if(AuthSession.getSubject().equals(getUsername())){
             comboBoxRole.setVisible(false);
             comboBoxRole.setManaged(false);
         }else{
-            showRole();
+            comboBoxRole.getSelectionModel().selectLast();
         }
     }
 

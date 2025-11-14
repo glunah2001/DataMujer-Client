@@ -130,7 +130,9 @@ public class VolunteeringController extends BaseSubSceneController {
 
     @FXML
     private void showPrint(ActionEvent event) {
+        UIUXFeedbackUtils.showLoading();
         ReportService.genReportVolunteering();
+        UIUXFeedbackUtils.hideLoading();
     }
 
     private void addCard(VolunteeringDTO dto){

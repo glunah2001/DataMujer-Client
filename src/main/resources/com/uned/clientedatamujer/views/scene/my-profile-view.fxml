@@ -140,24 +140,24 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="14.0" layoutY="840.0" prefHeight="592.0" prefWidth="1050.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" prefHeight="592.0" HBox.hgrow="ALWAYS">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e281be;">
+                              <ScrollPane fitToWidth="true" hbarPolicy="NEVER" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefViewportWidth="500">
+                                 <content>
+                                    <VBox style="-fx-background-color: #e281be;" alignment="CENTER" spacing="25" prefWidth="0" maxWidth="Infinity">
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="14.0" prefHeight="85.0" prefWidth="430.0" styleClass="etiqueta-mayor" text="Reglamento Asociación Data Mujer" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
-                                          <Label fx:id="labelRules" alignment="CENTER" layoutX="14.0" layoutY="107.0" text="label" textAlignment="JUSTIFY" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                          <Label alignment="CENTER" text="Reglamento Asociación Data Mujer" textAlignment="CENTER" styleClass="etiqueta-mayor" wrapText="true" VBox.vgrow="ALWAYS"/>
+                                          <Label fx:id="labelRules" alignment="CENTER" text="label" textAlignment="JUSTIFY" maxWidth="Infinity" wrapText="true" VBox.vgrow="ALWAYS"/>
                                        </children>
-                                    </AnchorPane>
-                                </content>
+                                    </VBox>
+                                 </content>
                               </ScrollPane>
-                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" prefHeight="200.0" HBox.hgrow="ALWAYS">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #a98be4;">
-                                       <children>
-                                          <Label alignment="CENTER" layoutX="221.0" layoutY="70.0" styleClass="etiqueta-mayor" text="Ley de Protección de la Persona Frente al Tratamiento de sus Datos Personales" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
-                                          <Label fx:id="labelLaw" alignment="CENTER" layoutX="234.0" layoutY="235.0" text="Label" textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
+                              <ScrollPane fitToWidth="true" hbarPolicy="NEVER" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefViewportWidth="500">
+                                 <content>
+                                    <VBox style="-fx-background-color: #a98be4;" alignment="CENTER" spacing="25" prefWidth="0" maxWidth="Infinity">
+                                      <children>
+                                         <Label alignment="CENTER" text="Ley de Protección de la Persona Frente al Tratamiento de sus Datos Personales" textAlignment="CENTER" styleClass="etiqueta-mayor" wrapText="true" VBox.vgrow="ALWAYS"/>
+                                         <Label fx:id="labelLaw" alignment="CENTER" text="label" textAlignment="JUSTIFY" maxWidth="Infinity" wrapText="true" VBox.vgrow="ALWAYS"/>
+                                      </children>
+                                   </VBox>
                                 </content>
                               </ScrollPane>
                            </children>

@@ -112,7 +112,7 @@ public class UserService extends BaseHttpClient{
     }
 
     public Object updateProfile(Object object) throws IOException {
-        String url = URL + "/user/me/";
+        String url = "/user/me/";
         String json = "";
         if(object instanceof PhysicalPersonUpdateDTO dto){
             url = url + "physical";

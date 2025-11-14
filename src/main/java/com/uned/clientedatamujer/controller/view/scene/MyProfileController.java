@@ -74,6 +74,7 @@ public class MyProfileController extends BaseController {
         ComponentInitializer.initializePhone(txtPhone);
         prepareSceneElements();
         getData();
+        setDocumentData();
     }
 
     @FXML
@@ -179,15 +180,12 @@ public class MyProfileController extends BaseController {
             }
         }
         btnUpdateProfile.setDisable(false);
-        setDocumentData();
         UIUXFeedbackUtils.hideLoading();
     }
 
     private void setDocumentData(){
         String dataMujerRules = TermsReader.loadText("/com/uned/clientedatamujer/terms/DataMujerRules.txt");
         String law = TermsReader.loadText("/com/uned/clientedatamujer/terms/LeyN8968.txt");
-        System.out.println(TermsReader.class.getClassLoader().getResource("com/uned/clientedatamujer/terms/"));
-
         labelRules.setText(dataMujerRules);
         labelLaw.setText(law);
     }

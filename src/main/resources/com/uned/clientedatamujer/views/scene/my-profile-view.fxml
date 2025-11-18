@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXSnackbar?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../../stylesheet/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uned.clientedatamujer.controller.view.scene.MyProfileController">
+   <children>
+      <JFXSnackbar fx:id="snackBarInfo" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="grid-background">
+         <children>
+            <HBox alignment="CENTER" layoutX="469.0" layoutY="21.0" prefHeight="41.0" prefWidth="143.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label styleClass="etiqueta-mayor" text="Mi Perfil" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="75.0" prefHeight="161.0" prefWidth="1045.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="163.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="115.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/profile.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="labelUsername" styleClass="etiqueta-menor" text="[USERNAME]" />
+                        <Label fx:id="labelId" styleClass="etiqueta-menor" text="[ID]">
+                           <padding>
+                              <Insets top="6.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="14.0" layoutY="80.0" prefHeight="620.0" prefWidth="1060.0" vvalue="0.63" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="255.0">
+               <content>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1650.0" prefWidth="0.0" style="-fx-background-color: transparent;">
+                     <children>
+                        <HBox layoutY="14.0" prefHeight="227.0" prefWidth="1045.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="251.0" prefWidth="1045.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="41.0" prefWidth="1017.0" style="-fx-background-color: #e0d7cf;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                                       <children>
+                                          <Label alignment="CENTER" styleClass="etiqueta-menor" text="Sus datos" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets left="40.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="14.0" layoutY="72.0" prefHeight="51.0" prefWidth="200.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                       <children>
+                                          <TextField fx:id="txtName" prefHeight="42.0" prefWidth="300.0" promptText="NOMBRE" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="txtFSurname" prefHeight="42.0" prefWidth="300.0" promptText="PRIMER APELLIDO" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="txtSSurname" prefHeight="42.0" prefWidth="300.0" promptText="SEGUNDO APELLIDO" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="14.0" layoutY="144.0" prefHeight="62.0" prefWidth="200.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                       <children>
+                                          <TextField fx:id="txtProfession" prefHeight="42.0" prefWidth="300.0" promptText="PROFESIÓN" />
+                                          <DatePicker fx:id="dtpDate" prefHeight="44.0" prefWidth="300.0" promptText="FECHA DE NACIMIENTO" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox layoutY="278.0" prefHeight="227.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="41.0" prefWidth="200.0" style="-fx-background-color: #e0d7cf;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                                       <children>
+                                          <Label styleClass="etiqueta-menor" text="Datos de contacto">
+                                             <HBox.margin>
+                                                <Insets left="40.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="14.0" layoutY="80.0" prefHeight="51.0" prefWidth="1025.0" spacing="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                       <children>
+                                          <TextField fx:id="txtEmail" promptText="EMAIL" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="txtPhone" promptText="TELÉFONO" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="144.0" prefHeight="51.0" prefWidth="200.0" spacing="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                       <children>
+                                          <ComboBox fx:id="comboBoxCountry" prefHeight="42.0" prefWidth="250.0" promptText="PAÍS" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="txtLocation" promptText="UBICACIÓN" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutY="496.0" prefHeight="75.0" prefWidth="1045.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Button fx:id="btnUpdateProfile" mnemonicParsing="false" onAction="#updateProfile" styleClass="button-primario" text="Guardar" />
+                              <Button mnemonicParsing="false" onAction="#resetData" styleClass="button-primario" text="Cancelar" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutY="581.0" prefHeight="41.0" prefWidth="200.0" style="-fx-background-color: #e0d7cf;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Label styleClass="etiqueta-menor" text="Sobre Data Mujer">
+                                 <HBox.margin>
+                                    <Insets left="40.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutY="645.0" maxWidth="1.7976931348623157E308" prefHeight="161.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="161.0" style="-fx-background-color: #a98be4;" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="etiqueta-mayor" text="Misión" />
+                                    <Label maxWidth="1.7976931348623157E308" prefHeight="101.0" prefWidth="474.0" styleClass="etiqueta-menor" text="Nuestra misión es impulsar a las mujeres de todas las edades a incursionar en el campo de las ciencias de datos y brindarles capacitación y acompañamiento para que puedan desarrollarse profesionalmente en esta área, mejorar su calidad de vida y aportar al desarrollo socioeconómico del país." textAlignment="CENTER" wrapText="true" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="200.0" style="-fx-background-color: #e281be;" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="etiqueta-mayor" text="Visión" />
+                                    <Label maxWidth="1.7976931348623157E308" prefHeight="101.0" prefWidth="474.0" styleClass="etiqueta-menor" text="Nuestra visión es liderar a las nuevas generaciones de profesionales en ciencias de datos de Costa Rica al exhortar el aprendizaje continuo, la colaboración técnica, la inspiración mutua y el alcance de sueños juntas." textAlignment="CENTER" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="14.0" layoutY="840.0" prefHeight="592.0" prefWidth="1050.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <ScrollPane fitToWidth="true" hbarPolicy="NEVER" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefViewportWidth="500">
+                                 <content>
+                                    <VBox style="-fx-background-color: #e281be;" alignment="CENTER" spacing="25" prefWidth="0" maxWidth="Infinity">
+                                       <children>
+                                          <Label alignment="CENTER" text="Reglamento Asociación Data Mujer" textAlignment="CENTER" styleClass="etiqueta-mayor" wrapText="true" VBox.vgrow="ALWAYS"/>
+                                          <Label fx:id="labelRules" alignment="CENTER" text="label" textAlignment="JUSTIFY" maxWidth="Infinity" wrapText="true" VBox.vgrow="ALWAYS"/>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                              <ScrollPane fitToWidth="true" hbarPolicy="NEVER" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefViewportWidth="500">
+                                 <content>
+                                    <VBox style="-fx-background-color: #a98be4;" alignment="CENTER" spacing="25" prefWidth="0" maxWidth="Infinity">
+                                      <children>
+                                         <Label alignment="CENTER" text="Ley de Protección de la Persona Frente al Tratamiento de sus Datos Personales" textAlignment="CENTER" styleClass="etiqueta-mayor" wrapText="true" VBox.vgrow="ALWAYS"/>
+                                         <Label fx:id="labelLaw" alignment="CENTER" text="label" textAlignment="JUSTIFY" maxWidth="Infinity" wrapText="true" VBox.vgrow="ALWAYS"/>
+                                      </children>
+                                   </VBox>
+                                </content>
+                              </ScrollPane>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutY="1403.0" prefHeight="114.0" prefWidth="1045.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#logout" styleClass="button-primario" text="Cerrar Sesión" />
+                                    <Button mnemonicParsing="false" onAction="#toMainView" styleClass="button-secundario" text="Regresar" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

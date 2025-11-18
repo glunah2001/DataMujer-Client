@@ -1,0 +1,19 @@
+package com.uned.clientedatamujer;
+
+import com.uned.clientedatamujer.controller.util.SceneManager;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class App extends Application {
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        SceneManager.setStage(stage);
+        SceneManager.toLogIn();
+        stage.show();
+    }
+}

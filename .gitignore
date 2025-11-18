@@ -1,0 +1,96 @@
+# Directorios de build
+/target/
+**/target/
+build/
+out/
+
+# Maven wrapper - mantener los archivos necesarios
+!/.mvn/wrapper/maven-wrapper.jar
+!/.mvn/wrapper/maven-wrapper.properties
+
+# Archivos y artefactos empaquetados
+*.jar
+*.war
+*.ear
+*.nar
+
+# Archivos temporales y logs
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+*.class
+
+# Reports de pruebas
+surefire-reports/
+failsafe-reports/
+test-output/
+
+# IDE: IntelliJ
+/.idea/
+/.idea/*
+!/.idea/inspectionProfiles # (si realmente quieres versionar perfiles, elimina la negación)
+*.iml
+*.iws
+*.ipr
+
+# IDE: Eclipse
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated
+.springBeans
+.sts4-cache
+
+# IDE: NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# IDE: VS Code
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# Keystores y credenciales locales
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+.env
+.env.local
+
+# Dependencias locales / caches comunes
+/.m2/repository/
+/.gradle/
+/node_modules/
+
+# Archivos de ejecución / dumps
+hs_err_pid*
+javacore.*
+*.dump
+
+# Recursos empaquetados por IDE o herramientas
+*.class
+*.class.*
+*.cache
+*.log
+*.properties.user
+
+# Otros
+dist/
+tmp/
+coverage/
+coverage-*.xml
+.vagrant/
+.idea_modules/

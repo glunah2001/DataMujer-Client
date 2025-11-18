@@ -153,7 +153,11 @@ public class ParticipationController extends BaseSubSceneController {
     @FXML
     private void showPrint(ActionEvent event) {
         UIUXFeedbackUtils.showLoading();
-        ReportService.genReportParticipation();
-        UIUXFeedbackUtils.hideLoading();
+        mainController.runAsync(
+                () -> {
+                    ReportService.genReportParticipation();
+                    mainController.runLater(UIUXFeedbackUtils::hideLoading);
+                }
+        );
     }
 }

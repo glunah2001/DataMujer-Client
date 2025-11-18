@@ -108,8 +108,12 @@ public class PaymentController extends BaseSubSceneController {
     @FXML
     private void showPrint(ActionEvent event) {
         UIUXFeedbackUtils.showLoading();
-        ReportService.genReportAffiliate();
-        UIUXFeedbackUtils.hideLoading();
+        mainController.runAsync(
+                () -> {
+                    ReportService.genReportAffiliate();
+                    UIUXFeedbackUtils.hideLoading();
+                }
+        );
     }
 
     private void getPageDataAffiliate() {

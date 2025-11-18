@@ -52,7 +52,10 @@ public class PaymentUpdateController extends BaseSubSceneController {
         var date = dtpPayDate.getValue();
         var dateTime = LocalDateTime.of(date, time);
         mainController.executeCall(
-                () -> service.pay(txtId.getText(), dateTime),
+                () -> service.pay(
+                        String.valueOf(DataUtilities.getLastPaymentDTO().id()),
+                        dateTime
+                ),
                 (PaymentDTO dto) -> {
                     UIUXFeedbackUtils.showSuccessSnackbar("Éxito en el reporte de actualización de pago #"+dto.id()
                     +" a estado: PAGADO");

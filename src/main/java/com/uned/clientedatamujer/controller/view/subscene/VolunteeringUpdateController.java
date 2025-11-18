@@ -66,7 +66,10 @@ public class VolunteeringUpdateController extends BaseSubSceneController {
         }
         var dto = getData();
         mainController.executeCall(
-                () -> service.updateVolunteering(dto, txtID.getText()),
+                () -> service.updateVolunteering(
+                        dto,
+                        String.valueOf(DataUtilities.getLastVolunteeringDTO().id())
+                ),
                 (VolunteeringDTO response) ->{
                     UIUXFeedbackUtils.showSuccessSnackbar("Voluntariado #"+response.id()+" se ha actualizado, " +
                             "correctamente.");
@@ -109,8 +112,8 @@ public class VolunteeringUpdateController extends BaseSubSceneController {
         spinnerStartHour.getValueFactory().setValue(
                 startShift.getHour()
         );
-        spinnerStartHour.getValueFactory().setValue(
-                startShift.getHour()
+        spinnerStartMinutes.getValueFactory().setValue(
+                startShift.getMinute()
         );
         spinnerEndHour.getValueFactory().setValue(
                 endShift.getHour()

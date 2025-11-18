@@ -64,11 +64,11 @@ public abstract class BaseController {
         executeCall(serviceCall, onSuccess, null, null);
     }
 
-    protected void runAsync(Runnable task){
+    public void runAsync(Runnable task){
         new Thread(task).start();
     }
 
-    protected void runLater(Runnable task){
+    public void runLater(Runnable task){
         Platform.runLater(task);
     }
 

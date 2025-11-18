@@ -89,7 +89,11 @@ public abstract class BaseSubSceneController {
     }
 
     protected void allowPrintButtons(boolean allow){
-        if(!Objects.equals(AuthSession.getRole(), "ROLE_ADMIN")) return;
+        if(!Objects.equals(AuthSession.getRole(), "ROLE_ADMIN")){
+            print.setVisible(false);
+            print.setManaged(false);
+            return;
+        }
         if(allow && vBox.getChildren().isEmpty()){
             print.setVisible(false);
             print.setManaged(false);

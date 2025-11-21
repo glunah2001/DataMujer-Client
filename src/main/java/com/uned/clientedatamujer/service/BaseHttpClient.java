@@ -17,7 +17,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public abstract class BaseHttpClient {
-    protected final String URL = "http://localhost:8080";
+    protected final String URL = "https://api.datamujer.com";
 
     protected final HttpClient client = HttpClient.newBuilder()
                                                 .connectTimeout(Duration.ofSeconds(15))

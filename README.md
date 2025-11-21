@@ -40,3 +40,9 @@ una de las exigencias dentro del límite de tiempo propuesto por la UNED.
 Esta solución será puesta en producción a modo de complemento a la API Data Mujer. Puede consultar el link de descarga
 oficial a traves de la [Página Oficial de Data Mujer](https://datamujer.com) o mediante
 [el siguiente link](https://datamujer.com).
+
+Tambien puede consultar los repositorios de la [API](https://github.com/glunah2001/DataMujer-API.git) y el
+[cliente](https://drive.google.com/drive/folders/1PiLhvJ7Qpmo9NHklvCGKp0VEn0YQcMN1?usp=sharing) 
+para ejecutar una prueba local.
+
+Es muy importante haber instalado Javafx dado que este ya no se incluye en el JDK.
